@@ -1,6 +1,9 @@
 package com.example.asus.br;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -32,6 +35,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
+
+        final String PREFS_NAME = "MyPrefsFile";
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME,0);
+        if(settings.getBoolean("my_first_time",true) || AccessToken.getCurrentAccessToken()==null) {
+            login();
+            settings.edit().putBoolean("my_first_time", false).commit();
+        }else{
+            Intent intent = new Intent(MainActivity.this, IndexActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    public void login(){
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
         // loginButton.setReadPermissions(); Cambiar permisos de lectura
