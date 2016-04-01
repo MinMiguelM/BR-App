@@ -24,7 +24,7 @@ import org.json.JSONObject;
 public class IndexActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private TextView textName; // Name to display.
+    private TextView textName; // Name to display
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
