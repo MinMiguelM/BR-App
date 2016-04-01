@@ -90,7 +90,7 @@ public class IndexActivity extends AppCompatActivity
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response){
                         try {
-                            setTextName(object.getString("first_name"));
+                            setTextName(object.getString("first_name")); // Change de name on menu bar
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
