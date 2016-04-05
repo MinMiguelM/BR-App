@@ -38,6 +38,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.asus.br.MainActivity" />
         </activity>
+        <activity
+            android:name=".CreateAccountActivity"
+            android:label="@string/title_activity_crear_cuenta_activity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
