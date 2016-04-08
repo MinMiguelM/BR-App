@@ -9,6 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/com_facebook_button_background_color"
+
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.asus.br.MainActivity"
     tools:showIn="@layout/activity_main">
@@ -16,10 +17,113 @@
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="180dp"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/button"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Iniciar Sesión"
+        android:id="@+id/textView"
+        android:layout_marginTop="87dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:id="@+id/editText"
+        android:layout_below="@+id/textView2"
+        android:background="#ffffff"
+        android:layout_alignLeft="@+id/login_button"
+        android:layout_alignStart="@+id/login_button"
+        android:layout_alignRight="@+id/login_button"
+        android:layout_alignEnd="@+id/login_button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuario:"
+        android:id="@+id/textView2"
+        android:textColor="#ffffff"
+        android:layout_marginTop="32dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignLeft="@+id/editText"
+        android:layout_alignStart="@+id/editText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contraseña"
+        android:id="@+id/textView3"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/editText"
+        android:layout_alignLeft="@+id/editText"
+        android:layout_alignStart="@+id/editText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:layout_below="@+id/textView3"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText"
+        android:background="#ffffff" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Iniciar Sesión"
+        android:id="@+id/buttonIniciarSesion"
+        android:textSize="12dp"
+        android:background="#7931323f"
+        android:textColor="#ffffff"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Registrarse"
+        android:textSize="12dp"
+        android:textColor="#ffffff"
+        android:id="@+id/buttonRegistrarse"
+        android:background="#7931323f"
+        android:clickable="true"
+        android:enabled="true"
+        android:layout_below="@+id/login_button"
+        android:layout_alignLeft="@+id/login_button"
+        android:layout_alignStart="@+id/login_button"
+        android:layout_marginTop="22dp"
+        android:layout_alignRight="@+id/login_button"
+        android:layout_alignEnd="@+id/login_button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="¿Olvido su contraseña?"
+        android:id="@+id/button"
+        android:textColor="#fdfdfd"
+        android:textSize="12dp"
+        android:background="@color/com_facebook_button_background_color"
+        android:backgroundTint="@color/com_facebook_button_background_color"
+        android:typeface="normal"
+        android:layout_below="@+id/buttonIniciarSesion"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp" />
 
 </RelativeLayout>

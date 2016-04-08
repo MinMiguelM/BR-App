@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -37,14 +38,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final String PREFS_NAME = "MyPrefsFile";
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME,0);
+
+        Button createAccount = (Button)findViewById(R.id.buttonRegistrarse);
+        createAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,CreateAccountActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        /*SharedPreferences settings = getSharedPreferences(PREFS_NAME,0);
         if(settings.getBoolean("my_first_time",true) || AccessToken.getCurrentAccessToken()==null) {
             login();
             settings.edit().putBoolean("my_first_time", false).commit();
         }else{
             Intent intent = new Intent(MainActivity.this, IndexActivity.class);
             startActivity(intent);
-        }
+        }*/
     }
 
     public void login(){
