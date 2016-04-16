@@ -2,9 +2,9 @@
     <string name="app_name">B&amp;R</string>
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">935644289883292</string>
-    <string name="title_activity_index">IndexActivity</string>
+    <string name="title_activity_index">Menu principal</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_crear_cuenta_activity">Crear_cuenta_activity</string>
+    <string name="title_activity_crear_cuenta_activity">Registro</string>
 </resources>
