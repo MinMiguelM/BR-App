@@ -25,5 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-    provided 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'com.mcxiaoke.volley:library:1.0.19'
 }

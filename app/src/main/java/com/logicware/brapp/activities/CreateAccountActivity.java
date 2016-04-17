@@ -53,8 +53,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 /*if(emailRegistrado(ema)){
                     mostrarError("Email registrado","El email a registrar ya se encontro en la base de datos");
                 } */
-
-
             }
 
             /*

@@ -15,6 +15,8 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.logicware.brapp.meta.User;
+import com.logicware.brapp.persistence.AdapterWebService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreateAccountActivity.class);
                 startActivity(intent);
+                //AdapterWebService.getUsersByCorreo(getApplicationContext(),"kb");
+                User user = new User(null, "montanez-m", "prueba", "3165498", "USUARIO", false, null);
+                AdapterWebService.insertUser(getApplicationContext(),user);
             }
         });
 
