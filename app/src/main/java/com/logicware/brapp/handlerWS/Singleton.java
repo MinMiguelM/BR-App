@@ -21,31 +21,37 @@ public class Singleton {
         requestQueue = getRequestQueue();
     }
 
-    /**
-     * Retorna la instancia unica del singleton
-     *
-     * @param context contexto donde se ejecutarán las peticiones
-     * @return Instancia
-     */
+    /*
+           * Nombre de Método: getInstace
+           * Entradas: contexto donde se ejecutaran las peticiones
+           * Salidas: instancia unica del singleton
+           * Descripcion: retona la instancia unica del singleton
+           */
+
     public static synchronized Singleton getInstance(Context context) {
         if (singleton == null) {
             singleton = new Singleton(context.getApplicationContext());
         }
         return singleton;
     }
-
-    /**
-     * Obtiene la instancia de la cola de peticiones
-     *
-     * @return cola de peticiones
-     */
+/*
+           * Nombre de Método: getRequestQueue
+           * Entradas:
+           * Salidas: cola de peticiones
+           * Descripcion: obtiene la instancia de la cola de peticiones
+           */
     public RequestQueue getRequestQueue() {
         if (requestQueue == null) {
             requestQueue = Volley.newRequestQueue(context.getApplicationContext());
         }
         return requestQueue;
     }
-
+/*
+           * Nombre de Método: login
+           * Entradas: peticion, resultado final de tipo T
+           * Salidas: void
+           * Descripcion: añande una peticion a la cola
+           */
     /**
      * Añade la petición a la cola
      *

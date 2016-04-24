@@ -55,14 +55,17 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+/*
+           * Nombre de Método: login
+           * Entradas:
+           * Salidas: void
+           * Descripcion: Cuando el usuario le da clic al boton de ingresar con facebook
+           *   se debe mirar tres posibles estados de acuerdo a la transaccion
+           *   Exito: se le muestra la actividad de inicio
+           *   Cancel: simplemente no se hace nada
+           *   Error: se muestra mensaje de error
+           */
 
-    /*
-    *   Cuando el usuario le da clic al boton de ingresar con facebook
-    *   se debe mirar tres posibles estados de acuerdo a la transaccion
-    *   Exito: se le muestra la actividad de inicio
-    *   Cancel: simplemente no se hace nada
-    *   Error: se muestra mensaje de error
-     */
     public void login(){
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
@@ -87,11 +90,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     /*
-     *  Maneja la respuesta de facebook.
-     *  De acuerdo a esto, se mira si la transaccion se pudo llevar a cualquiera
-     *  de los tres estados posibles.
-     */
+           * Nombre de Método: onActivityResult
+           * Entradas: codigo de solicitud, codigo de resultado, data
+           * Salidas: void
+           * Descripcion:   Maneja la respuesta de facebook.
+           *  De acuerdo a esto, se mira si la transaccion se pudo llevar a cualquiera
+           *  de los tres estados posibles.
+           *
+           */
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);

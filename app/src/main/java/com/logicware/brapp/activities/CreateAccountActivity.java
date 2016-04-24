@@ -116,7 +116,12 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String tokenFacebook = "";
                 //meter a la base de Datos
             } */
-
+ /*
+             *  Nombre de Método: mostrar Error
+            * Entradas: nombre del error y su descripcion
+            * Salidas: void
+            * Descripcion:  imprime una alerta para el usuario que verifica si hay errores
+            */
             private void mostrarError(String nombreError, String descripcion) {
                 AlertDialog alerta = new AlertDialog.Builder(CreateAccountActivity.this).create();
                 alerta.setTitle(nombreError);
