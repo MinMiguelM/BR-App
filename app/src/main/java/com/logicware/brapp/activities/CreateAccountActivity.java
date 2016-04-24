@@ -1,4 +1,4 @@
-package com.example.asus.br;
+package com.logicware.brapp.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.asus.br.R;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
@@ -44,15 +46,13 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 //insertarUsuario(nom, tel, ema, pas1);
 
-                /*if(emailErroneo(ema)){
-                    mostrarError("Email incorrecto","El formato del email es incorrecto.");
-                } FALTA IMPLEMENTACION*/
+                if(emailErroneo(ema)){
+                    mostrarError("Email incorrecto","El email no es valido.");
+                }
 
                 /*if(emailRegistrado(ema)){
                     mostrarError("Email registrado","El email a registrar ya se encontro en la base de datos");
                 } */
-
-
             }
 
             /*
@@ -74,8 +74,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             */
 
             private boolean emailErroneo(String email) {
-                // metodo de miguel
-                return false;
+                return !email.matches("[a-zA-Z][a-zA-Z_\\.0-9]*@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)+");
             }
 
             /*
