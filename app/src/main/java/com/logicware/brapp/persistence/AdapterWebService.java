@@ -19,6 +19,8 @@ import java.util.Map;
 
 /**
  * Created by ASUS on 4/16/2016.
+ * Permite la conexion entre el cliente, es decir, el dispositivo
+ * y el servidor de LogicWare.
  */
 public class AdapterWebService {
 
@@ -59,7 +61,7 @@ public class AdapterWebService {
             switch (Integer.parseInt(response.getString("estado"))) {
                 case 1:
                     JSONObject obj = response.getJSONObject("meta");
-                    newUser = new User(Integer.parseInt(obj.getString("id")),obj.getString("correo"),obj.getString("password"),obj.getString("num_celular"),
+                    newUser = new User(Integer.parseInt(obj.getString("id")),obj.getString("nombre"),obj.getString("correo"),obj.getString("password"),obj.getString("num_celular"),
                             obj.getString("rol"),Boolean.parseBoolean(obj.getString("link_facebook")),obj.getString("token_facebook"));
                     break;
                 default:
