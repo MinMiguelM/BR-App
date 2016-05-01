@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,12 +26,9 @@ import com.facebook.login.widget.LoginButton;
 import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.meta.User;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Collection;
 
 /**
  * Esta clase se encarga de mostrarle al usuario
@@ -43,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private Button createAccount;
     private Button loggin;
     private User user = null;
+    public static String currentToken;
 
     /**
      * Nombre: onCreate
@@ -58,26 +58,6 @@ public class MainActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
 
-        final String PREFS_NAME = "MyPrefsFile";
-
-
-        RestTemplate restTemplate = new RestTemplate();
-        Collection<User> u = (Collection<User>) restTemplate.getForObject(Constantes.GET_ALL_USERS,User.class);
-        for(User uu : u){
-            System.out.println(uu.getCorreo() + "  " + uu.getNombre());
-        }
-
-
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME,0);
-        if(settings.getBoolean("my_first_time",true)) {
-            user = new User(new Long(1),"Miguel Ang.","prueba@jave.co","1234","1234","USUARIO","false",null);
-            settings.edit().putBoolean("my_first_time", false).commit();
-        }else{
-            settings = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
-            String jsonUserSaved = settings.getString("key_userObject", null);
-            user = User.createUserFromJson(jsonUserSaved);
-        }
-
         createAccount = (Button)findViewById(R.id.buttonRegistrarse);
         createAccount.setOnClickListener(new View.OnClickListener() {
             /**
@@ -90,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreateAccountActivity.class);
-                intent.putExtra("user",user);
                 startActivity(intent);
                 //AdapterWebService.getUsersByCorreo(getApplicationContext(),"kb");
                 //User user = new User(null, "montanez-m", "prueba", "3165498", "USUARIO", false, null);
@@ -110,31 +89,39 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View v) {
-                String email = ((EditText)findViewById(R.id.editTextEmail)).getText().toString();
-                String password = ((EditText)findViewById(R.id.editTextPassword)).getText().toString();
-                if(email.equalsIgnoreCase("") &&
-                        password.equalsIgnoreCase("")){
-                    mostrarError("Campos vacíos","Para iniciar sesión debe llenar los datos requeridos");
-                }else if(email.equalsIgnoreCase(""))
-                    mostrarError("Email vacío","Para iniciar sesión hace falta señalar un email");
-                else if(password.equalsIgnoreCase(""))
-                    mostrarError("Password vacío","Para iniciar sesión hace falta ingresar la contraseña");
-                else if(!email.matches("[a-zA-Z][a-zA-Z_\\-\\.0-9]*@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)+"))
-                    mostrarError("Email inválido","Por favor ingrese un email válido para iniciar sesión");
+                String email = ((EditText) findViewById(R.id.editTextEmail)).getText().toString();
+                String password = ((EditText) findViewById(R.id.editTextPassword)).getText().toString();
+                if (email.equalsIgnoreCase("") &&
+                        password.equalsIgnoreCase("")) {
+                    mostrarError("Campos vacíos", "Para iniciar sesión debe llenar los datos requeridos");
+                } else if (email.equalsIgnoreCase(""))
+                    mostrarError("Email vacío", "Para iniciar sesión hace falta señalar un email");
+                else if (password.equalsIgnoreCase(""))
+                    mostrarError("Password vacío", "Para iniciar sesión hace falta ingresar la contraseña");
+                else if (!email.matches("[a-zA-Z][a-zA-Z_\\-\\.0-9]*@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)+"))
+                    mostrarError("Email inválido", "Por favor ingrese un email válido para iniciar sesión");
                 else
-                    login(email,password);
+                    login(email, password);
             }
         });
         loginFacebook();
 
-        /*SharedPreferences settings = getSharedPreferences(PREFS_NAME,0);
-        if(settings.getBoolean("my_first_time",true) && AccessToken.getCurrentAccessToken()==null && user == null) {
-            loginFacebook();
-            settings.edit().putBoolean("my_first_time", false).commit();
-        }else{
-            Intent intent = new Intent(MainActivity.this, IndexActivity.class);
-            startActivity(intent);
-        }*/
+        SharedPreferences settings;
+        settings = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
+        currentToken = settings.getString("key_token", null);
+        if(currentToken != null) {
+            new HttpRequestTask().execute();
+            if(user.getRol().equals("USUARIO")){
+                Intent intent = new Intent(MainActivity.this, IndexActivity.class);
+                intent.putExtra("user",user);
+                startActivity(intent);
+            }else if(user.getRol().equals("CLIENTE")) {
+                //Mandar a activity client
+                /*Intent intent = new Intent(MainActivity.this, IndexActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);*/
+            }
+        }
     }
 
     /**
@@ -196,13 +183,14 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 try {
-                                    user = new User(new Long(1238), object.getString("first_name"), null, null, null, "USUARIO", "true", AccessToken.getCurrentAccessToken().toString());
+                                    /*user = new User(new Long(1238), object.getString("first_name"), null, null, null, "USUARIO", "true", AccessToken.getCurrentAccessToken().toString(),new ArrayList<Establishment>());
                                     String jsonUser = user.serializeUser();
                                     SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = preferencesUser.edit();
                                     editor.putString("key_userObject", jsonUser);
-                                    editor.commit();
-                                } catch (JSONException e) {
+                                    editor.commit();*/
+                                    System.out.println("hello");
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }
@@ -239,5 +227,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private class HttpRequestTask extends AsyncTask<Void, Void, User> {
+
+        @Override
+        protected User doInBackground(Void... params){
+            try {
+                // Esto iría en el adapter...
+                // se traeria por token getUserByToken
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                User u = restTemplate.getForObject(Constantes.GET_USER_BY_CORREO + "test", User.class, "Android");
+                return u;
+            }catch (Exception e) {
+                Log.e("MainActivity", e.getMessage(), e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(User user) {
+            // save mainActivity's user
+            System.out.println(user.toString());
+        }
     }
 }

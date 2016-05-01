@@ -61,8 +61,6 @@ public class AdapterWebService {
             switch (Integer.parseInt(response.getString("estado"))) {
                 case 1:
                     JSONObject obj = response.getJSONObject("meta");
-                    newUser = new User(Long.parseLong(obj.getString("id")),obj.getString("nombre"),obj.getString("correo"),obj.getString("password"),obj.getString("num_celular"),
-                            obj.getString("rol"),obj.getString("link_facebook"),obj.getString("token_facebook"));
                     break;
                 default:
                     break;
@@ -85,7 +83,7 @@ public class AdapterWebService {
         Map<String,String> mapa = new HashMap<>();
         mapa.put("correo",user.getCorreo());
         mapa.put("password",user.getPassword());
-        mapa.put("num_celular",user.getNum_celular());
+        mapa.put("num_celular",user.getNum_cel());
         mapa.put("link_facebook", (user.isLink_facebook() + ""));
         mapa.put("token_facebook", user.getToken_facebook());
         JSONObject j = new JSONObject(mapa);

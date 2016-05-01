@@ -17,7 +17,7 @@ public class User implements Serializable {
     private String nombre; // Nombre del usuario
     private String correo; // correo que le permite ingresar a la aplicacion
     private String password; // hace parte de las credenciales del usuario
-    private String num_celular; // numero de contacto
+    private String num_cel; // numero de contacto
     private String rol; // Rol que desempeña para nuestro sistema: USUARIO, CLIENTE O ADMINISTRADOR
     private String link_facebook; // True si tiene la cuenta asociada con facebook
     private String token_facebook; // El token que facebook genera para este usuario.
@@ -29,7 +29,7 @@ public class User implements Serializable {
      * Salidas: void
      * Descripcion: constructor de la clase usuario
      */
-    public User(Long id,String nombre, String correo, String password, String num_celular, String rol, String link_facebook, String token_facebook) {
+    /*public User(Long id,String nombre, String correo, String password, String num_celular, String rol, String link_facebook, String token_facebook, Collection<Establishment> establishment) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
@@ -38,7 +38,8 @@ public class User implements Serializable {
         this.rol = rol;
         this.link_facebook = link_facebook;
         this.token_facebook = token_facebook;
-    }
+        this.establishment = new ArrayList<>(establishment);
+    }*/
 
     /**
      * Nombre de Método: getID
@@ -122,8 +123,8 @@ public class User implements Serializable {
      * Salidas:
      * Descripcion: retorna el numero de celular del usuario
      */
-    public String getNum_celular() {
-        return num_celular;
+    public String getNum_cel() {
+        return num_cel;
     }
 
     /**
@@ -132,8 +133,8 @@ public class User implements Serializable {
      * Salidas: numero de celular
      * Descripcion: modifica el numero de celular del usuario
      */
-    public void setNum_celular(String num_celular) {
-        this.num_celular = num_celular;
+    public void setNum_cel(String num_cel) {
+        this.num_cel = num_cel;
     }
 
     /**
@@ -238,5 +239,27 @@ public class User implements Serializable {
      */
     public void setEstablishment(Collection<Establishment> establishment) {
         this.establishment = establishment;
+    }
+
+    /**
+     * Nombre: toString
+     * Entradas: -
+     * Salidas: Una cadena mostrando todos los atributos
+     * Descripcion: Pasa todos los atributos de tal forma que se puedan mostrar
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", correo='" + correo + '\'' +
+                ", password='" + password + '\'' +
+                ", num_cel='" + num_cel + '\'' +
+                ", rol='" + rol + '\'' +
+                ", link_facebook='" + link_facebook + '\'' +
+                ", token_facebook='" + token_facebook + '\'' +
+                ", establishment=" + establishment +
+                '}';
     }
 }

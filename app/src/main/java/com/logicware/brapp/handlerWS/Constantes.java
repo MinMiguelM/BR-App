@@ -11,7 +11,7 @@ public class Constantes {
      * Dirección IP del Host.
      */
     //private static final String IP = "45.55.193.13";
-    private static final String IP = "localhost";
+    private static final String IP = "192.168.0.15";
 
     /**
      * Puerto donde funciona el servidor
@@ -22,6 +22,5 @@ public class Constantes {
      * URLs del Web Service
      */
     public static final String GET_ALL_USERS = "http://" + IP + ":" +PORT + "/user/getAll";
-    public static final String GET_USER_BY_CORREO = "http://" + IP + "/webservice/requests/getUsersByCorreo.php";
-    public static final String INSERT_USER = "http://" + IP + "/webservice/requests/insertUser.php";
+    public static final String GET_USER_BY_CORREO = "http://" + IP + ":" +PORT + "/user/getByCorreo/";
 }

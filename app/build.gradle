@@ -4,6 +4,14 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
 
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+    }
+
     defaultConfig {
         applicationId "com.example.asus.br"
         minSdkVersion 15
@@ -28,4 +36,5 @@ dependencies {
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
 }
