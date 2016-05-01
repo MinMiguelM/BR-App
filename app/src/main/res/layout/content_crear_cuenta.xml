@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".CreateAccountActivity"
+    tools:context="com.logicware.brapp.activities.CreateAccountActivity"
     tools:showIn="@layout/activity_crear_cuenta"
     android:background="#ced1ce"
     android:backgroundTint="#c7c6c6">
@@ -56,30 +56,20 @@
         android:text="Teléfono"
         android:id="@+id/textView6"
         android:layout_below="@+id/nombreUsuario"
-        android:layout_alignLeft="@+id/nombreUsuario"
-        android:layout_alignStart="@+id/nombreUsuario" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/telefonoUsuario"
-        android:layout_below="@+id/textView6"
-        android:layout_alignLeft="@+id/nombreUsuario"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/nombreUsuario"
-        android:layout_alignEnd="@+id/nombreUsuario" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="email:"
+        android:text="Email:"
         android:id="@+id/textView8"
         android:layout_below="@+id/telefonoUsuario"
-        android:layout_alignLeft="@+id/telefonoUsuario"
-        android:layout_alignStart="@+id/telefonoUsuario" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -87,11 +77,11 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/emailUsuario"
-        android:layout_alignParentEnd="true"
         android:layout_below="@+id/textView8"
-        android:layout_alignLeft="@+id/textView8"
-        android:layout_alignStart="@+id/textView8"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/telefonoUsuario"
+        android:layout_alignEnd="@+id/telefonoUsuario" />
 
     <Button
         android:layout_width="wrap_content"
@@ -108,8 +98,9 @@
         android:text="Contraseña:"
         android:id="@+id/textView9"
         android:layout_below="@+id/emailUsuario"
-        android:layout_alignLeft="@+id/emailUsuario"
-        android:layout_alignStart="@+id/emailUsuario" />
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -130,8 +121,8 @@
         android:text="Confirme su contraseña"
         android:id="@+id/textView10"
         android:layout_below="@+id/passUsuario1"
-        android:layout_alignLeft="@+id/textView9"
-        android:layout_alignStart="@+id/textView9" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -139,10 +130,22 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/passUsuario2"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView10"
-        android:layout_alignLeft="@+id/textView9"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/passUsuario1"
         android:layout_alignEnd="@+id/passUsuario1" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/telefonoUsuario"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
