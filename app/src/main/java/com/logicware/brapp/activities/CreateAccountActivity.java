@@ -138,7 +138,7 @@ public class CreateAccountActivity extends AppCompatActivity {
              */
 
             public void insertarUsuario(String nom, String telefono, String email, String pass) {
-                user = new User(55,nom,email,pass,telefono,"USUARIO",false,null);
+                user = new User(new Long(55),nom,email,pass,telefono,"USUARIO","false",null);
                 String jsonUser = user.serializeUser();
                 SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferencesUser.edit();

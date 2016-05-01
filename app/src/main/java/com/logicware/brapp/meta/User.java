@@ -3,6 +3,8 @@ package com.logicware.brapp.meta;
 import com.google.gson.Gson;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by ASUS on 4/16/2016.
@@ -11,14 +13,15 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class User implements Serializable {
 
-    private Integer id; // Id que se le asigna automáticamente en el sistema
+    private Long id; // Id que se le asigna automáticamente en el sistema
     private String nombre; // Nombre del usuario
     private String correo; // correo que le permite ingresar a la aplicacion
     private String password; // hace parte de las credenciales del usuario
     private String num_celular; // numero de contacto
     private String rol; // Rol que desempeña para nuestro sistema: USUARIO, CLIENTE O ADMINISTRADOR
-    private boolean link_facebook; // True si tiene la cuenta asociada con facebook
+    private String link_facebook; // True si tiene la cuenta asociada con facebook
     private String token_facebook; // El token que facebook genera para este usuario.
+    private Collection<Establishment> establishment = new ArrayList<>();
 
     /**
      * Nombre de Método: User
@@ -26,7 +29,7 @@ public class User implements Serializable {
      * Salidas: void
      * Descripcion: constructor de la clase usuario
      */
-    public User(Integer id,String nombre, String correo, String password, String num_celular, String rol, boolean link_facebook, String token_facebook) {
+    public User(Long id,String nombre, String correo, String password, String num_celular, String rol, String link_facebook, String token_facebook) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
@@ -36,13 +39,14 @@ public class User implements Serializable {
         this.link_facebook = link_facebook;
         this.token_facebook = token_facebook;
     }
+
     /**
      * Nombre de Método: getID
      * Entradas:
      * Salidas:  id
      * Descripcion: metodo que retona el id del usuario
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -52,7 +56,7 @@ public class User implements Serializable {
      * Salidas:
      * Descripcion: modifica el valor del id
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -158,7 +162,7 @@ public class User implements Serializable {
      * Salidas: boleano
      * Descripcion: verifica si es un link de facebook
      */
-    public boolean isLink_facebook() {
+    public String isLink_facebook() {
         return link_facebook;
     }
 
@@ -168,7 +172,7 @@ public class User implements Serializable {
      * Salidas:
      * Descripcion: comprueba que sea un link de facebook y modifica el del usuario
      */
-    public void setLink_facebook(boolean link_facebook) {
+    public void setLink_facebook(String link_facebook) {
         this.link_facebook = link_facebook;
     }
 
@@ -212,5 +216,27 @@ public class User implements Serializable {
     public static User createUserFromJson(String userJson){
         Gson objectJson = new Gson();
         return objectJson.fromJson(userJson, User.class);
+    }
+
+    /**
+     * Nombre: getEstablishment
+     * Entradas: -
+     * Salidas: una coleccion de establecimientos asociados al usuario
+     * Descripcion: Retorna los establecimientos que tiene asociado el usuario
+     * @return
+     */
+    public Collection<Establishment> getEstablishment() {
+        return establishment;
+    }
+
+    /**
+     * Nombre: setEstablishment
+     * Entradas: una coleccion de establecimientos
+     * Salidas: -
+     * Descripcion: cambia la coleccion actual por una nueva o actualizada.
+     * @param establishment
+     */
+    public void setEstablishment(Collection<Establishment> establishment) {
+        this.establishment = establishment;
     }
 }

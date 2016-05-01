@@ -61,8 +61,8 @@ public class AdapterWebService {
             switch (Integer.parseInt(response.getString("estado"))) {
                 case 1:
                     JSONObject obj = response.getJSONObject("meta");
-                    newUser = new User(Integer.parseInt(obj.getString("id")),obj.getString("nombre"),obj.getString("correo"),obj.getString("password"),obj.getString("num_celular"),
-                            obj.getString("rol"),Boolean.parseBoolean(obj.getString("link_facebook")),obj.getString("token_facebook"));
+                    newUser = new User(Long.parseLong(obj.getString("id")),obj.getString("nombre"),obj.getString("correo"),obj.getString("password"),obj.getString("num_celular"),
+                            obj.getString("rol"),obj.getString("link_facebook"),obj.getString("token_facebook"));
                     break;
                 default:
                     break;

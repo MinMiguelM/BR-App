@@ -21,10 +21,15 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.meta.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Collection;
 
 /**
  * Esta clase se encarga de mostrarle al usuario
@@ -56,9 +61,16 @@ public class MainActivity extends AppCompatActivity {
         final String PREFS_NAME = "MyPrefsFile";
 
 
+        RestTemplate restTemplate = new RestTemplate();
+        Collection<User> u = (Collection<User>) restTemplate.getForObject(Constantes.GET_ALL_USERS,User.class);
+        for(User uu : u){
+            System.out.println(uu.getCorreo() + "  " + uu.getNombre());
+        }
+
+
         SharedPreferences settings = getSharedPreferences(PREFS_NAME,0);
         if(settings.getBoolean("my_first_time",true)) {
-            user = new User(1,"Miguel Ang.","prueba@jave.co","1234","1234","USUARIO",false,null);
+            user = new User(new Long(1),"Miguel Ang.","prueba@jave.co","1234","1234","USUARIO","false",null);
             settings.edit().putBoolean("my_first_time", false).commit();
         }else{
             settings = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
@@ -184,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 try {
-                                    user = new User(1238, object.getString("first_name"), null, null, null, "USUARIO", true, AccessToken.getCurrentAccessToken().toString());
+                                    user = new User(new Long(1238), object.getString("first_name"), null, null, null, "USUARIO", "true", AccessToken.getCurrentAccessToken().toString());
                                     String jsonUser = user.serializeUser();
                                     SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = preferencesUser.edit();
