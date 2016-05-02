@@ -1,126 +1,90 @@
 package com.logicware.brapp.persistence;
 
-import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.logicware.brapp.handlerWS.Constantes;
-import com.logicware.brapp.handlerWS.Singleton;
+import com.logicware.brapp.meta.Establishment;
 import com.logicware.brapp.meta.User;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by ASUS on 4/16/2016.
  * Permite la conexion entre el cliente, es decir, el dispositivo
  * y el servidor de LogicWare.
  */
-public class AdapterWebService {
+public class AdapterWebService extends AsyncTask<String, Void, Object> {
+
+    /**
+     * Nombre: doInBackGround
+     * Entradas: una lista de parametros, segun sea se hace una
+     *           operacion hacia el servidor
+     * Salidas: Un objeto, puede ser cualquiera de los que esta en el paquete META
+     * Descripcion: Segun el tipo de operacion a realizar este llama a un metodo
+     *              para realizar dicha operacion del cliente al servidor
+     */
+    @Override
+    protected Object doInBackground(String... params){
+        try {
+            if(params[0].equals(Constantes.GET_USER_BY_CORREO))
+                return getUserByCorreo(params[1]);
+            if(params[0].equals(Constantes.GET_USER_BY_TOKEN))
+                return null; // get by token method params[1]
+            if(params[0].equals(Constantes.ADD_USER))
+                return addUser(params[1],params[2],params[3],params[4],params[5],params[6],params[7]);
+        }catch (Exception e) {
+            Log.e("AdapterWebService", e.getMessage(), e);
+        }
+        return null;
+    }
 
     /**
      * Trae el correo y la contrasena de un usuario según el email.
-     *
-     * @param c Contexto de la actividad que llama al método
      * @param correo Parametro que trae la consulta
      */
-    public static void getUsersByCorreo(Context c, String correo){
-        String URL = Constantes.GET_USER_BY_CORREO + "?correo=" + correo;
-        Singleton.getInstance(c).addToRequestQueue(new JsonObjectRequest(Request.Method.GET, URL, (String) null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                response_getUsersByCorreo(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Exception", error.toString());
-            }
-        }
-        ));
+    public User getUserByCorreo(String correo){
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+        User u = restTemplate.getForObject(Constantes.GET_USER_BY_CORREO + correo, User.class, "Android");
+        return u;
     }
 
     /**
-     * Revisa el archivo json que llega como repsuesta del servidor
-     * y lo trata según sus llaves y valores.
-     *
-     * @param response
-     * @return si retorna null es por dos razones
-     *  1. Lo que se busca no se encuentra en la base de datos
-     *  2. El parametro de la consulta estaba vacío.
+     * Nombre: addUser
+     * Entradas: la lista de atributos concerniente a un usuario
+     * Salidas: Un usuario nuevo
+     * Descripcion: Agrega un nuevo usuario a la base de datos.
      */
-    public static User response_getUsersByCorreo(JSONObject response){
-        User newUser = null;
-        try {
-            switch (Integer.parseInt(response.getString("estado"))) {
-                case 1:
-                    JSONObject obj = response.getJSONObject("meta");
-                    break;
-                default:
-                    break;
-            }
-        }catch(Exception e){
-            Log.e("Exception",e.toString());
-        }
-        return newUser;
-    }
+    public User addUser(String... params){
+        User newUser = new User();
+        newUser.setNombre(params[0]);
+        newUser.setNum_cel(params[1]);
+        newUser.setCorreo(params[2]);
+        newUser.setPassword(params[3]);
+        newUser.setLink_facebook(params[4]);
+        newUser.setToken(params[5]);
+        newUser.setRol(params[6]);
 
-    /**
-     * Inserta en la tabla un nuevo registro
-     *
-     * @param c Contexto de la actividad que llama al método
-     * @param user El user que se acaba de crear.
-     */
-    public static void insertUser(Context c, User user){
-        //boolean final ret = false;
-        String URL = Constantes.INSERT_USER;
-        Map<String,String> mapa = new HashMap<>();
-        mapa.put("correo",user.getCorreo());
-        mapa.put("password",user.getPassword());
-        mapa.put("num_celular",user.getNum_cel());
-        mapa.put("link_facebook", (user.isLink_facebook() + ""));
-        mapa.put("token_facebook", user.getToken_facebook());
-        JSONObject j = new JSONObject(mapa);
-        Singleton.getInstance(c).addToRequestQueue(new JsonObjectRequest(Request.Method.POST, URL, j, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                response_insertUser(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Exception", error.toString());
-            }
-        }));
-    }
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+        restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+        restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
 
-    /**
-     * La respuesta de un insert puede ser positiva o negativa, aquí se maneja esto
-     *
-     * @param response La respuesta del servidor
-     * @return Retorna true si pudo insertar la tupla dentro de la tabla
-     *         De lo contrario retorna false.
-     */
-    public static boolean response_insertUser(JSONObject response){
-        boolean ret = false;
-        try {
-            switch(Integer.parseInt(response.getString("estado"))){
-                case 1:
-                    System.out.println("bien");
-                    ret = true;
-                    break;
-                default:
-                    break;
-            }
-        } catch (JSONException e) {
-            Log.e("Exception", e.toString());
-        }
-        return ret;
+        User response = restTemplate.postForObject(Constantes.ADD_USER, newUser,User.class);
+        return response;
     }
 }

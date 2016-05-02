@@ -1,8 +1,10 @@
 package com.logicware.brapp.activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,7 +13,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.asus.br.R;
+import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.meta.User;
+import com.logicware.brapp.persistence.AdapterWebService;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * Es la interfaz que permite a registrar cuentas nuevas
@@ -68,7 +74,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 } else if (emailErroneo(ema)) {
                     mostrarError("Email incorrecto", "El email no es valido.");
                 } else {
-                    //insertarUsuario(nom, tel, ema, pas1);
+                    insertarUsuario(nom, tel, ema, pas1);
                     Intent intent = new Intent(CreateAccountActivity.this,IndexActivity.class);
                     intent.putExtra("user",user);
                     startActivity(intent);
@@ -133,15 +139,19 @@ public class CreateAccountActivity extends AppCompatActivity {
              * Descripcion:  inserta el usuario a la base de datos del sistema
              */
 
-            /*public void insertarUsuario(String nom, String telefono, String email, String pass) {
-                user = new User(new Long(55),nom,email,pass,telefono,"USUARIO","false",null,new ArrayList<Establishment>());
-                String jsonUser = user.serializeUser();
-                SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferencesUser.edit();
-                editor.putString("key_userObject", jsonUser);
-                editor.commit();
-                guardar token
-            }*/
+            public void insertarUsuario(String nom, String telefono, String email, String pass) {
+                try {
+                    user = (User)new AdapterWebService().execute(Constantes.ADD_USER,nom,telefono,email,pass,"false","1274021983","USUARIO").get();
+                    if(user != null) {
+                        SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferencesUser.edit();
+                        editor.putString("key_token", user.getToken());
+                        editor.commit();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
             /**
              * Nombre de Método: mostrar Error

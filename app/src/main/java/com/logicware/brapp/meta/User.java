@@ -20,7 +20,7 @@ public class User implements Serializable {
     private String num_cel; // numero de contacto
     private String rol; // Rol que desempeña para nuestro sistema: USUARIO, CLIENTE O ADMINISTRADOR
     private String link_facebook; // True si tiene la cuenta asociada con facebook
-    private String token_facebook; // El token que facebook genera para este usuario.
+    private String token; // El token que facebook genera para este usuario.
     private Collection<Establishment> establishment = new ArrayList<>();
 
     /**
@@ -158,12 +158,12 @@ public class User implements Serializable {
     }
 
     /**
-     * Nombre de Método: isLink_facebook
+     * Nombre de Método: getLink_facebook
      * Entradas:
-     * Salidas: boleano
-     * Descripcion: verifica si es un link de facebook
+     * Salidas: string
+     * Descripcion: retorna si es esta o no linkeado con facebook
      */
-    public String isLink_facebook() {
+    public String getLink_facebook() {
         return link_facebook;
     }
 
@@ -183,8 +183,8 @@ public class User implements Serializable {
      * Salidas: token de facebook
      * Descripcion: retorna el token de facebook
      */
-    public String getToken_facebook() {
-        return token_facebook;
+    public String getToken() {
+        return token;
     }
 
     /**
@@ -193,8 +193,8 @@ public class User implements Serializable {
      * Salidas: token de facebook
      * Descripcion: modifica el token de facebook
      */
-    public void setToken_facebook(String token_facebook) {
-        this.token_facebook = token_facebook;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     /**
@@ -258,7 +258,7 @@ public class User implements Serializable {
                 ", num_cel='" + num_cel + '\'' +
                 ", rol='" + rol + '\'' +
                 ", link_facebook='" + link_facebook + '\'' +
-                ", token_facebook='" + token_facebook + '\'' +
+                ", token='" + token + '\'' +
                 ", establishment=" + establishment +
                 '}';
     }

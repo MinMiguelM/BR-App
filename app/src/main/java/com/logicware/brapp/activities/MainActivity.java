@@ -25,10 +25,13 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.meta.User;
+import com.logicware.brapp.persistence.AdapterWebService;
 
 import org.json.JSONObject;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * Esta clase se encarga de mostrarle al usuario
@@ -105,17 +108,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         loginFacebook();
+    }
 
+    @Override
+    public void onStart(){
+        super.onStart();
         SharedPreferences settings;
         settings = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
         currentToken = settings.getString("key_token", null);
         if(currentToken != null) {
-            new HttpRequestTask().execute();
-            if(user.getRol().equals("USUARIO")){
+            try {
+                user = (User)new AdapterWebService().execute(Constantes.GET_USER_BY_TOKEN,currentToken).get();
+                System.out.println(user + "   " + currentToken);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if(user != null && user.getRol().equals("USUARIO")){
                 Intent intent = new Intent(MainActivity.this, IndexActivity.class);
                 intent.putExtra("user",user);
                 startActivity(intent);
-            }else if(user.getRol().equals("CLIENTE")) {
+            }else if(user != null && user.getRol().equals("CLIENTE")) {
                 //Mandar a activity client
                 /*Intent intent = new Intent(MainActivity.this, IndexActivity.class);
                 intent.putExtra("user", user);
@@ -132,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
      *              a la aplicación
      */
     public void login(String email, String password){
+        // If the token's date expired, renove after logIn
         if(email.equals(user.getCorreo()) && password.equals(user.getPassword())){
             Intent intent = new Intent(MainActivity.this, IndexActivity.class);
             intent.putExtra("user",user);
@@ -227,29 +240,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private class HttpRequestTask extends AsyncTask<Void, Void, User> {
-
-        @Override
-        protected User doInBackground(Void... params){
-            try {
-                // Esto iría en el adapter...
-                // se traeria por token getUserByToken
-                RestTemplate restTemplate = new RestTemplate();
-                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                User u = restTemplate.getForObject(Constantes.GET_USER_BY_CORREO + "test", User.class, "Android");
-                return u;
-            }catch (Exception e) {
-                Log.e("MainActivity", e.getMessage(), e);
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(User user) {
-            // save mainActivity's user
-            System.out.println(user.toString());
-        }
     }
 }
