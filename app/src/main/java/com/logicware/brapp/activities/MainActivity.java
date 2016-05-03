@@ -28,10 +28,6 @@ import com.logicware.brapp.meta.User;
 import com.logicware.brapp.persistence.AdapterWebService;
 
 import org.json.JSONObject;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
-
-import java.util.concurrent.ExecutionException;
 
 /**
  * Esta clase se encarga de mostrarle al usuario

@@ -11,11 +11,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import java.util.UUID;
 
 import com.example.asus.br.R;
 import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.meta.User;
 import com.logicware.brapp.persistence.AdapterWebService;
+
+
 
 import java.util.concurrent.ExecutionException;
 
@@ -141,7 +144,9 @@ public class CreateAccountActivity extends AppCompatActivity {
 
             public void insertarUsuario(String nom, String telefono, String email, String pass) {
                 try {
-                    user = (User)new AdapterWebService().execute(Constantes.ADD_USER,nom,telefono,email,pass,"false","1274021983","USUARIO").get();
+                    UUID tok = UUID.randomUUID();
+                    String token = new String(tok.toString());
+                    user = (User)new AdapterWebService().execute(Constantes.ADD_USER,nom,telefono,email,pass,"false",token,"USUARIO").get();
                     if(user != null) {
                         SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferencesUser.edit();
