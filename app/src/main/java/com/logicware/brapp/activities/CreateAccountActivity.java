@@ -78,16 +78,13 @@ public class CreateAccountActivity extends AppCompatActivity {
                     mostrarError("Email incorrecto", "El email no es valido.");
                 } else {
                     insertarUsuario(nom, tel, ema, pas1);
+                } if (user == null){
+                    mostrarError("Usuario no creado", "El email ya esta registrado, intente con otro.");
+                } else {
                     Intent intent = new Intent(CreateAccountActivity.this,IndexActivity.class);
                     intent.putExtra("user",user);
                     startActivity(intent);
                 }
-
-                /*else if(emailRegistrado(ema)){
-                    mostrarError("Email registrado","El email a registrar ya se encontro en la base de datos");
-                } else {
-                    //insertarUsuario(nom, tel, ema, pas1);
-                }*/
             }
 
             /**

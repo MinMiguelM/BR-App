@@ -70,9 +70,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreateAccountActivity.class);
                 startActivity(intent);
-                //AdapterWebService.getUsersByCorreo(getApplicationContext(),"kb");
-                //User user = new User(null, "montanez-m", "prueba", "3165498", "USUARIO", false, null);
-                //AdapterWebService.insertUser(getApplicationContext(),user); Falta solucionar errores
             }
         });
 
@@ -115,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
         if(currentToken != null) {
             try {
                 user = (User)new AdapterWebService().execute(Constantes.GET_USER_BY_TOKEN,currentToken).get();
-                System.out.println(user + "   " + currentToken);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -196,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
                                     String jsonUser = user.serializeUser();
                                     SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = preferencesUser.edit();
-                                    editor.putString("key_userObject", jsonUser);
+                                    editor.putString("key_token", jsonUser);
                                     editor.commit();*/
                                     System.out.println("hello");
                                 } catch (Exception e) {

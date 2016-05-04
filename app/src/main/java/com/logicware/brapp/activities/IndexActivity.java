@@ -49,8 +49,8 @@ public class IndexActivity extends AppCompatActivity
     }
 
     @Override
-    protected  void onStart(){
-        super.onStart();
+    protected  void onResume(){
+        super.onResume();
         loadBasisInfo();
     }
 
@@ -108,7 +108,7 @@ public class IndexActivity extends AppCompatActivity
      *              layout
      */
     public TextView getTextName(){
-        return (TextView)findViewById(R.id.textName);
+        return (TextView)getActivity().findViewById(R.id.textName);
     }
 
     /**
@@ -119,7 +119,7 @@ public class IndexActivity extends AppCompatActivity
      *              por el nuevo valor.
      */
     public void setTextName(CharSequence text){
-        TextView t = (TextView)findViewById(R.id.textName);
+        TextView t = (TextView)getActivity().findViewById(R.id.textName);
         t.setText(text);
     }
 
@@ -132,10 +132,23 @@ public class IndexActivity extends AppCompatActivity
      */
     public void loadBasisInfo(){
         try {
+            /*
+                Cargar imagen y el nombre
+             */
             System.out.println(user.getNombre());
             setTextName(user.getNombre());
         }catch(Exception e){
             System.out.println(e.toString());
         }
+    }
+
+    /**
+     * Nombre: getActivity
+     * Entradas: -
+     * Salidas: retorna esta misma activity
+     * Descripcion: Retornar esta actividad con sus componentes cargados.
+     */
+    public AppCompatActivity getActivity(){
+        return this;
     }
 }
