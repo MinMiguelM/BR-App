@@ -108,7 +108,7 @@ public class IndexActivity extends AppCompatActivity
      *              layout
      */
     public TextView getTextName(){
-        return (TextView)getActivity().findViewById(R.id.textName);
+        return (TextView)getNavigation().findViewById(R.id.textName);
     }
 
     /**
@@ -119,7 +119,7 @@ public class IndexActivity extends AppCompatActivity
      *              por el nuevo valor.
      */
     public void setTextName(CharSequence text){
-        TextView t = (TextView)getActivity().findViewById(R.id.textName);
+        TextView t = (TextView)getNavigation().findViewById(R.id.textName);
         t.setText(text);
     }
 
@@ -143,12 +143,12 @@ public class IndexActivity extends AppCompatActivity
     }
 
     /**
-     * Nombre: getActivity
+     * Nombre: getNavigation
      * Entradas: -
-     * Salidas: retorna esta misma activity
-     * Descripcion: Retornar esta actividad con sus componentes cargados.
+     * Salidas: retorna el Navigation de esta actividad
+     * Descripcion: Retornar esta Navigation con sus componentes cargados.
      */
-    public AppCompatActivity getActivity(){
-        return this;
+    public NavigationView getNavigation(){
+        return (NavigationView)findViewById(R.id.nav_view);
     }
 }
