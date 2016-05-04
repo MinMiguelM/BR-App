@@ -1,42 +1,45 @@
 package com.logicware.brapp.activities;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.asus.br.R;
 import com.logicware.brapp.meta.User;
 
-/**
- * Es la interfaz del menu principal despues de que el usuario
- * se logguea correctamente
- */
-public class IndexActivity extends AppCompatActivity
+public class IndexClientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private User user = null;
+    private User user;
 
-    /**
-     * Nombre: onCreate
-     * Entradas: Instancia del estado salvada
-     * Salidas: -
-     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
-     *              que la aplicacion pueda mostrar sus componentes graficos
-     *              y funcionales
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_index);
+        setContentView(R.layout.activity_index_client);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         user = (User)getIntent().getExtras().getSerializable("user");
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -53,31 +56,38 @@ public class IndexActivity extends AppCompatActivity
         loadBasisInfo();
     }
 
-    /**
-     * Nombre: onBackPressed
-     * Entradas: -
-     * Salidas: -
-     * Descripcion: Si el usuario de la aplicacion le da al boton
-     *              de retroceso cerrara la aplicacion si la barra del menu
-     *              no esta desplegada
-     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            this.finish();
+            super.onBackPressed();
         }
     }
 
-    /**
-     * Nombre: onNavigationItemSelected
-     * Entradas: item que representa un boton del menu desplegable
-     * salidas: siempre retorna verdadero
-     * Descripcion: Segun al item que se le haya dado clic se deberia implementar
-     *              una funcionalidad para mostrar
-     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.index_client, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -91,6 +101,10 @@ public class IndexActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
 
         }
 
