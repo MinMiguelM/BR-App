@@ -4,24 +4,14 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.logicware.brapp.handlerWS.Constantes;
-import com.logicware.brapp.meta.Establishment;
 import com.logicware.brapp.meta.User;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -61,10 +51,15 @@ public class AdapterWebService extends AsyncTask<String, Void, Object> {
      * Descripcion: trae un usuario de la base de datos segun el token.
      */
     public User getUserByToken(String token){
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-        User u = restTemplate.getForObject(Constantes.GET_USER_BY_TOKEN + token,User.class,"Android");
-        return u;
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            User u = restTemplate.getForObject(Constantes.GET_USER_BY_TOKEN + token, User.class, "Android");
+            return u;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -72,10 +67,15 @@ public class AdapterWebService extends AsyncTask<String, Void, Object> {
      * @param correo Parametro que trae la consulta
      */
     public User getUserByCorreo(String correo){
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-        User u = restTemplate.getForObject(Constantes.GET_USER_BY_CORREO + "\"" + correo + "\"", User.class, "Android");
-        return u;
+        try{
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            User u = restTemplate.getForObject(Constantes.GET_USER_BY_CORREO + "\"" + correo + "\"", User.class, "Android");
+            return u;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -104,6 +104,8 @@ public class AdapterWebService extends AsyncTask<String, Void, Object> {
         }catch(HttpServerErrorException e){
             if (e.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR)
                 return null;
+            else
+                e.printStackTrace();
         }
         return null;
     }

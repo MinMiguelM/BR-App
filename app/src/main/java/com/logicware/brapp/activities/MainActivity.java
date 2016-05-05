@@ -27,6 +27,10 @@ import com.logicware.brapp.persistence.AdapterWebService;
 
 import org.json.JSONObject;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 /**
  * Esta clase se encarga de mostrarle al usuario
  * la primera pantalla para que pueda iniciar sesion
@@ -113,10 +117,10 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         SharedPreferences settings;
         settings = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
-        currentToken = settings.getString("key_token", null);
+        currentToken = settings.getString("key_token", null); // "a3b58f34-f4ee-451e-9b26-4c6e433e175d";
         if(currentToken != null) {
             try {
-                user = (User)new AdapterWebService().execute(Constantes.GET_USER_BY_TOKEN,currentToken).get();
+                user = (User)new AdapterWebService().execute(Constantes.GET_USER_BY_TOKEN,currentToken).get(5, TimeUnit.SECONDS);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -141,22 +145,44 @@ public class MainActivity extends AppCompatActivity {
      */
     public void login(String email, String password){
         // If the token's date expired, renove after logIn
-        /*if(email.equals(user.getCorreo()) && password.equals(user.getPassword())){
-            Intent intent = new Intent(MainActivity.this, IndexActivity.class);
-            intent.putExtra("user",user);
-            startActivity(intent);
+        try {
+            user = (User)new AdapterWebService().execute(Constantes.GET_USER_BY_CORREO,email).get(5, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            mostrarError("Server not found","Problemas con el servidor...");
+        }
+        /**
+         * To test, comment this if-statement and work with the if-statement below
+         */
+        if(user != null && password.equals(user.getPassword())){
+            SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferencesUser.edit();
+            editor.putString("key_token", user.getToken());
+            editor.commit();
+            if(user.getRol().equals("USUARIO")) {
+                Intent intent = new Intent(MainActivity.this, IndexActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+            }else if(user.getRol().equals("CLIENTE")){
+                Intent intent = new Intent(MainActivity.this, IndexClientActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+            }
         }else
-            mostrarError("No se pudo ingresar","Email o contraseña incorrectas");*/
-        if(email.equals("1") && password.equals("1")){
+            mostrarError("No se pudo ingresar","Email o contraseña incorrectas");
+
+        /*if(email.equals("1") && password.equals("1")){
             Intent intent = new Intent(MainActivity.this, IndexActivity.class);
             intent.putExtra("user",user);
             startActivity(intent);
-        }else{
+        }else if(email.equals("2") && password.equals("2")){
             Intent intent = new Intent(MainActivity.this, IndexClientActivity.class);
             intent.putExtra("user",user);
             startActivity(intent);
-        }
-
+        }*/
     }
 
     /**
