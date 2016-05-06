@@ -1,5 +1,6 @@
 package com.logicware.brapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -17,11 +18,23 @@ import android.widget.TextView;
 import com.example.asus.br.R;
 import com.logicware.brapp.meta.User;
 
+/**
+ * Es la interfaz del menu principal despues de que el cliente
+ * se logguea correctamente
+ */
 public class IndexClientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private User user;
 
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,19 +65,41 @@ public class IndexClientActivity extends AppCompatActivity
 
         View v = navigationView.getHeaderView(0);
         TextView name = (TextView)v.findViewById(R.id.textName);
-        name.setText(user.getNombre());
+        try {
+            name.setText(user.getNombre());
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 
+    /**
+     * Nombre: onBackPressed
+     * Entradas: -
+     * Salidas: -
+     * Descripcion: Si el usuario de la aplicacion le da al boton
+     *              de retroceso cerrara la aplicacion si la barra del menu
+     *              no esta desplegada
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            //super.onBackPressed();
+            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+            homeIntent.addCategory( Intent.CATEGORY_HOME );
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(homeIntent);
         }
     }
 
+    /**
+     * Nombre: onCreateOptionsMenu
+     * Entradas: Menu
+     * Salidas: retorna verdadero si pudo crear el menu
+     * Descripcion: Crea un menu a desplegar en la interfaz
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -72,6 +107,13 @@ public class IndexClientActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * Nombre: onOptionsItemSelected
+     * Entradas: Un item del munu desplegado
+     * Salidas: Verdadero despues de haber llevado a cabo la tarea del boton
+     * Descripcion: Se programa la funcionalidad despues de darle al boton de
+     *              Configuracion que es deplegado.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -87,6 +129,13 @@ public class IndexClientActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Nombre: onNavigationItemSelected
+     * Entradas: item que representa un boton del menu desplegable
+     * salidas: siempre retorna verdadero
+     * Descripcion: Segun al item que se le haya dado clic se deberia implementar
+     *              una funcionalidad para mostrar
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

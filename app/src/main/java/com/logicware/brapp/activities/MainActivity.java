@@ -117,10 +117,20 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         SharedPreferences settings;
         settings = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
-        currentToken = settings.getString("key_token", null); // "a3b58f34-f4ee-451e-9b26-4c6e433e175d";
+        currentToken = settings.getString("key_token", null);
         if(currentToken != null) {
             try {
-                user = (User)new AdapterWebService().execute(Constantes.GET_USER_BY_TOKEN,currentToken).get(5, TimeUnit.SECONDS);
+                user = (User)new AdapterWebService().execute(Constantes.GET_USER_BY_TOKEN,currentToken).get(Constantes.TIMEOUT, TimeUnit.SECONDS);
+                if(user.getLink_facebook().equals("true")){
+                    if(AccessToken.getCurrentAccessToken().isExpired()){
+                        AccessToken.refreshCurrentAccessTokenAsync();
+                        // update token facebook
+                        SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferencesUser.edit();
+                        editor.putString("key_token", user.getToken());
+                        editor.commit();
+                    }
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -146,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
     public void login(String email, String password){
         // If the token's date expired, renove after logIn
         try {
-            user = (User)new AdapterWebService().execute(Constantes.GET_USER_BY_CORREO,email).get(5, TimeUnit.SECONDS);
+            user = (User)new AdapterWebService().execute(Constantes.GET_USER_BY_CORREO,email).get(Constantes.TIMEOUT, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -220,20 +230,20 @@ public class MainActivity extends AppCompatActivity {
         // loginButton.setReadPermissions(); Cambiar permisos de lectura
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
-                Intent intent = new Intent(MainActivity.this, IndexActivity.class);
+            public void onSuccess(final LoginResult loginResult) {
                 GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 try {
-                                    /*user = new User(new Long(1238), object.getString("first_name"), null, null, null, "USUARIO", "true", AccessToken.getCurrentAccessToken().toString(),new ArrayList<Establishment>());
-                                    String jsonUser = user.serializeUser();
+                                    Intent intent = new Intent(MainActivity.this, IndexActivity.class);
+                                    user = (User)new AdapterWebService().execute(Constantes.ADD_USER,object.getString("first_name"),"",loginResult.getAccessToken().getUserId(),"","true",loginResult.getAccessToken().getToken(),"USUARIO").get();
                                     SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = preferencesUser.edit();
-                                    editor.putString("key_token", jsonUser);
-                                    editor.commit();*/
-                                    System.out.println("hello");
+                                    editor.putString("key_token", user.getToken());
+                                    editor.commit();
+                                    intent.putExtra("user", user);
+                                    startActivity(intent);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -243,9 +253,6 @@ public class MainActivity extends AppCompatActivity {
                 parameters.putString("fields", "id,first_name");
                 request.setParameters(parameters);
                 request.executeAsync();
-                intent.putExtra("user", user);
-                startActivity(intent);
-                // save token = loginResult.getAccessToken().getToken() a bases de datos
             }
 
             @Override

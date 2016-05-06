@@ -1,5 +1,6 @@
 package com.logicware.brapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -49,7 +50,11 @@ public class IndexActivity extends AppCompatActivity
 
         View v = navigationView.getHeaderView(0);
         TextView name = (TextView)v.findViewById(R.id.textName);
-        name.setText(user.getNombre());
+        try {
+            name.setText(user.getNombre());
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -66,7 +71,11 @@ public class IndexActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            this.finish();
+            //this.finish();
+            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+            homeIntent.addCategory( Intent.CATEGORY_HOME );
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(homeIntent);
         }
     }
 

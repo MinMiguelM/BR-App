@@ -19,6 +19,12 @@ public class Constantes {
     private static  final String PORT = "8181";
 
     /**
+     * Tiempo de espera de una respuesta por parte del servidor.
+     * Tiempo en segundos.
+     */
+    public static final int TIMEOUT = 2;
+
+    /**
      * URLs del Web Service
      */
     public static final String GET_ALL_USERS = "http://" + IP + ":" +PORT + "/user/getAll";
