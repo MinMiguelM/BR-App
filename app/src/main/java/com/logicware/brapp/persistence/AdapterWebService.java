@@ -38,8 +38,10 @@ public class AdapterWebService extends AsyncTask<String, Void, Object> {
                 return getUserByToken(params[1]); // get by token method params[1]
             if(params[0].equals(Constantes.ADD_USER))
                 return addUser(params[1],params[2],params[3],params[4],params[5],params[6],params[7]);
+            if(params[0].equals(Constantes.UPDATE_TOKEN_USER))
+                return updateTokenUser(params[1],params[2]);
         }catch (Exception e) {
-            Log.e("AdapterWebService", e.getMessage(), e);
+            e.printStackTrace();
         }
         return null;
     }
@@ -106,6 +108,25 @@ public class AdapterWebService extends AsyncTask<String, Void, Object> {
                 return null;
             else
                 e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Nombre: updateTokenUser
+     * Entradas: El correo del usuario a quien se le actualizara el token y ademas
+     *           el new token generado para dicho usuario
+     * Salidas: El usuario con sus datos acualizados.
+     * Descripcion: Actualiza el token debido a que este ya expiró.
+     */
+    public User updateTokenUser(String newToken, String correo){
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            User u = restTemplate.getForObject(Constantes.UPDATE_TOKEN_USER + newToken + "&" + "\"" + correo + "\"", User.class, "Android");
+            return u;
+        }catch(Exception e){
+            e.printStackTrace();
         }
         return null;
     }

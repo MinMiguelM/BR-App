@@ -31,4 +31,5 @@ public class Constantes {
     public static final String GET_USER_BY_CORREO = "http://" + IP + ":" +PORT + "/user/getByCorreo/";
     public static final String GET_USER_BY_TOKEN = "http://" + IP + ":" +PORT + "/user/getByToken/";
     public static final String ADD_USER = "http://" + IP + ":" +PORT + "/user/add";
+    public static final String UPDATE_TOKEN_USER = "http://" + IP + ":" +PORT + "/user/updateToken/";
 }

@@ -121,14 +121,29 @@ public class MainActivity extends AppCompatActivity {
         if(currentToken != null) {
             try {
                 user = (User)new AdapterWebService().execute(Constantes.GET_USER_BY_TOKEN,currentToken).get(Constantes.TIMEOUT, TimeUnit.SECONDS);
-                if(user.getLink_facebook().equals("true")){
+                if(user != null && user.getLink_facebook().equals("true")){
                     if(AccessToken.getCurrentAccessToken().isExpired()){
-                        AccessToken.refreshCurrentAccessTokenAsync();
-                        // update token facebook
-                        SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = preferencesUser.edit();
-                        editor.putString("key_token", user.getToken());
-                        editor.commit();
+                        AccessToken.refreshCurrentAccessTokenAsync(new AccessToken.AccessTokenRefreshCallback() {
+                            @Override
+                            public void OnTokenRefreshed(AccessToken accessToken) {
+                                try {
+                                    user = (User)new AdapterWebService().execute(Constantes.UPDATE_TOKEN_USER,accessToken.getCurrentAccessToken().getToken(),user.getCorreo()).get();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                } catch (ExecutionException e) {
+                                    e.printStackTrace();
+                                }
+                                SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferencesUser.edit();
+                                editor.putString("key_token", user.getToken());
+                                editor.commit();
+                            }
+
+                            @Override
+                            public void OnTokenRefreshFailed(FacebookException exception) {
+
+                            }
+                        });
                     }
                 }
             } catch (Exception e) {
