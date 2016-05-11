@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.asus.br.R;
@@ -26,7 +27,7 @@ public class IndexClientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private User user;
-
+    private Button profile;
     /**
      * Nombre: onCreate
      * Entradas: Instancia del estado salvada
@@ -43,7 +44,23 @@ public class IndexClientActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        user = (User)getIntent().getExtras().getSerializable("user");
+        user = (User)getIntent().getExtras().getSerializable("cliente");
+
+        profile=(Button)findViewById(R.id.perfil);
+        profile.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Nombre: onClick
+             * Entradas: la vista actual del componente
+             * Salidas: -
+             * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
+             *              sobre el boton.
+             */
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IndexClientActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -142,13 +159,11 @@ public class IndexClientActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_perfil) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
 
         }
 

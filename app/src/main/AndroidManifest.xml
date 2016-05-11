@@ -50,6 +50,10 @@
         <activity
             android:name="com.logicware.brapp.activities.IndexClientActivity"
             android:label="@string/title_activity_index_client"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.ProfileActivity"
+            android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

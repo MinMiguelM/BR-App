@@ -9,4 +9,5 @@
     <string name="title_activity_crear_cuenta_activity">Registro</string>
     <string name="title_activity_index_client">Menu principal</string>
     <string name="usernameLocal">%1$s</string>
+    <string name="title_activity_profile">Profile</string>
 </resources>

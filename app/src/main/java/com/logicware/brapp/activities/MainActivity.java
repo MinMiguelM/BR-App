@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * To test, comment this if-statement and work with the if-statement below
          */
-        if(user != null && password.equals(user.getPassword())){
+       /* if(user != null && password.equals(user.getPassword())){
             SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = preferencesUser.edit();
             editor.putString("key_token", user.getToken());
@@ -197,17 +197,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }else
-            mostrarError("No se pudo ingresar","Email o contraseña incorrectas");
+            mostrarError("No se pudo ingresar","Email o contraseña incorrectas");*/
 
-        /*if(email.equals("1") && password.equals("1")){
+        if(email.equals("usuario@us.com") && password.equals("1")){
             Intent intent = new Intent(MainActivity.this, IndexActivity.class);
             intent.putExtra("user",user);
             startActivity(intent);
-        }else if(email.equals("2") && password.equals("2")){
+        }else if(email.equals("cliente@cl.com") && password.equals("2")){
             Intent intent = new Intent(MainActivity.this, IndexClientActivity.class);
             intent.putExtra("user",user);
             startActivity(intent);
-        }*/
+        }
     }
 
     /**
