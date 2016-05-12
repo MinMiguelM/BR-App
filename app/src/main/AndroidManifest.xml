@@ -54,6 +54,18 @@
         <activity
             android:name="com.logicware.brapp.activities.ProfileActivity"
             android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.ChangePasswordActivity"
+            android:label="@string/title_activity_change_password"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.ListEstablishmentActivity"
+            android:label="@string/title_activity_list_establishment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.OneEstablishmentActivity"
+            android:label="@string/title_activity_one_establishment"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

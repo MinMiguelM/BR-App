@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.logicware.brapp.activities.ProfileActivity">
+    tools:context="com.logicware.brapp.activities.OneEstablishmentActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,6 +21,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_profile" />
+    <include layout="@layout/content_one_establishment" />
 
 </android.support.design.widget.CoordinatorLayout>

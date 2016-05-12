@@ -10,4 +10,8 @@
     <string name="title_activity_index_client">Menu principal</string>
     <string name="usernameLocal">%1$s</string>
     <string name="title_activity_profile">Profile</string>
+    <string name="imagen">imagen</string>
+    <string name="title_activity_change_password">ChangePasswordActivity</string>
+    <string name="title_activity_list_establishment">ListEstablishmentActivity</string>
+    <string name="title_activity_one_establishment">OneEstablishmentActivity</string>
 </resources>

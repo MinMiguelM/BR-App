@@ -27,7 +27,7 @@ public class IndexClientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private User user;
-    private Button profile;
+    private Button establecimiento;
     /**
      * Nombre: onCreate
      * Entradas: Instancia del estado salvada
@@ -45,9 +45,8 @@ public class IndexClientActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         user = (User)getIntent().getExtras().getSerializable("cliente");
-
-        profile=(Button)findViewById(R.id.perfil);
-        profile.setOnClickListener(new View.OnClickListener() {
+        establecimiento = (Button)findViewById(R.id.buttonEstablecimiento);
+       establecimiento.setOnClickListener(new View.OnClickListener() {
             /**
              * Nombre: onClick
              * Entradas: la vista actual del componente
@@ -57,10 +56,11 @@ public class IndexClientActivity extends AppCompatActivity
              */
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IndexClientActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(IndexClientActivity.this, ListEstablishmentActivity.class);
                 startActivity(intent);
             }
         });
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -160,7 +160,9 @@ public class IndexClientActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_perfil) {
-            // Handle the camera action
+            Intent intent = new Intent(IndexClientActivity.this, ProfileActivity.class);
+            startActivity(intent);
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
