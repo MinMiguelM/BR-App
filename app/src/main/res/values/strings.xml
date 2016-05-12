@@ -14,4 +14,5 @@
     <string name="title_activity_change_password">ChangePasswordActivity</string>
     <string name="title_activity_list_establishment">ListEstablishmentActivity</string>
     <string name="title_activity_one_establishment">OneEstablishmentActivity</string>
+    <string name="title_activity_create_establishment">createEstablishmentActivity</string>
 </resources>

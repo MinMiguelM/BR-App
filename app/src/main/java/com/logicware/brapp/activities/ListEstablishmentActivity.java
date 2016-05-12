@@ -24,8 +24,8 @@ public class ListEstablishmentActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String[] cosasPorHacer = new String[] { "Establecimiento 1","Establecimiento 2"};
-        ArrayAdapter array = new ArrayAdapter(ListEstablishmentActivity.this,simple_expandable_list_item_1,cosasPorHacer);
+        String[] Establecimientos = new String[] { "Establecimiento 1","Establecimiento 2"};
+        ArrayAdapter array = new ArrayAdapter(ListEstablishmentActivity.this,simple_expandable_list_item_1,Establecimientos);
 
         lista= (ListView) findViewById(R.id.listViewCliente);
         lista.setAdapter(array);

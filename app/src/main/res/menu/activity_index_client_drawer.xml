@@ -4,16 +4,16 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_perfil"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/com_facebook_profile_picture_blank_square"
             android:title="Mi perfil" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_establecimiento"
+            android:icon="@drawable/establecimiento"
+            android:title="Establecimientos" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_reporte"
+            android:icon="@drawable/reporte"
+            android:title="Reporte de rendimiento" />
     </group>
 
 </menu>
