@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.asus.br.R;
@@ -26,7 +26,9 @@ public class IndexClientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private User user;
+    private Button establecimiento;
 
+    private Button promocion;
     /**
      * Nombre: onCreate
      * Entradas: Instancia del estado salvada
@@ -43,14 +45,47 @@ public class IndexClientActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        user = (User)getIntent().getExtras().getSerializable("user");
+        user = (User)getIntent().getExtras().getSerializable("cliente");
+        establecimiento = (Button)findViewById(R.id.buttonEstablecimiento);
+       establecimiento.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Nombre: onClick
+             * Entradas: la vista actual del componente
+             * Salidas: -
+             * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
+             *              sobre el boton.
+             */
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IndexClientActivity.this, ListEstablishmentActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        promocion = (Button)findViewById(R.id.buttonPromocion);
+        promocion.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Nombre: onClick
+             * Entradas: la vista actual del componente
+             * Salidas: -
+             * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
+             *              sobre el boton.
+             */
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IndexClientActivity.this, PromoteEstablishmentActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(IndexClientActivity.this, CreateEstablishmentActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -142,13 +177,16 @@ public class IndexClientActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_perfil) {
+            Intent intent = new Intent(IndexClientActivity.this, ProfileActivity.class);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_establecimiento) {
+            Intent intent = new Intent(IndexClientActivity.this, ListEstablishmentActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_promocion) {
+            Intent intent = new Intent(IndexClientActivity.this, PromoteEstablishmentActivity.class);
+            startActivity(intent);
 
         }
 
