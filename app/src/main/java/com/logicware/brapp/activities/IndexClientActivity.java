@@ -27,6 +27,8 @@ public class IndexClientActivity extends AppCompatActivity
 
     private User user;
     private Button establecimiento;
+
+    private Button promocion;
     /**
      * Nombre: onCreate
      * Entradas: Instancia del estado salvada
@@ -56,6 +58,23 @@ public class IndexClientActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(IndexClientActivity.this, ListEstablishmentActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        promocion = (Button)findViewById(R.id.buttonPromocion);
+        promocion.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Nombre: onClick
+             * Entradas: la vista actual del componente
+             * Salidas: -
+             * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
+             *              sobre el boton.
+             */
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IndexClientActivity.this, PromoteEstablishmentActivity.class);
                 startActivity(intent);
             }
         });
@@ -165,7 +184,9 @@ public class IndexClientActivity extends AppCompatActivity
         } else if (id == R.id.nav_establecimiento) {
             Intent intent = new Intent(IndexClientActivity.this, ListEstablishmentActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_promocion) {
+            Intent intent = new Intent(IndexClientActivity.this, PromoteEstablishmentActivity.class);
+            startActivity(intent);
 
         }
 

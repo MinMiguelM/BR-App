@@ -139,20 +139,18 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/scrollView3" >
 
-                                <LinearLayout
-                                    android:orientation="vertical"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:orientation="vertical" >
 
-                                    <ExpandableListView
-                                        android:layout_width="wrap_content"
+                                    <ListView
+                                        android:id="@+id/listViewCalificacion"
+                                        android:layout_width="fill_parent"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/expandableListView" />
+                                        android:dividerHeight="1dp"
+                                        android:choiceMode="multipleChoice" />
 
-                                    <RatingBar
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:id="@+id/ratingBar" />
                                 </LinearLayout>
                             </ScrollView>
                         </LinearLayout>
@@ -166,7 +164,7 @@
                             <ListView
                                 android:layout_width="480dp"
                                 android:layout_height="350dp"
-                                android:id="@+id/listView" />
+                                android:id="@+id/listViewReservas" />
                         </LinearLayout>
                     </FrameLayout>
                 </LinearLayout>

@@ -70,6 +70,10 @@
         <activity
             android:name="com.logicware.brapp.activities.CreateEstablishmentActivity"
             android:label="@string/title_activity_create_establishment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.PromoteEstablishmentActivity"
+            android:label="@string/title_activity_promote_establishment"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

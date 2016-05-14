@@ -15,4 +15,5 @@
     <string name="title_activity_list_establishment">ListEstablishmentActivity</string>
     <string name="title_activity_one_establishment">OneEstablishmentActivity</string>
     <string name="title_activity_create_establishment">createEstablishmentActivity</string>
+    <string name="title_activity_promote_establishment">PromoteEstablishmentActivity</string>
 </resources>
