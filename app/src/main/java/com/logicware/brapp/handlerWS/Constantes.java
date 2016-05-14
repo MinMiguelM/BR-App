@@ -22,7 +22,7 @@ public class Constantes {
      * Tiempo de espera de una respuesta por parte del servidor.
      * Tiempo en segundos.
      */
-    public static final int TIMEOUT = 2;
+    public static final int TIMEOUT = 3;
 
     /**
      * URLs del Web Service

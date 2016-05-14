@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.asus.br.R;
-import com.logicware.brapp.meta.User;
+import com.logicware.brapp.meta.Usuario;
 
 /**
  * Es la interfaz del menu principal despues de que el cliente
@@ -25,7 +25,7 @@ import com.logicware.brapp.meta.User;
 public class IndexClientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private User user;
+    private Usuario user;
     private Button establecimiento;
 
     private Button promocion;
@@ -45,22 +45,22 @@ public class IndexClientActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        user = (User)getIntent().getExtras().getSerializable("cliente");
+        user = (Usuario)getIntent().getExtras().getSerializable("user");
         establecimiento = (Button)findViewById(R.id.buttonEstablecimiento);
        establecimiento.setOnClickListener(new View.OnClickListener() {
-            /**
-             * Nombre: onClick
-             * Entradas: la vista actual del componente
-             * Salidas: -
-             * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
-             *              sobre el boton.
-             */
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(IndexClientActivity.this, ListEstablishmentActivity.class);
-                startActivity(intent);
-            }
-        });
+           /**
+            * Nombre: onClick
+            * Entradas: la vista actual del componente
+            * Salidas: -
+            * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
+            *              sobre el boton.
+            */
+           @Override
+           public void onClick(View v) {
+               Intent intent = new Intent(IndexClientActivity.this, ListEstablishmentActivity.class);
+               startActivity(intent);
+           }
+       });
 
 
         promocion = (Button)findViewById(R.id.buttonPromocion);

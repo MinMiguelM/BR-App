@@ -1,10 +1,9 @@
 package com.logicware.brapp.persistence;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.logicware.brapp.handlerWS.Constantes;
-import com.logicware.brapp.meta.User;
+import com.logicware.brapp.meta.Usuario;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -52,11 +51,11 @@ public class AdapterWebService extends AsyncTask<String, Void, Object> {
      * Salidas: Usuario si existe, si no null
      * Descripcion: trae un usuario de la base de datos segun el token.
      */
-    public User getUserByToken(String token){
+    public Usuario getUserByToken(String token){
         try {
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            User u = restTemplate.getForObject(Constantes.GET_USER_BY_TOKEN + token, User.class, "Android");
+            Usuario u = restTemplate.getForObject(Constantes.GET_USER_BY_TOKEN + token, Usuario.class, "Android");
             return u;
         }catch(Exception e){
             e.printStackTrace();
@@ -68,11 +67,11 @@ public class AdapterWebService extends AsyncTask<String, Void, Object> {
      * Trae el correo y la contrasena de un usuario según el email.
      * @param correo Parametro que trae la consulta
      */
-    public User getUserByCorreo(String correo){
+    public Usuario getUserByCorreo(String correo){
         try{
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            User u = restTemplate.getForObject(Constantes.GET_USER_BY_CORREO + "\"" + correo + "\"", User.class, "Android");
+            Usuario u = restTemplate.getForObject(Constantes.GET_USER_BY_CORREO + "\"" + correo + "\"", Usuario.class, "Android");
             return u;
         }catch(Exception e){
             e.printStackTrace();
@@ -86,22 +85,22 @@ public class AdapterWebService extends AsyncTask<String, Void, Object> {
      * Salidas: Un usuario nuevo
      * Descripcion: Agrega un nuevo usuario a la base de datos.
      */
-    public User addUser(String... params){
-        User newUser = new User();
+    public Usuario addUser(String... params){
+        Usuario newUser = new Usuario();
         newUser.setNombre(params[0]);
-        newUser.setNum_cel(params[1]);
+        newUser.setTelefono(params[1]);
         newUser.setCorreo(params[2]);
-        newUser.setPassword(params[3]);
-        newUser.setLink_facebook(params[4]);
+        newUser.setContrasena(params[3]);
+        newUser.setLink_facebook(Boolean.parseBoolean(params[4]));
         newUser.setToken(params[5]);
-        newUser.setRol(params[6]);
+        newUser.setTipo(params[6]);
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
         restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
         try{
-            User response = restTemplate.postForObject(Constantes.ADD_USER, newUser,User.class);
+            Usuario response = restTemplate.postForObject(Constantes.ADD_USER, newUser,Usuario.class);
             return response;
         }catch(HttpServerErrorException e){
             if (e.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR)
@@ -119,11 +118,11 @@ public class AdapterWebService extends AsyncTask<String, Void, Object> {
      * Salidas: El usuario con sus datos acualizados.
      * Descripcion: Actualiza el token debido a que este ya expiró.
      */
-    public User updateTokenUser(String newToken, String correo){
+    public Usuario updateTokenUser(String newToken, String correo){
         try {
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            User u = restTemplate.getForObject(Constantes.UPDATE_TOKEN_USER + newToken + "&" + "\"" + correo + "\"", User.class, "Android");
+            Usuario u = restTemplate.getForObject(Constantes.UPDATE_TOKEN_USER + newToken + "&" + "\"" + correo + "\"", Usuario.class, "Android");
             return u;
         }catch(Exception e){
             e.printStackTrace();

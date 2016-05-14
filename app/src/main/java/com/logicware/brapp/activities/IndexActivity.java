@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.asus.br.R;
-import com.logicware.brapp.meta.User;
+import com.logicware.brapp.meta.Usuario;
 
 /**
  * Es la interfaz del menu principal despues de que el usuario
@@ -22,7 +22,7 @@ import com.logicware.brapp.meta.User;
 public class IndexActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private User user = null;
+    private Usuario user = null;
 
     /**
      * Nombre: onCreate
@@ -38,7 +38,7 @@ public class IndexActivity extends AppCompatActivity
         setContentView(R.layout.activity_index);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        user = (User)getIntent().getExtras().getSerializable("user");
+        user = (Usuario)getIntent().getExtras().getSerializable("user");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

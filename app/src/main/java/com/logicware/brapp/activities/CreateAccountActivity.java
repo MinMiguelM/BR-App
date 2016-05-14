@@ -11,16 +11,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import java.util.UUID;
 
 import com.example.asus.br.R;
 import com.logicware.brapp.handlerWS.Constantes;
-import com.logicware.brapp.meta.User;
+import com.logicware.brapp.meta.Usuario;
 import com.logicware.brapp.persistence.AdapterWebService;
 
-
-
-import java.util.concurrent.ExecutionException;
+import java.util.UUID;
 
 /**
  * Es la interfaz que permite a registrar cuentas nuevas
@@ -29,7 +26,7 @@ import java.util.concurrent.ExecutionException;
 public class CreateAccountActivity extends AppCompatActivity {
 
     private Button confirm;
-    private User user;
+    private Usuario user;
 
     /**
      * Nombre: onCreate
@@ -143,7 +140,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 try {
                     UUID tok = UUID.randomUUID();
                     String token = new String(tok.toString());
-                    user = (User)new AdapterWebService().execute(Constantes.ADD_USER,nom,telefono,email,pass,"false",token,"USUARIO").get();
+                    user = (Usuario)new AdapterWebService().execute(Constantes.ADD_USER,nom,telefono,email,pass,"false",token,"USUARIO").get();
                     if(user != null) {
                         SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferencesUser.edit();

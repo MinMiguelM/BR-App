@@ -22,7 +22,7 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.logicware.brapp.handlerWS.Constantes;
-import com.logicware.brapp.meta.User;
+import com.logicware.brapp.meta.Usuario;
 import com.logicware.brapp.persistence.AdapterWebService;
 
 import org.json.JSONObject;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private Button createAccount;
     private Button loggin;
-    private User user = null;
+    private Usuario user = null;
     public static String currentToken;
 
     /**
@@ -120,14 +120,14 @@ public class MainActivity extends AppCompatActivity {
         currentToken = settings.getString("key_token", null);
         if(currentToken != null) {
             try {
-                user = (User)new AdapterWebService().execute(Constantes.GET_USER_BY_TOKEN,currentToken).get(Constantes.TIMEOUT, TimeUnit.SECONDS);
-                if(user != null && user.getLink_facebook().equals("true")){
+                user = (Usuario)new AdapterWebService().execute(Constantes.GET_USER_BY_TOKEN,currentToken).get(Constantes.TIMEOUT, TimeUnit.SECONDS);
+                if(user != null && user.isLink_facebook()){
                     if(AccessToken.getCurrentAccessToken().isExpired()){
                         AccessToken.refreshCurrentAccessTokenAsync(new AccessToken.AccessTokenRefreshCallback() {
                             @Override
                             public void OnTokenRefreshed(AccessToken accessToken) {
                                 try {
-                                    user = (User)new AdapterWebService().execute(Constantes.UPDATE_TOKEN_USER,accessToken.getCurrentAccessToken().getToken(),user.getCorreo()).get();
+                                    user = (Usuario)new AdapterWebService().execute(Constantes.UPDATE_TOKEN_USER,accessToken.getCurrentAccessToken().getToken(),user.getCorreo()).get();
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 } catch (ExecutionException e) {
@@ -149,11 +149,11 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if(user != null && user.getRol().equals("USUARIO")){
+            if(user != null && user.getTipo().equals("USUARIO")){
                 Intent intent = new Intent(MainActivity.this, IndexActivity.class);
                 intent.putExtra("user",user);
                 startActivity(intent);
-            }else if(user != null && user.getRol().equals("CLIENTE")) {
+            }else if(user != null && user.getTipo().equals("CLIENTE")) {
                 Intent intent = new Intent(MainActivity.this, IndexClientActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
     public void login(String email, String password){
         // If the token's date expired, renove after logIn
         try {
-            user = (User)new AdapterWebService().execute(Constantes.GET_USER_BY_CORREO,email).get(Constantes.TIMEOUT, TimeUnit.SECONDS);
+            user = (Usuario)new AdapterWebService().execute(Constantes.GET_USER_BY_CORREO,email).get(Constantes.TIMEOUT, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -182,16 +182,16 @@ public class MainActivity extends AppCompatActivity {
         /**
          * To test, comment this if-statement and work with the if-statement below
          */
-       /* if(user != null && password.equals(user.getPassword())){
+       /*if(user != null && password.equals(user.getContrasena())){
             SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = preferencesUser.edit();
             editor.putString("key_token", user.getToken());
             editor.commit();
-            if(user.getRol().equals("USUARIO")) {
+            if(user.getTipo().equals("USUARIO")) {
                 Intent intent = new Intent(MainActivity.this, IndexActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
-            }else if(user.getRol().equals("CLIENTE")){
+            }else if(user.getTipo().equals("CLIENTE")){
                 Intent intent = new Intent(MainActivity.this, IndexClientActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
@@ -252,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 try {
                                     Intent intent = new Intent(MainActivity.this, IndexActivity.class);
-                                    user = (User)new AdapterWebService().execute(Constantes.ADD_USER,object.getString("first_name"),"",loginResult.getAccessToken().getUserId(),"","true",loginResult.getAccessToken().getToken(),"USUARIO").get();
+                                    user = (Usuario)new AdapterWebService().execute(Constantes.ADD_USER,object.getString("first_name"),"",loginResult.getAccessToken().getUserId(),"","true",loginResult.getAccessToken().getToken(),"USUARIO").get();
                                     SharedPreferences preferencesUser = getSharedPreferences("PreferencesUser", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = preferencesUser.edit();
                                     editor.putString("key_token", user.getToken());
