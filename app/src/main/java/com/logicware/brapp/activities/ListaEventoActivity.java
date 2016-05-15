@@ -24,7 +24,7 @@ public class ListaEventoActivity  extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String[] Establecimientos = new String[]{"Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar"};
+        final String[] Establecimientos = new String[]{"Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar"};
         ArrayAdapter array = new ArrayAdapter(ListaEventoActivity.this, simple_expandable_list_item_1, Establecimientos);
 
         lista = (ListView) findViewById(R.id.listViewUsuario);
@@ -33,9 +33,18 @@ public class ListaEventoActivity  extends AppCompatActivity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ListaEventoActivity.this, OneEstablishmentActivity.class);
-                startActivity(intent);
+                if(Establecimientos[position].contains("Bar"))
+                {
+                    Intent intent = new Intent(ListaEventoActivity.this, OneEventActivity.class);
+                    startActivity(intent);
+                }
+                else if(Establecimientos[position].contains("Restaurante"))
+                {
+                    Intent intent = new Intent(ListaEventoActivity.this, OneResEventActivity.class);
+                    startActivity(intent);
+                }
             }
         });
+
     }
 }
