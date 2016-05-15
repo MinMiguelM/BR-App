@@ -11,32 +11,31 @@ import android.widget.ListView;
 import com.example.asus.br.R;
 import static android.R.layout.simple_expandable_list_item_1;
 
-public class ListEstablishmentActivity extends AppCompatActivity {
+/**
+ * Created by Pipe on 14/05/2016.
+ */
+public class ListaEventoActivity  extends AppCompatActivity {
 
     private ListView lista;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_establishment);
+        setContentView(R.layout.activity_list_evento);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String[] Establecimientos = new String[] { "Establecimiento 1","Establecimiento 2"};
-        ArrayAdapter array = new ArrayAdapter(ListEstablishmentActivity.this,simple_expandable_list_item_1,Establecimientos);
+        String[] Establecimientos = new String[]{"Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar"};
+        ArrayAdapter array = new ArrayAdapter(ListaEventoActivity.this, simple_expandable_list_item_1, Establecimientos);
 
-        lista= (ListView) findViewById(R.id.listViewCliente);
+        lista = (ListView) findViewById(R.id.listViewUsuario);
         lista.setAdapter(array);
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ListEstablishmentActivity.this, OneEstablishmentActivity.class);
+                Intent intent = new Intent(ListaEventoActivity.this, OneEstablishmentActivity.class);
                 startActivity(intent);
             }
         });
-
-
     }
-
-
-
 }
