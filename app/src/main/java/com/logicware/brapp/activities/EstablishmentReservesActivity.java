@@ -6,12 +6,12 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.asus.br.R;
 
-public class createEstablishmentActivity extends AppCompatActivity {
+public class EstablishmentReservesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_establishment);
+        setContentView(R.layout.activity_establishment_reserves);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

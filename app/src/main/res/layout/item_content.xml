@@ -2,29 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <TextView
         android:id="@+id/nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:typeface="sans" />
+        android:text="Nombre" />
     <TextView
-        android:id="@+id/calification"
+        android:id="@+id/calificacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/nombre"
-        android:layout_marginTop="5dip"
-        android:textColor="#343434"
-        android:textSize="12sp" />
-
+        android:text="Calificacion" />
     <TextView
         android:id="@+id/comentario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Calification"
-        android:layout_alignBottom="@+id/Calification"
-        android:layout_alignParentRight="true"
-        android:textColor="#343434"
-        android:textSize="12sp" />
+        android:text="Comentario" />
+
 </LinearLayout>

@@ -84,7 +84,7 @@ public class IndexClientActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(IndexClientActivity.this, CreateEstablishmentActivity.class);
+                Intent intent = new Intent(IndexClientActivity.this, createEstablishmentActivity.class);
                 startActivity(intent);
             }
         });

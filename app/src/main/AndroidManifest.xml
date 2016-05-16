@@ -68,12 +68,24 @@
             android:label="@string/title_activity_one_establishment"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.logicware.brapp.activities.CreateEstablishmentActivity"
+            android:name="com.logicware.brapp.activities.createEstablishmentActivity"
             android:label="@string/title_activity_create_establishment"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.logicware.brapp.activities.PromoteEstablishmentActivity"
             android:label="@string/title_activity_promote_establishment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.ModifyEstablishmentActivity"
+            android:label="@string/title_activity_modify_establishment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.CalificacionEstablishmentActivity"
+            android:label="@string/title_activity_calificacion_establishment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.EstablishmentReservesActivity"
+            android:label="@string/title_activity_establishment_reserves"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
