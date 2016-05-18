@@ -19,4 +19,9 @@
     <string name="title_activity_one_event">OneEventActivity</string>
     <string name="title_activity_create_establishment">createEstablishmentActivity</string>
     <string name="title_activity_promote_establishment">PromoteEstablishmentActivity</string>
+    <string name="title_activity_prueba">pruebaActivity</string>
+    <string name="title_activity_modify_establishment">ModifyEstablishmentActivity</string>
+    <string name="title_activity_calificacion_establishment">CalificacionEstablishmentActivity
+    </string>
+    <string name="title_activity_establishment_reserves">EstablishmentReservesActivity</string>
 </resources>
