@@ -1,4 +1,4 @@
-package com.logicware.brapp.Adapters;
+package com.logicware.brapp.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

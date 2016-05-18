@@ -31,5 +31,22 @@ public class Constantes {
     public static final String GET_USER_BY_CORREO = "http://" + IP + ":" +PORT + "/user/getByCorreo/";
     public static final String GET_USER_BY_TOKEN = "http://" + IP + ":" +PORT + "/user/getByToken/";
     public static final String ADD_USER = "http://" + IP + ":" +PORT + "/user/add";
-    public static final String UPDATE_TOKEN_USER = "http://" + IP + ":" +PORT + "/user/updateToken/";
+    public static final String UPDATE_USER = "http://" + IP + ":" +PORT + "/user/update";
+
+    public static final String ADD_ESTABLISHMENT = "http://" + IP + ":" +PORT + "/establishment/add";
+    public static final String GET_ESTABLISHMENT_BY_NOMBRE = "http://" + IP + ":" +PORT + "/establishment/getByNombre/";
+    public static final String UPDATE_ESTABLISHMENT = "http://" + IP + ":" +PORT + "/establishment/update";
+    public static final String GET_ESTABLISHMENT_BY_TIPO = "http://" + IP + ":" +PORT + "/establishment/getByTipo/";
+
+    public static final String ADD_EVENT = "http://" + IP + ":" +PORT + "/event/add";
+    public static final String UPDATE_EVENT = "http://" + IP + ":" +PORT + "/event/update";
+
+    public static final String ADD_COMMENTS = "http://" + IP + ":" +PORT + "/comments/add";
+    public static final String UPDATE_COMMENTS = "http://" + IP + ":" +PORT + "/comments/update";
+
+    public static final String ADD_ITEM = "http://" + IP + ":" +PORT + "/item/add";
+    public static final String UPDATE_ITEM = "http://" + IP + ":" +PORT + "/item/update";
+
+    public static final String ADD_BOOKING = "http://" + IP + ":" +PORT + "/booking/add";
+    public static final String UPDATE_BOOKING = "http://" + IP + ":" +PORT + "/booking/update";
 }

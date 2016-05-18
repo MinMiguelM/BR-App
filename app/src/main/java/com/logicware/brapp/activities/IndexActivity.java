@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.asus.br.R;
-import com.logicware.brapp.meta.Usuario;
+import com.logicware.brapp.entities.Usuario;
 
 /**
  * Es la interfaz del menu principal despues de que el usuario

@@ -1,4 +1,4 @@
-package com.logicware.brapp.meta;
+package com.logicware.brapp.entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,7 +9,7 @@ import java.util.Date;
 public class Reserva implements Serializable {
 
     private long idReserva;
-    private Date fecha_reserva;
+    private String fecha_reserva;
     private String estado;
     private long cantidad_personas;
 
@@ -34,14 +34,14 @@ public class Reserva implements Serializable {
     /**
      * @return the fecha_reserva
      */
-    public Date getFecha_reserva() {
+    public String getFecha_reserva() {
         return fecha_reserva;
     }
 
     /**
      * @param fecha_reserva the fecha_reserva to set
      */
-    public void setFecha_reserva(Date fecha_reserva) {
+    public void setFecha_reserva(String fecha_reserva) {
         this.fecha_reserva = fecha_reserva;
     }
 

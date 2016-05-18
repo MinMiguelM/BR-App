@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.asus.br.R;
 
-public class createEstablishmentActivity extends AppCompatActivity {
+public class CreateEstablishmentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

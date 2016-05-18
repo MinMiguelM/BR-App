@@ -1,4 +1,4 @@
-package com.logicware.brapp.Adapters;
+package com.logicware.brapp.adapters;
 
 /**
  * Created by Pipe on 15/05/2016.

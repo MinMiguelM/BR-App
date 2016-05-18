@@ -1,4 +1,4 @@
-package com.logicware.brapp.meta;
+package com.logicware.brapp.entities;
 
 import java.io.Serializable;
 

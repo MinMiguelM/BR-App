@@ -22,7 +22,7 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.logicware.brapp.handlerWS.Constantes;
-import com.logicware.brapp.meta.Usuario;
+import com.logicware.brapp.entities.Usuario;
 import com.logicware.brapp.persistence.AdapterWebService;
 
 import org.json.JSONObject;
@@ -127,7 +127,8 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void OnTokenRefreshed(AccessToken accessToken) {
                                 try {
-                                    user = (Usuario)new AdapterWebService().execute(Constantes.UPDATE_TOKEN_USER,accessToken.getCurrentAccessToken().getToken(),user.getCorreo()).get();
+                                    user.setToken(accessToken.getCurrentAccessToken().getToken());
+                                    new AdapterWebService().execute(Constantes.UPDATE_USER,user).get();
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 } catch (ExecutionException e) {

@@ -6,10 +6,8 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 
 import com.example.asus.br.R;
-import com.logicware.brapp.Adapters.CustomAdapterComentarios;
-import com.logicware.brapp.Adapters.CustomAdapterEventos;
-import com.logicware.brapp.Adapters.ItemListComentarios;
-import com.logicware.brapp.Adapters.ItemListEventos;
+import com.logicware.brapp.adapters.CustomAdapterEventos;
+import com.logicware.brapp.adapters.ItemListEventos;
 
 import java.util.ArrayList;
 

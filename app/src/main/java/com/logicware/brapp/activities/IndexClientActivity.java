@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.asus.br.R;
-import com.logicware.brapp.meta.Usuario;
+import com.logicware.brapp.entities.Usuario;
 
 /**
  * Es la interfaz del menu principal despues de que el cliente
@@ -84,7 +84,7 @@ public class IndexClientActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(IndexClientActivity.this, createEstablishmentActivity.class);
+                Intent intent = new Intent(IndexClientActivity.this, CreateEstablishmentActivity.class);
                 startActivity(intent);
             }
         });

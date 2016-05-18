@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.asus.br.R;
 import com.logicware.brapp.handlerWS.Constantes;
-import com.logicware.brapp.meta.Usuario;
+import com.logicware.brapp.entities.Usuario;
 import com.logicware.brapp.persistence.AdapterWebService;
 
 import java.util.UUID;
