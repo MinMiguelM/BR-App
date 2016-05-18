@@ -8,14 +8,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.example.asus.br.R;
-
 import static android.R.layout.simple_expandable_list_item_1;
 
 public class ListEstablishmentActivity extends AppCompatActivity {
-
-
 
     private ListView lista;
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +36,7 @@ public class ListEstablishmentActivity extends AppCompatActivity {
 
 
     }
+
 
 
 }

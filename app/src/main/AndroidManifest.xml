@@ -68,7 +68,23 @@
             android:label="@string/title_activity_one_establishment"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+<<<<<<< HEAD
+            android:name="com.logicware.brapp.activities.ListaEventoActivity"
+            android:label="@string/title_activity_list_evento"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.OneEventActivity"
+            android:label="@string/title_activity_one_establishment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.OneResEventActivity"
+            android:label="@string/title_activity_one_res_event"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.CreateEstablishmentActivity"
+=======
             android:name="com.logicware.brapp.activities.createEstablishmentActivity"
+>>>>>>> master
             android:label="@string/title_activity_create_establishment"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
