@@ -10,8 +10,8 @@ public class Constantes {
     /**
      * Dirección IP del Host.
      */
-    //private static final String IP = "45.55.193.13";
-    private static final String IP = "192.168.0.15";
+    private static final String IP = "45.55.193.13";
+    //private static final String IP = "192.168.0.15";
 
     /**
      * Puerto donde funciona el servidor
@@ -22,7 +22,7 @@ public class Constantes {
      * Tiempo de espera de una respuesta por parte del servidor.
      * Tiempo en segundos.
      */
-    public static final int TIMEOUT = 3;
+    public static final int TIMEOUT = 4;
 
     /**
      * URLs del Web Service
