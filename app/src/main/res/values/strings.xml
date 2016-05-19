@@ -16,6 +16,7 @@
     <string name="title_activity_one_establishment">OneEstablishmentActivity</string>
     <string name="title_activity_one_res_event">OneResEventActivity</string>
     <string name="title_activity_list_evento">ListaEventoActivity</string>
+    <string name="title_activity_list_restaurantes">ListaRestaurantesActivity</string>
     <string name="title_activity_one_event">OneEventActivity</string>
     <string name="title_activity_create_establishment">createEstablishmentActivity</string>
     <string name="title_activity_promote_establishment">PromoteEstablishmentActivity</string>

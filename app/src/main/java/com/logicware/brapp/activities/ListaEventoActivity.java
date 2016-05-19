@@ -24,7 +24,7 @@ public class ListaEventoActivity  extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final String[] Establecimientos = new String[]{"Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar","Restaurante", "Bar"};
+        final String[] Establecimientos = new String[]{"Restaurante", "Bar"};
         ArrayAdapter array = new ArrayAdapter(ListaEventoActivity.this, simple_expandable_list_item_1, Establecimientos);
 
         lista = (ListView) findViewById(R.id.listViewUsuario);
