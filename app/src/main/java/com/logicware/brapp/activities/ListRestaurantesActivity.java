@@ -33,7 +33,7 @@ public class ListRestaurantesActivity extends AppCompatActivity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ListRestaurantesActivity.this, OneEstablishmentActivity.class);// cambiar oneEstablishment
+                Intent intent = new Intent(ListRestaurantesActivity.this, OneEstablishmentUsuarioActivity.class);
                 startActivity(intent);
             }
         });
