@@ -8,9 +8,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.asus.br.R;
+import com.logicware.brapp.entities.Establecimiento;
 
 public class OneEstablishmentActivity extends AppCompatActivity {
-
+    private Establecimiento establishment;
     private Button modificar;
     private Button comentario;
     private Button reserva;
@@ -19,6 +20,8 @@ public class OneEstablishmentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_one_establishment);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        establishment = (Establecimiento)getIntent().getExtras().getSerializable("establecimiento");
 
         modificar = (Button)findViewById(R.id.buttonModificar);
         modificar.setOnClickListener(new View.OnClickListener() {
@@ -32,6 +35,7 @@ public class OneEstablishmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OneEstablishmentActivity.this, ModifyEstablishmentActivity.class);
+                intent.putExtra("establecimiento", establishment);
                 startActivity(intent);
             }
         });
@@ -48,6 +52,7 @@ public class OneEstablishmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OneEstablishmentActivity.this, CalificacionEstablishmentActivity.class);
+                intent.putExtra("establecimiento", establishment);
                 startActivity(intent);
             }
         });

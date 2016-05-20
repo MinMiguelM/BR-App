@@ -46,10 +46,10 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
                 return addUser((String)params[1],(String)params[2],(String)params[3],(String)params[4],
                         (String)params[5],(String)params[6],(String)params[7]);
             if(params[0].equals(Constantes.UPDATE_USER))
-                updateUser((Usuario)params[1]);
+                return updateUser((Usuario)params[1]);
             if(params[0].equals(Constantes.ADD_ESTABLISHMENT))
                 return addEstablishment((Usuario) params[1],(String)params[2],(String)params[3],(String)params[4],
-                        (String)params[5],(String)params[6]);
+                        (String)params[5],(String)params[6],(String)params[7]);
             if(params[0].equals(Constantes.GET_ESTABLISHMENT_BY_NOMBRE))
                 return getEstablishmentByNombre((String)params[1]);
             if(params[0].equals(Constantes.UPDATE_ESTABLISHMENT))
@@ -159,14 +159,15 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
      * Salidas: El usuario con sus datos acualizados.
      * Descripcion: Actualiza el token debido a que este ya expiró.
      */
-    public void updateUser(Usuario user){
+    public Usuario updateUser(Usuario user){
         try {
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            restTemplate.put(Constantes.UPDATE_USER,user,Usuario.class);
+            return restTemplate.postForObject(Constantes.UPDATE_USER,user,Usuario.class);
         }catch(Exception e){
             e.printStackTrace();
         }
+        return null;
     }
 
     /**
@@ -188,6 +189,7 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         establecimiento.setTelefono(params[5]);
         establecimiento.setCalificacion_promedio(0.0);
         establecimiento.setUsuario(user);
+        //user.getEstablecimientos().add(establecimiento);
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());

@@ -16,7 +16,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.asus.br.R;
+import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Usuario;
+
+import java.util.ArrayList;
 
 /**
  * Es la interfaz del menu principal despues de que el cliente
@@ -26,6 +29,7 @@ public class IndexClientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Usuario user;
+    private Establecimiento establishment;
     private Button establecimiento;
 
     private Button promocion;
@@ -46,6 +50,14 @@ public class IndexClientActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         user = (Usuario)getIntent().getExtras().getSerializable("user");
+        //---------------imprimir prueba
+
+        if(user.getEstablecimientos().isEmpty())
+            System.out.println("vacioais");
+        else
+            System.out.println(((ArrayList<Establecimiento>)user.getEstablecimientos()).get(0).getNombre());
+
+
         establecimiento = (Button)findViewById(R.id.buttonEstablecimiento);
        establecimiento.setOnClickListener(new View.OnClickListener() {
            /**
@@ -58,6 +70,7 @@ public class IndexClientActivity extends AppCompatActivity
            @Override
            public void onClick(View v) {
                Intent intent = new Intent(IndexClientActivity.this, ListEstablishmentActivity.class);
+               intent.putExtra("user", user);
                startActivity(intent);
            }
        });
@@ -85,6 +98,7 @@ public class IndexClientActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(IndexClientActivity.this, CreateEstablishmentActivity.class);
+                intent.putExtra("user", user);
                 startActivity(intent);
             }
         });
@@ -179,6 +193,7 @@ public class IndexClientActivity extends AppCompatActivity
 
         if (id == R.id.nav_perfil) {
             Intent intent = new Intent(IndexClientActivity.this, ProfileActivity.class);
+            intent.putExtra("user", user);
             startActivity(intent);
 
         } else if (id == R.id.nav_establecimiento) {

@@ -198,9 +198,9 @@ public class Usuario implements Serializable {
     /**
      * @return the comentariosYCalificaciones
      */
-    public Collection<ComentarioYCalificacion> getComentariosYCalificaciones() {
+   /* public Collection<ComentarioYCalificacion> getComentariosYCalificaciones() {
         return comentariosYCalificaciones;
-    }
+    }*/
 
     /**
      * @param comentariosYCalificaciones the comentariosYCalificaciones to set
