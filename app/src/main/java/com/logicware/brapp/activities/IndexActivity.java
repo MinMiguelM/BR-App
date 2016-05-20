@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.asus.br.R;
@@ -24,6 +25,8 @@ public class IndexActivity extends AppCompatActivity
 
     private Usuario user = null;
 
+    private Button resta;
+    private Button bares;
     /**
      * Nombre: onCreate
      * Entradas: Instancia del estado salvada
@@ -39,6 +42,39 @@ public class IndexActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         user = (Usuario)getIntent().getExtras().getSerializable("user");
+
+        resta = (Button)findViewById(R.id.buttonResta);
+        resta.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Nombre: onClick
+             * Entradas: la vista actual del componente
+             * Salidas: -
+             * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
+             *              sobre el boton.
+             */
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IndexActivity.this, ListRestaurantesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        bares = (Button)findViewById(R.id.buttonBares);
+        bares.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Nombre: onClick
+             * Entradas: la vista actual del componente
+             * Salidas: -
+             * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
+             *              sobre el boton.
+             */
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IndexActivity.this, ListEstablishmentActivity.class);
+                startActivity(intent);
+            }
+        });
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -106,4 +142,5 @@ public class IndexActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

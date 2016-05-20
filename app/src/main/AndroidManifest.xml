@@ -98,7 +98,18 @@
         <activity
             android:name="com.logicware.brapp.activities.EstablishmentReservesActivity"
             android:label="@string/title_activity_establishment_reserves"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.ListRestaurantesActivity"
+            android:label="@string/title_activity_list_restaurantes"
+            android:theme="@style/AppTheme.NoActionBar">
+            />
+        </activity>
+        <activity
+            android:name="com.logicware.brapp.activities.OneEstablishmentUsuarioActivity"
+            android:label="@string/title_activity_one_establishment_usuario"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
