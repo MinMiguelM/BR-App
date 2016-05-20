@@ -36,20 +36,20 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText10"
+                android:id="@+id/nombreEsta"
                 android:layout_gravity="center_horizontal" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Ubicacion"
+                android:text="Dirección"
                 android:id="@+id/textView24" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText11" />
+                android:id="@+id/ubicacionEsta" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -58,7 +58,8 @@
 
                 <RadioGroup
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:id="@+id/grupoBoton">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -95,21 +96,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText12" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Descripcion"
-                android:id="@+id/textView26" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:ems="10"
-                android:id="@+id/editText13" />
+                android:id="@+id/tematica" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -123,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:ems="10"
-                android:id="@+id/editText14" />
+                android:id="@+id/telefonoEsta" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -135,13 +122,13 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText15" />
+                android:id="@+id/horaio" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Aceptar"
-                android:id="@+id/button3"
+                android:id="@+id/aceptarCrearEsta"
                 android:layout_gravity="center_horizontal" />
 
         </LinearLayout>

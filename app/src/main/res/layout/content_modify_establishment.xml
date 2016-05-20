@@ -25,7 +25,7 @@
     <EditText
         android:layout_width="381dp"
         android:layout_height="wrap_content"
-        android:id="@+id/editText3"
+        android:id="@+id/modifiNombre"
         android:layout_below="@+id/textView16"
         android:layout_alignParentLeft="true" />
 
@@ -33,15 +33,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Ubicacion"
+        android:text="Dirección"
         android:id="@+id/textView15"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@+id/modifiNombre"
         android:layout_alignParentLeft="true" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/modifiUbica"
         android:layout_below="@+id/textView15"
         android:layout_alignParentLeft="true" />
 
@@ -51,31 +51,14 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Tematica"
         android:id="@+id/textView18"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/modifiUbica"
         android:layout_alignParentLeft="true" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText8"
+        android:id="@+id/modifiTema"
         android:layout_below="@+id/textView18"
-        android:layout_alignParentLeft="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Descripción"
-        android:id="@+id/textView17"
-        android:layout_below="@+id/editText8"
-        android:layout_alignParentLeft="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText7"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/textView17"
         android:layout_alignParentLeft="true" />
 
     <TextView
@@ -84,15 +67,15 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Teléfono"
         android:id="@+id/textView34"
-        android:layout_below="@+id/editText7"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/modifiTema" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:ems="10"
-        android:id="@+id/editText19"
+        android:id="@+id/modifiTele"
         android:layout_below="@+id/textView34"
         android:layout_alignParentLeft="true" />
 
@@ -101,8 +84,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Modificar"
-        android:id="@+id/button4"
+        android:id="@+id/buttonModifiEstable"
         android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/editText19"
+        android:layout_below="@+id/modifiTele"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

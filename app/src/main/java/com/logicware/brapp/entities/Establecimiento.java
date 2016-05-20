@@ -163,6 +163,11 @@ public class Establecimiento implements Serializable {
     }
 
     /**
+     * @return a usuario
+     */
+    public Usuario getUsuario() {return this.usuario;}
+
+    /**
      * @return the eventos
      */
     public Collection<Evento> getEventos() {
