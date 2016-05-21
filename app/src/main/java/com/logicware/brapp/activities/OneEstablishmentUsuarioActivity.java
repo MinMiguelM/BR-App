@@ -21,15 +21,12 @@ public class OneEstablishmentUsuarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_one_establishment_usuario);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-       // user = this.user;
+        user = (Usuario)getIntent().getExtras().getSerializable("user");
 
-        TextView mostrarNombre = (TextView)findViewById(R.id.textViewSmallNombre) ;
-        mostrarNombre.setText("NOMBRE POR EL MOMENTO");
-        TextView mostrarID = (TextView)findViewById(R.id.textViewSmallID) ;
-        //mostrarID.setText(String.valueOf(user.getIdUsuario()));
-        mostrarID.setText("ID 3 POR EL MOMENTO");
+        TextView mostrarNombre = (TextView)findViewById(R.id.textViewNomEsta) ;
+        mostrarNombre.setText(user.getNombre());
 
-        comentario = (Button)findViewById(R.id.buttonComentario);
+   /*     comentario = (Button)findViewById(R.id.buttonComentario);
         comentario.setOnClickListener(new View.OnClickListener() {
             /**
              * Nombre: onClick
@@ -38,11 +35,11 @@ public class OneEstablishmentUsuarioActivity extends AppCompatActivity {
              * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
              *              sobre el boton.
              */
-            @Override
+         /*   @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OneEstablishmentUsuarioActivity.this, CalificacionEstablishmentActivity.class);// cambiar
                 startActivity(intent);
             }
-        });
+        });*/
     }
 }

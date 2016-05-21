@@ -7,27 +7,26 @@ import android.widget.ListView;
 
 import com.example.asus.br.R;
 import com.logicware.brapp.adapters.CustomAdapterEventos;
-import com.logicware.brapp.adapters.ItemListEventos;
 
 import java.util.ArrayList;
 
 /**
  * Created by Pipe on 15/05/2016.
  */
-public class OneResEventActivity extends AppCompatActivity {
+public class ListReservasUsuarioActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_one_res_event);
+        setContentView(R.layout.activity_list_reservas_usuario);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ArrayList image_details = getListData();
+      /*  ArrayList image_details = getListData();
         final ListView lv1 = (ListView) findViewById(R.id.listViewEventos);
-        lv1.setAdapter(new CustomAdapterEventos(this, image_details));
+        lv1.setAdapter(new CustomAdapterEventos(this, image_details));*/
     }
 
-    private ArrayList getListData() {
+  /*  private ArrayList getListData() {
         ArrayList<ItemListEventos> results = new ArrayList<ItemListEventos>();
         ItemListEventos newsData = new ItemListEventos();
         newsData.setDia("MARTES 17 DE MAYO");
@@ -43,6 +42,6 @@ public class OneResEventActivity extends AppCompatActivity {
         results.add(newsData);
         results.add(newsData2);
         return results;
-    }
+    }*/
 
 }

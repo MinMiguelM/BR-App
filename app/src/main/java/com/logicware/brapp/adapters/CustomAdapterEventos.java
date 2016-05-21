@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.asus.br.R;
+import com.logicware.brapp.entities.Evento;
 
 import java.util.ArrayList;
 
@@ -17,9 +18,9 @@ import java.util.ArrayList;
 public class CustomAdapterEventos extends BaseAdapter {
 
 
-    private ArrayList<ItemListEventos> listaDatos;
+    private ArrayList<Evento> listaDatos;
     private LayoutInflater layoutInflater;
-    public CustomAdapterEventos(Context aContext, ArrayList<ItemListEventos> listData) {
+    public CustomAdapterEventos(Context aContext, ArrayList<Evento> listData) {
         this.listaDatos = listData;
         layoutInflater = LayoutInflater.from(aContext);
     }
@@ -46,16 +47,18 @@ public class CustomAdapterEventos extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.list_row_eventos, null);
             holder = new ViewHolder();
             holder.establecimientoView = (TextView) convertView.findViewById(R.id.Establecimiento);
-            holder.horaView = (TextView) convertView.findViewById(R.id.Hora);
-            holder.diaView = (TextView) convertView.findViewById(R.id.Dia);
+            holder.fechaView = (TextView) convertView.findViewById(R.id.Fecha);
+            holder.nombreView = (TextView) convertView.findViewById(R.id.NombreEvento);
+            holder.descripcionView = (TextView) convertView.findViewById(R.id.Descripcion);
             convertView.setTag(holder);
 
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.establecimientoView.setText(listaDatos.get(position).getEstablecimiento());
-        holder.diaView.setText("Dia: " + listaDatos.get(position).getDia());
-        holder.horaView.setText("Hora: " + listaDatos.get(position).getHora());
+        holder.establecimientoView.setText("ESTABLECIMIENTO:  "+listaDatos.get(position).getEstablecimiento().getNombre());
+        holder.nombreView.setText("NOMBRE DEL EVENTO:  " + listaDatos.get(position).getTitulo());
+        holder.fechaView.setText("FECHA:  " + listaDatos.get(position).getFecha_inicio()+" - "+listaDatos.get(position).getFecha_fin());
+        holder.descripcionView.setText("DESCRIPCIÓN:  " + listaDatos.get(position).getDescripcion());
         return convertView;
 
 
@@ -63,7 +66,8 @@ public class CustomAdapterEventos extends BaseAdapter {
 
     static class ViewHolder {
         TextView establecimientoView;
-        TextView horaView;
-        TextView diaView;
+        TextView fechaView;
+        TextView nombreView;
+        TextView descripcionView;
     }
 }

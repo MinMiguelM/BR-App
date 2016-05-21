@@ -7,9 +7,13 @@
             android:icon="@drawable/com_facebook_profile_picture_blank_square"
             android:title="Mi perfil" />
         <item
-            android:id="@+id/nav_eventos"
+        android:id="@+id/nav_eventos"
+        android:icon="@drawable/establecimiento"
+        android:title="Eventos" />
+        <item
+            android:id="@+id/nav_reservas"
             android:icon="@drawable/establecimiento"
-            android:title="Eventos" />
+            android:title="Reservas" />
 
     </group>
 

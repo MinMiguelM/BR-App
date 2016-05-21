@@ -24,7 +24,6 @@ public class IndexActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Usuario user = null;
-
     private Button resta;
     private Button bares;
     /**
@@ -55,11 +54,13 @@ public class IndexActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(IndexActivity.this, ListRestaurantesActivity.class);
+                intent.putExtra("user", user);
+
                 startActivity(intent);
             }
         });
 
-        bares = (Button)findViewById(R.id.buttonBares);
+      /*  bares = (Button)findViewById(R.id.buttonBares);
         bares.setOnClickListener(new View.OnClickListener() {
             /**
              * Nombre: onClick
@@ -68,12 +69,14 @@ public class IndexActivity extends AppCompatActivity
              * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
              *              sobre el boton.
              */
-            @Override
+       /*     @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IndexActivity.this, ListEstablishmentActivity.class);
+                Intent intent = new Intent(IndexActivity.this, ListRestaurantesActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -130,13 +133,18 @@ public class IndexActivity extends AppCompatActivity
 
         if (id == R.id.nav_perfil) {
             Intent intent = new Intent(IndexActivity.this, ProfileActivity.class);
+            intent.putExtra("user", user);
             startActivity(intent);
 
         } else if (id == R.id.nav_eventos) {
-            Intent intent = new Intent(IndexActivity.this,ListaEventoActivity.class);
+            Intent intent = new Intent(IndexActivity.this,ListEventosUsuarioActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+        }else if (id == R.id.nav_reservas) {
+            Intent intent = new Intent(IndexActivity.this, ListReservasUsuarioActivity.class);
+            intent.putExtra("user", user);
             startActivity(intent);
         }
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

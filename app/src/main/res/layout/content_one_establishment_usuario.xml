@@ -31,33 +31,65 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Comentarios y Calificaciones"
-        android:id="@+id/buttonComentario"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
         android:layout_below="@+id/scrollView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="101dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="49dp"
+        android:layout_alignRight="@+id/scrollView2"
+        android:layout_alignEnd="@+id/scrollView2"
+        android:id="@+id/textViewNomEsta" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/textViewSmallNombre"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textViewDirec"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/textViewSmallID"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/buttonComentario"
-        android:layout_alignLeft="@+id/textViewSmallNombre"
-        android:layout_alignStart="@+id/textViewSmallNombre" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textViewHorario"
+        android:layout_below="@+id/textViewDirec"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/textViewDirec"
+        android:layout_alignEnd="@+id/textViewDirec" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textViewTelefono"
+        android:layout_below="@+id/textViewHorario"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/textViewHorario"
+        android:layout_alignEnd="@+id/textViewHorario" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textViewTematica"
+        android:layout_below="@+id/textViewTelefono"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/textViewTelefono"
+        android:layout_alignEnd="@+id/textViewTelefono" />
 
 </RelativeLayout>

@@ -11,7 +11,7 @@
         android:textStyle="bold"
         android:typeface="sans" />
     <TextView
-        android:id="@+id/Dia"
+        android:id="@+id/Fecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/Establecimiento"
@@ -20,11 +20,20 @@
         android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/Hora"
+        android:id="@+id/NombreEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Dia"
-        android:layout_alignBottom="@+id/Dia"
+        android:layout_alignBaseline="@+id/Fecha"
+        android:layout_alignBottom="@+id/Fecha"
+        android:layout_alignParentRight="true"
+        android:textColor="#343434"
+        android:textSize="12sp" />
+    <TextView
+        android:id="@+id/Descripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/NombreEvento"
+        android:layout_alignBottom="@+id/NombreEvento"
         android:layout_alignParentRight="true"
         android:textColor="#343434"
         android:textSize="12sp" />

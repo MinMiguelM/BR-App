@@ -10,12 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.asus.br.R;
+import com.logicware.brapp.entities.Usuario;
 
 import static android.R.layout.simple_expandable_list_item_1;
 
 public class ListRestaurantesActivity extends AppCompatActivity {
 
     private ListView lista;
+    private Usuario user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +26,7 @@ public class ListRestaurantesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        user = (Usuario)getIntent().getExtras().getSerializable("user");
         String[] Establecimientos = new String[] {"Restaruante 1","Restaruante 2","Restaruante 3","Restaruante 4","Restaruante 5"};
         ArrayAdapter array = new ArrayAdapter(ListRestaurantesActivity.this,simple_expandable_list_item_1,Establecimientos);
 
@@ -34,6 +37,7 @@ public class ListRestaurantesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ListRestaurantesActivity.this, OneEstablishmentUsuarioActivity.class);
+                intent.putExtra("user", user);
                 startActivity(intent);
             }
         });
