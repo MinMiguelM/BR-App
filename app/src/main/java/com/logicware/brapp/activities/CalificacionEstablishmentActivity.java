@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.example.asus.br.R;
 import com.logicware.brapp.adapters.ComentAdapter;
@@ -29,6 +31,13 @@ public class CalificacionEstablishmentActivity extends AppCompatActivity {
         ComentAdapter adapter = new ComentAdapter(this, calificaciones);
         ListView listView = (ListView) findViewById(R.id.calificacionlistView);
         listView.setAdapter(adapter);
+        float calificacion=calificacionPromedio();
+        TextView caliProm=(TextView) findViewById(R.id.calificacionPromedio);
+        caliProm.setText("La calificacion promedio su establecimiento es: "+calificacion);
+
+        RatingBar estrellas= (RatingBar)findViewById(R.id.ratingBarComentarios);
+        estrellas.setNumStars((int)calificacion);
+
     }
 
     private void llenarListaComentarios() {
@@ -43,6 +52,18 @@ public class CalificacionEstablishmentActivity extends AppCompatActivity {
             calificaciones.add(comen);
         }
 
+
+    }
+
+    private int calificacionPromedio(){
+        int hasta = 0;
+        int contador=0;
+        hasta = establishment.getComentariosYCalificaciones().size();
+        for (int i = 0; i < hasta; i++) {
+            contador=contador+((ArrayList<ComentarioYCalificacion>) establishment.getComentariosYCalificaciones()).get(i).getCalificacion();
+
+        }
+        return contador/hasta;
 
     }
 

@@ -48,7 +48,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText18" />
+                android:id="@+id/tituloEvento" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="date"
                 android:ems="10"
-                android:id="@+id/editText2" />
+                android:id="@+id/fechaInicio" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="date"
                 android:ems="10"
-                android:id="@+id/editText16" />
+                android:id="@+id/fechaFin" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -90,7 +90,16 @@
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:ems="10"
-                android:id="@+id/editText17" />
+                android:id="@+id/Descripcion" />
+
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="aceptar"
+        android:id="@+id/buttonPromocion"
+        android:layout_below="@+id/scrollView5"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
