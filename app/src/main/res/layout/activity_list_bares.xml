@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.logicware.brapp.activities.ListRestaurantesActivity"
+    tools:context="com.logicware.brapp.activities.ListBaresActivity"
     android:background="@drawable/ciudad">
 
     <android.support.design.widget.AppBarLayout
@@ -22,6 +22,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_list_restaurantes" />
+    <include layout="@layout/content_list_bares" />
 
 </android.support.design.widget.CoordinatorLayout>

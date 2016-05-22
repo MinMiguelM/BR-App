@@ -104,6 +104,34 @@
         <activity
             android:name="com.logicware.brapp.activities.OneEstablishmentUsuarioActivity"
             android:label="@string/title_activity_one_establishment_usuario"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.ReservaUsuarioActivity"
+            android:label="@string/title_activity_reserva_usuario"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.ListEventosEstablishmentActivity"
+            android:label="@string/title_activity_list_eventos_establishment"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name="com.logicware.brapp.activities.CalificacionEstablishmentUsuarioActivity"
+            android:label="@string/title_activity_list_eventos_establishment_usuario"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.ComentarioUsuarioActivity"
+            android:label="@string/title_activity_comentario_usuario"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.EventoUsuarioActivity"
+            android:label="@string/title_activity_evento_usuario"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="com.logicware.brapp.activities.ListBaresActivity"
+            android:label="@string/title_activity_list_bares"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

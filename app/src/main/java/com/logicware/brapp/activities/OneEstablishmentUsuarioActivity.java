@@ -15,6 +15,9 @@ public class OneEstablishmentUsuarioActivity extends AppCompatActivity {
 
     private Usuario user = null;
     private Button comentario;
+    private Button reserva;
+    private Button evento;
+    private Button conEventos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +29,40 @@ public class OneEstablishmentUsuarioActivity extends AppCompatActivity {
         TextView mostrarNombre = (TextView)findViewById(R.id.textViewNomEsta) ;
         mostrarNombre.setText(user.getNombre());
 
-   /*     comentario = (Button)findViewById(R.id.buttonComentario);
+        reserva = (Button)findViewById(R.id.buttonReservas);
+        reserva.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Nombre: onClick
+             * Entradas: la vista actual del componente
+             * Salidas: -
+             * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
+             *              sobre el boton.
+             */
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OneEstablishmentUsuarioActivity.this, ReservaUsuarioActivity.class);
+                intent.putExtra("user",user);
+                startActivity(intent);
+            }
+        });
+
+        conEventos = (Button)findViewById(R.id.buttonConsultarEvento);
+        conEventos.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Nombre: onClick
+             * Entradas: la vista actual del componente
+             * Salidas: -
+             * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
+             *              sobre el boton.
+             */
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OneEstablishmentUsuarioActivity.this,  ListEventosEstablishmentActivity.class);
+                //intent.putExtra("user",user);
+                startActivity(intent);
+            }
+        });
+        comentario = (Button)findViewById(R.id.buttonComentarios);
         comentario.setOnClickListener(new View.OnClickListener() {
             /**
              * Nombre: onClick
@@ -35,11 +71,29 @@ public class OneEstablishmentUsuarioActivity extends AppCompatActivity {
              * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
              *              sobre el boton.
              */
-         /*   @Override
+            @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OneEstablishmentUsuarioActivity.this, CalificacionEstablishmentActivity.class);// cambiar
+                Intent intent = new Intent(OneEstablishmentUsuarioActivity.this,   CalificacionEstablishmentUsuarioActivity.class);
+                //intent.putExtra("user",user);
                 startActivity(intent);
             }
-        });*/
+        });
+
+        evento = (Button)findViewById(R.id.buttonRealizarEvento);
+        evento.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Nombre: onClick
+             * Entradas: la vista actual del componente
+             * Salidas: -
+             * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
+             *              sobre el boton.
+             */
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OneEstablishmentUsuarioActivity.this, EventoUsuarioActivity.class);
+                intent.putExtra("user",user);
+                startActivity(intent);
+            }
+        });
     }
 }

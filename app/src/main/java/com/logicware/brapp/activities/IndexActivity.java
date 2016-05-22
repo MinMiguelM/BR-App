@@ -60,7 +60,7 @@ public class IndexActivity extends AppCompatActivity
             }
         });
 
-      /*  bares = (Button)findViewById(R.id.buttonBares);
+       bares = (Button)findViewById(R.id.buttonBares);
         bares.setOnClickListener(new View.OnClickListener() {
             /**
              * Nombre: onClick
@@ -69,12 +69,13 @@ public class IndexActivity extends AppCompatActivity
              * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
              *              sobre el boton.
              */
-       /*     @Override
+          @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IndexActivity.this, ListRestaurantesActivity.class);
+                Intent intent = new Intent(IndexActivity.this, ListBaresActivity.class);
+                intent.putExtra("user", user);
                 startActivity(intent);
             }
-        });*/
+        });
 
 
 

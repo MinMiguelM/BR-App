@@ -15,6 +15,12 @@
     <string name="title_activity_list_establishment">ListEstablishmentActivity</string>
     <string name="title_activity_one_establishment">OneEstablishmentActivity</string>
     <string name="title_activity_one_establishment_usuario">OneEstablishmentUsuarioActivity</string>
+    <string name="title_activity_reserva_usuario">ReservaUsuarioActivity</string>
+    <string name="title_activity_list_eventos_establishment">ListEventosEstablishmentActivity</string>
+    <string name="title_activity_list_eventos_establishment_usuario">CalificacionEstablishmentUsuarioActivity</string>
+    <string name="title_activity_comentario_usuario">ComentarioUsuarioActivity</string>
+    <string name="title_activity_evento_usuario">EventoUsuarioActivity</string>
+    <string name="title_activity_list_bares">ListBaresActivity</string>
     <string name="title_activity_list_reservas_usuario">ListReservasUsuarioActivity</string>
     <string name="title_activity_list_evento">ListaEventoActivity</string>
     <string name="title_activity_list_restaurantes">ListaRestaurantesActivity</string>

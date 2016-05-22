@@ -9,7 +9,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.logicware.brapp.activities.OneEstablishmentUsuarioActivity">
+    tools:context="com.logicware.brapp.activities.OneEstablishmentUsuarioActivity"
+    android:background="@drawable/ciudad">
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -36,13 +37,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
+        android:id="@+id/textViewNomEsta"
         android:layout_below="@+id/scrollView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="49dp"
-        android:layout_alignRight="@+id/scrollView2"
-        android:layout_alignEnd="@+id/scrollView2"
-        android:id="@+id/textViewNomEsta" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -51,10 +48,7 @@
         android:text="Large Text"
         android:id="@+id/textViewDirec"
         android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,10 +57,8 @@
         android:text="Large Text"
         android:id="@+id/textViewHorario"
         android:layout_below="@+id/textViewDirec"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/textViewDirec"
-        android:layout_alignEnd="@+id/textViewDirec" />
+        android:layout_alignLeft="@+id/textViewDirec"
+        android:layout_alignStart="@+id/textViewDirec" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -75,8 +67,6 @@
         android:text="Large Text"
         android:id="@+id/textViewTelefono"
         android:layout_below="@+id/textViewHorario"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/textViewHorario"
         android:layout_alignEnd="@+id/textViewHorario" />
 
@@ -87,9 +77,43 @@
         android:text="Large Text"
         android:id="@+id/textViewTematica"
         android:layout_below="@+id/textViewTelefono"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/textViewTelefono"
         android:layout_alignEnd="@+id/textViewTelefono" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reservas"
+        android:id="@+id/buttonReservas"
+        android:layout_below="@+id/textViewTematica"
+        android:layout_toLeftOf="@+id/buttonComentarios"
+        android:layout_toStartOf="@+id/buttonComentarios" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comentarios"
+        android:id="@+id/buttonComentarios"
+        android:layout_below="@+id/textViewTematica"
+        android:layout_toRightOf="@+id/buttonConsultarEvento"
+        android:layout_toEndOf="@+id/buttonConsultarEvento" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ConsultarEventos"
+        android:id="@+id/buttonConsultarEvento"
+        android:layout_below="@+id/buttonReservas"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Realizar Evento"
+        android:id="@+id/buttonRealizarEvento"
+        android:layout_alignTop="@+id/buttonConsultarEvento"
+        android:layout_alignRight="@+id/scrollView2"
+        android:layout_alignEnd="@+id/scrollView2" />
 
 </RelativeLayout>

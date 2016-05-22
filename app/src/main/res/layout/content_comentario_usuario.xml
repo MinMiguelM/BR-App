@@ -9,18 +9,19 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.logicware.brapp.activities.ModifyEstablishmentActivity"
-    tools:showIn="@layout/activity_modify_establishment">
+    tools:context="com.logicware.brapp.activities.ComentarioUsuarioActivity"
+    tools:showIn="@layout/activity_comentario_usuario"
+    android:background="@drawable/ciudad">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Nombre del establecimiento"
+        android:text="Descripción"
         android:id="@+id/textViewDescripcion"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_toLeftOf="@+id/buttonModifiEstable"
+        android:layout_toStartOf="@+id/buttonModifiEstable" />
 
     <EditText
         android:layout_width="381dp"
@@ -33,50 +34,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Dirección"
+        android:text="Calificación"
         android:id="@+id/textViewCalificacion"
         android:layout_below="@+id/modifiNombre"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignLeft="@+id/textViewDescripcion"
+        android:layout_alignStart="@+id/textViewDescripcion" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/modifiUbica"
         android:layout_below="@+id/textViewCalificacion"
-        android:layout_alignParentLeft="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Tematica"
-        android:id="@+id/textView18"
-        android:layout_below="@+id/modifiUbica"
-        android:layout_alignParentLeft="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/modifiTema"
-        android:layout_below="@+id/textView18"
-        android:layout_alignParentLeft="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Teléfono"
-        android:id="@+id/textView34"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/modifiTema" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:id="@+id/modifiTele"
-        android:layout_below="@+id/textView34"
         android:layout_alignParentLeft="true" />
 
     <Button
@@ -86,6 +54,6 @@
         android:text="Modificar"
         android:id="@+id/buttonModifiEstable"
         android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/modifiTele"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
