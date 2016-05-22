@@ -45,7 +45,7 @@ public class CustomAdapterEventosStablishment extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if(convertView==null){
-            convertView = layoutInflater.inflate(R.layout.list_row_eventos, null);
+            convertView = layoutInflater.inflate(R.layout.list_row_eventos_stablishment, null);
             holder = new ViewHolder();
             holder.tituloViewSta = (TextView) convertView.findViewById(R.id.TituloSta);
             holder.fechaViewSta = (TextView) convertView.findViewById(R.id.FechaSta);
@@ -55,9 +55,9 @@ public class CustomAdapterEventosStablishment extends BaseAdapter {
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.tituloViewSta.setText("NOMBRE DEL EVENTO:  " + listaDatos.get(position).getTitulo());
-        holder.fechaViewSta.setText("FECHA:  " + listaDatos.get(position).getFecha_inicio()+" - "+listaDatos.get(position).getFecha_fin());
-        holder.descripcionViewSta.setText("DESCRIPCIÓN:  " + listaDatos.get(position).getDescripcion());
+        holder.tituloViewSta.setText("        NOMBRE DEL EVENTO:  " + listaDatos.get(position).getTitulo());
+        holder.fechaViewSta.setText("        FECHA:  " + listaDatos.get(position).getFecha_inicio()+" - "+listaDatos.get(position).getFecha_fin());
+        holder.descripcionViewSta.setText("        DESCRIPCIÓN:  " + listaDatos.get(position).getDescripcion());
         return convertView;
 
 

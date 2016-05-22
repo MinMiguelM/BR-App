@@ -31,18 +31,7 @@ public class ListEventosEstablishmentActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         establishment = (Establecimiento) getIntent().getExtras().getSerializable("establecimiento");
         eventos = establishment.getEventos();
-     /*  Evento ev1 = new Evento();
-        Evento ev2 = new Evento();
-        ev1.setDescripcion("EVENTO EN TAL RESTARUANTE BLA BLA BLA");
-        ev1.setFecha_fin("Termina el 20 de algo");
-        ev1.setFecha_inicio("comienza el 19 de algo");
-        ev1.setTitulo("PARTYYYY");
-        ev2.setDescripcion("EVENTO EN TAL RESTARUANTE BLA BLA BLA");
-        ev2.setFecha_fin("Termina el 20 de algo");
-        ev2.setFecha_inicio("comienza el 19 de algo");
-        ev2.setTitulo("PARTYYYY");
-        eventos.add(ev1);
-        eventos.add(ev2);*/
+
         if(eventos.isEmpty())
         {
             Mensaje();
