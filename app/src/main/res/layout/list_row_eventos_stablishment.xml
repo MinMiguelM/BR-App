@@ -5,36 +5,28 @@
 
 
     <TextView
-        android:id="@+id/Establecimiento"
+        android:id="@+id/TituloSta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:typeface="sans" />
     <TextView
-        android:id="@+id/Titulo"
+        android:id="@+id/FechaSta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Establecimiento"
+        android:layout_below="@id/TituloSta"
         android:layout_marginTop="5dip"
         android:textColor="#343434"
         android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/FechaFecha"
+        android:id="@+id/DescripcionSta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Titulo"
-        android:layout_alignBottom="@+id/Titulo"
+        android:layout_alignBaseline="@+id/FechaSta"
+        android:layout_alignBottom="@+id/FechaSta"
         android:layout_alignParentRight="true"
         android:textColor="#343434"
         android:textSize="12sp" />
-    <TextView
-        android:id="@+id/Descripcion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/FechaFecha"
-        android:layout_alignBottom="@+id/FechaFecha"
-        android:layout_alignParentRight="true"
-        android:textColor="#343434"
-        android:textSize="12sp" />
+
 </LinearLayout>

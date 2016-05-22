@@ -1,15 +1,12 @@
 package com.logicware.brapp.activities;
 
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.asus.br.R;
 import com.logicware.brapp.entities.Establecimiento;
@@ -24,43 +21,39 @@ public class ReservaUsuarioActivity extends AppCompatActivity {
     private Button reserva;
     private Establecimiento establishment;
     private Reserva res = new Reserva();
-    private boolean hecho = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserva_usuario);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        user = (Usuario)getIntent().getExtras().getSerializable("user");
-        establishment = (Establecimiento)getIntent().getExtras().getSerializable("establecimiento");
+        user = (Usuario) getIntent().getExtras().getSerializable("user");
+        establishment = (Establecimiento) getIntent().getExtras().getSerializable("establecimiento");
 
 
-        final  EditText RecibirFecha=(EditText) findViewById(R.id.editTextFecha);
-        final  EditText RecibirCPersonas=(EditText) findViewById(R.id.editTextCPersonas);
+        final EditText RecibirFecha = (EditText) findViewById(R.id.editTextFecha);
+        final EditText RecibirCPersonas = (EditText) findViewById(R.id.editTextCPer);
 
-        reserva = (Button)findViewById(R.id.buttonReservar);
+        reserva = (Button) findViewById(R.id.buttonReservar);
         reserva.setOnClickListener(new View.OnClickListener() {
             /**
              * Nombre: onClick
              * Entradas: la vista actual del componente
              * Salidas: -
              * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
-             *              sobre el boton.
+             * sobre el boton.
              */
             @Override
             public void onClick(View v) {
                 String fecha = RecibirFecha.getText().toString();
                 String cantidadPersonas = RecibirCPersonas.getText().toString();
                 String estado = "En espera";
-                if(fecha.equalsIgnoreCase(""))
-                {
+                if (fecha.equalsIgnoreCase("")) {
                     mostrarError("Campos vacíos", "Para solicitar una reserva debe llenar los datos requeridos");
-                }else if(!cantidadPersonas.matches("[0-9]+"))
-                {
+                } else if (!cantidadPersonas.matches("[0-9]+")) {
                     mostrarError("Número inválido", "Por favor ingrese un número ");
-                }else
-                {
-                    Reservar(fecha,cantidadPersonas,estado);
+                } else {
+                    Reservar(fecha, cantidadPersonas, estado);
                 }
 
             }
@@ -71,18 +64,16 @@ public class ReservaUsuarioActivity extends AppCompatActivity {
              * Salidas: -
              * Descripcion: modifica el usuario en la base de datos
              */
-            private void Reservar (String fecha, String per, String estado) {
+            private void Reservar(String fecha, String per, String estado) {
                 try {
                     res.setFecha_reserva(fecha);
                     res.setCantidad_personas(Long.parseLong(per));
                     res.setEstado(estado);
-                    res = (Reserva) new AdapterWebService().execute(Constantes.ADD_BOOKING,establishment ,user,fecha,estado,per).get();
-                    if(res!= null)
-                    {
-                        hecho = true;
-                    }
-                    else
-                        hecho = false;
+                    res = (Reserva) new AdapterWebService().execute(Constantes.ADD_BOOKING, establishment, user, fecha, estado, per).get();
+                    if (res != null) {
+                        mostrarConfirmacion();
+                    } else
+                        mostrarError("Error solicitud", "No se ha enviado la solicitud");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -90,21 +81,8 @@ public class ReservaUsuarioActivity extends AppCompatActivity {
 
             }
         });
-
-    /*    if(hecho){
-
-            AlertDialog ms = new AlertDialog.Builder(this).create();
-            ms.setTitle("Se ha solicitado la reserva");
-            ms.show();
-        }
-        else
-        {
-            AlertDialog ms = new AlertDialog.Builder(this).create();
-            ms.setTitle("No se ha solicitado la reserva");
-            ms.show();
-        }
-    hecho = false;*/
     }
+    /*
 
     /**
      * Nombre de Método: mostrar Error
@@ -116,6 +94,19 @@ public class ReservaUsuarioActivity extends AppCompatActivity {
         android.app.AlertDialog alerta = new android.app.AlertDialog.Builder(ReservaUsuarioActivity.this).create();
         alerta.setTitle(nombreError);
         alerta.setMessage(descripcion);
+        alerta.setButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+
+        });
+        alerta.show();
+    }
+
+    private void mostrarConfirmacion() {
+        android.app.AlertDialog alerta = new android.app.AlertDialog.Builder(ReservaUsuarioActivity.this).create();
+        alerta.setTitle("Confirmación");
+        alerta.setMessage("Se ha solicitado una reservación");
         alerta.setButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

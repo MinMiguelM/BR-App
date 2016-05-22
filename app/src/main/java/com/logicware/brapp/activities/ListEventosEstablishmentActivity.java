@@ -1,30 +1,27 @@
 package com.logicware.brapp.activities;
 
-import android.content.Intent;
-import android.net.Uri;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.asus.br.R;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.logicware.brapp.adapters.CustomAdapterEventosStablishment;
+import com.logicware.brapp.entities.Establecimiento;
+import com.logicware.brapp.entities.Evento;
 
-import static android.R.layout.simple_expandable_list_item_1;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class ListEventosEstablishmentActivity extends AppCompatActivity {
 
-    private ListView lista;
+    private Establecimiento establishment;
+    private Collection<Evento> eventos = null;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +29,43 @@ public class ListEventosEstablishmentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_eventos_establishment);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        establishment = (Establecimiento) getIntent().getExtras().getSerializable("establecimiento");
+        eventos = establishment.getEventos();
+     /*  Evento ev1 = new Evento();
+        Evento ev2 = new Evento();
+        ev1.setDescripcion("EVENTO EN TAL RESTARUANTE BLA BLA BLA");
+        ev1.setFecha_fin("Termina el 20 de algo");
+        ev1.setFecha_inicio("comienza el 19 de algo");
+        ev1.setTitulo("PARTYYYY");
+        ev2.setDescripcion("EVENTO EN TAL RESTARUANTE BLA BLA BLA");
+        ev2.setFecha_fin("Termina el 20 de algo");
+        ev2.setFecha_inicio("comienza el 19 de algo");
+        ev2.setTitulo("PARTYYYY");
+        eventos.add(ev1);
+        eventos.add(ev2);*/
+        if(eventos.isEmpty())
+        {
+            Mensaje();
+        }else
+        {
+            ArrayList image_details = (ArrayList) eventos;
+            final ListView lv1 = (ListView) findViewById(R.id.listViewEventosEstablecimiento);
+            lv1.setAdapter(new CustomAdapterEventosStablishment(this, image_details));
+        }
 
-        String[] Establecimientos = new String[]{"Evento y su info....","Evento y su info...."};
-        ArrayAdapter array = new ArrayAdapter(ListEventosEstablishmentActivity.this, simple_expandable_list_item_1, Establecimientos);
-        lista= (ListView) findViewById(R.id.listViewEventosEstablecimiento);
-        lista.setAdapter(array);
 
+    }
+
+    private void Mensaje() {
+        android.app.AlertDialog alerta = new android.app.AlertDialog.Builder(ListEventosEstablishmentActivity.this).create();
+        alerta.setTitle("No eventos");
+        alerta.setMessage("No tiene eventos este establecimiento");
+        alerta.setButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+
+        });
+        alerta.show();
     }
 }
