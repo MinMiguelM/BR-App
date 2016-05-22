@@ -12,6 +12,8 @@ import android.widget.ListView;
 import com.example.asus.br.R;
 import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Usuario;
+import com.logicware.brapp.handlerWS.Constantes;
+import com.logicware.brapp.persistence.AdapterWebService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,7 @@ public class ListEstablishmentActivity extends AppCompatActivity {
 
     private ListView lista;
     private Usuario user;
+    private ArrayList<Establecimiento> establecimientosUser = new ArrayList<>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +32,16 @@ public class ListEstablishmentActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         user = (Usuario)getIntent().getExtras().getSerializable("user");
-
+        try{
+            establecimientosUser = (ArrayList<Establecimiento>) new AdapterWebService().execute(Constantes.GET_ESTABLISHMENT_BY_USUARIO,user.getIdUsuario()).get();
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
         List<String> establecimientos= new ArrayList<String>();
-        int hasta=user.getEstablecimientos().size();
+        int hasta=establecimientosUser.size();
 
         for(int i=0; i<hasta;i++){
-            establecimientos.add(((ArrayList<Establecimiento>)user.getEstablecimientos()).get(i).getNombre());
+            establecimientos.add(establecimientosUser.get(i).getNombre());
 
         }
 
@@ -47,7 +54,8 @@ public class ListEstablishmentActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ListEstablishmentActivity.this, OneEstablishmentActivity.class);
-                intent.putExtra("establecimiento",((ArrayList<Establecimiento>)user.getEstablecimientos()).get(position));
+                establecimientosUser.get(position).setUsuario(user);
+                intent.putExtra("establecimiento", (establecimientosUser.get(position)));
                 startActivity(intent);
             }
         });

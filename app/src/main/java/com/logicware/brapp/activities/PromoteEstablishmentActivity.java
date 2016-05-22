@@ -23,9 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PromoteEstablishmentActivity extends AppCompatActivity {
+
     private Spinner estabecimientos;
     private Usuario user;
     private Button aceptar;
+    private ArrayList<Establecimiento> establecimientosUser = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,13 @@ public class PromoteEstablishmentActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         user = (Usuario)getIntent().getExtras().getSerializable("user");
+
+        try{
+            establecimientosUser = (ArrayList<Establecimiento>) new AdapterWebService().execute(Constantes.GET_ESTABLISHMENT_BY_USUARIO,user.getIdUsuario()).get();
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+
         inicializarSpinner();
 
         aceptar = (Button)findViewById(R.id.buttonPromocion);
@@ -101,8 +110,8 @@ public class PromoteEstablishmentActivity extends AppCompatActivity {
 
 
                 try {
-                Establecimiento establishment=(Establecimiento) new AdapterWebService().execute(Constantes.GET_ESTABLISHMENT_BY_NOMBRE,establecimiento).get();
-                Evento eve=(Evento) new AdapterWebService().execute(Constantes.ADD_EVENT, establishment,titulo,fechaIni,fechaFin,Descripcion).get();
+                    Establecimiento establishment=(Establecimiento) new AdapterWebService().execute(Constantes.GET_ESTABLISHMENT_BY_NOMBRE,establecimiento).get();
+                    Evento eve=(Evento) new AdapterWebService().execute(Constantes.ADD_EVENT, establishment,titulo,fechaIni,fechaFin,Descripcion).get();
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -116,13 +125,11 @@ public class PromoteEstablishmentActivity extends AppCompatActivity {
     private void inicializarSpinner() {
         estabecimientos=(Spinner)findViewById(R.id.spinnerEstablecimientos);
         List<String> listEstablecimientos= new ArrayList<String>();
-        int hasta=user.getEstablecimientos().size();
+        int hasta=establecimientosUser.size();
 
         for(int i=0; i<hasta;i++){
-            listEstablecimientos.add(((ArrayList<Establecimiento>)user.getEstablecimientos()).get(i).getNombre());
-
+            listEstablecimientos.add(establecimientosUser.get(i).getNombre());
         }
-
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listEstablecimientos);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         estabecimientos.setAdapter(dataAdapter);

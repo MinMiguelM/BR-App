@@ -18,10 +18,6 @@ import android.widget.TextView;
 import com.example.asus.br.R;
 import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Usuario;
-import com.logicware.brapp.handlerWS.Constantes;
-import com.logicware.brapp.persistence.AdapterWebService;
-
-import java.util.Collection;
 
 /**
  * Es la interfaz del menu principal despues de que el cliente
@@ -52,12 +48,6 @@ public class IndexClientActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         user = (Usuario)getIntent().getExtras().getSerializable("user");
-        try{
-            Collection<Establecimiento> establecimientos = (Collection<Establecimiento>) new AdapterWebService().execute(Constantes.GET_ESTABLISHMENT_BY_USUARIO,user.getIdUsuario()).get();
-        } catch(Exception ex){
-            ex.printStackTrace();
-        }
-
 
         establecimiento = (Button)findViewById(R.id.buttonEstablecimiento);
        establecimiento.setOnClickListener(new View.OnClickListener() {

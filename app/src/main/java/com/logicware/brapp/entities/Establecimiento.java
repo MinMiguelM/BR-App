@@ -156,7 +156,7 @@ public class Establecimiento implements Serializable {
     }
 
     /**
-     * @param user the user to set
+     * @param usuario the user to set
      */
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;

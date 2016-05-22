@@ -66,7 +66,6 @@ public class ProfileActivity extends AppCompatActivity {
                     user.setNombre(nomb);
                     user.setTelefono(tele);
                     user=(Usuario)new AdapterWebService().execute(Constantes.UPDATE_USER, user).get();
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

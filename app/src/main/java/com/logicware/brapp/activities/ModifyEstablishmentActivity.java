@@ -14,8 +14,10 @@ import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.persistence.AdapterWebService;
 
 public class ModifyEstablishmentActivity extends AppCompatActivity {
+
     private Establecimiento establishment;
     private Button modificar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,23 +58,16 @@ public class ModifyEstablishmentActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
-
             private void modificarEstablecimiento(String nom,String tele, String dir,String tema){
                 try {
                     establishment.setNombre(nom);
                     establishment.setTelefono(tele);
                     establishment.setTematica(tema);
                     establishment.setDireccion(dir);
-                    establishment= (Establecimiento)new AdapterWebService().execute(Constantes.UPDATE_ESTABLISHMENT, establishment).get();
-
+                    establishment = (Establecimiento)new AdapterWebService().execute(Constantes.UPDATE_ESTABLISHMENT, establishment).get();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
-
-
-
             }
         });
 

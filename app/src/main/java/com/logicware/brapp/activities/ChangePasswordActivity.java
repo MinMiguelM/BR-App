@@ -110,7 +110,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 try {
                     user.setContrasena(pas1);
                     user = (Usuario) new AdapterWebService().execute(Constantes.UPDATE_USER, user).get();
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

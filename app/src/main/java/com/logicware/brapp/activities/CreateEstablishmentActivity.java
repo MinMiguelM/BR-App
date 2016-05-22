@@ -18,6 +18,8 @@ import com.logicware.brapp.entities.Usuario;
 import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.persistence.AdapterWebService;
 
+import java.util.ArrayList;
+
 public class CreateEstablishmentActivity extends AppCompatActivity {
     private Establecimiento establishment;
     private Usuario user;
@@ -101,6 +103,12 @@ public class CreateEstablishmentActivity extends AppCompatActivity {
                 try {
                     establishment = (Establecimiento) new AdapterWebService().execute(Constantes.ADD_ESTABLISHMENT, user, nom, dir, hor, tem, tipo, tel).get();
                     user = (Usuario) new AdapterWebService().execute(Constantes.GET_USER_BY_CORREO,user.getCorreo()).get();
+                    try{
+                        ArrayList<Establecimiento> establecimientos = (ArrayList<Establecimiento>) new AdapterWebService().execute(Constantes.GET_ESTABLISHMENT_BY_USUARIO,user.getIdUsuario()).get();
+                        user.setEstablecimientos(establecimientos);
+                    } catch(Exception ex){
+                        ex.printStackTrace();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

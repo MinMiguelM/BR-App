@@ -37,6 +37,7 @@ public class Constantes {
     public static final String GET_ESTABLISHMENT_BY_NOMBRE = "http://" + IP + ":" +PORT + "/establishment/getByNombre/";
     public static final String UPDATE_ESTABLISHMENT = "http://" + IP + ":" +PORT + "/establishment/update";
     public static final String GET_ESTABLISHMENT_BY_TIPO = "http://" + IP + ":" +PORT + "/establishment/getByTipo/";
+    public static final String GET_ESTABLISHMENT_BY_USUARIO = "http://" + IP + ":" +PORT + "/establishment/getAllByUsuario/";
 
     public static final String ADD_EVENT = "http://" + IP + ":" +PORT + "/event/add";
     public static final String UPDATE_EVENT = "http://" + IP + ":" +PORT + "/event/update";
@@ -49,5 +50,4 @@ public class Constantes {
 
     public static final String ADD_BOOKING = "http://" + IP + ":" +PORT + "/booking/add";
     public static final String UPDATE_BOOKING = "http://" + IP + ":" +PORT + "/booking/update";
-    public static final String GET_ESTABLISHMENT_BY_USUARIO = "http://" + IP + ":" +PORT + "/establishment/getByAllByUsuario/";
 }
