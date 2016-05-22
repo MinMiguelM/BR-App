@@ -55,7 +55,7 @@ public class CustomAdapterEventos extends BaseAdapter {
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.establecimientoView.setText("ESTABLECIMIENTO:  "+listaDatos.get(position).getEstablecimiento().getNombre());
+      //  holder.establecimientoView.setText("ESTABLECIMIENTO:  "+listaDatos.get(position).getEstablecimiento().getNombre());
         holder.nombreView.setText("NOMBRE DEL EVENTO:  " + listaDatos.get(position).getTitulo());
         holder.fechaView.setText("FECHA:  " + listaDatos.get(position).getFecha_inicio()+" - "+listaDatos.get(position).getFecha_fin());
         holder.descripcionView.setText("DESCRIPCIÓN:  " + listaDatos.get(position).getDescripcion());

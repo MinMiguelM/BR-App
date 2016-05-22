@@ -9,11 +9,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.asus.br.R;
+import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Usuario;
 
 public class OneEstablishmentUsuarioActivity extends AppCompatActivity {
 
     private Usuario user = null;
+    private Establecimiento establishment;
     private Button comentario;
     private Button reserva;
     private Button evento;
@@ -25,9 +27,22 @@ public class OneEstablishmentUsuarioActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         user = (Usuario)getIntent().getExtras().getSerializable("user");
+        establishment = (Establecimiento)getIntent().getExtras().getSerializable("establecimiento");
 
         TextView mostrarNombre = (TextView)findViewById(R.id.textViewNomEsta) ;
-        mostrarNombre.setText(user.getNombre());
+        mostrarNombre.setText(establishment.getNombre());
+
+        TextView mostrarDireccion = (TextView)findViewById(R.id.textViewDirec) ;
+        mostrarDireccion.setText(establishment.getDireccion());
+
+        TextView mostrarHorario = (TextView)findViewById(R.id.textViewHorario) ;
+        mostrarHorario.setText(establishment.getHorario());
+
+        TextView mostrarTelefono = (TextView)findViewById(R.id.textViewTelefono) ;
+        mostrarTelefono.setText(establishment.getTelefono());
+
+        TextView mostrarTematica = (TextView)findViewById(R.id.textViewTematica) ;
+        mostrarTematica.setText(establishment.getTematica());
 
         reserva = (Button)findViewById(R.id.buttonReservas);
         reserva.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +57,7 @@ public class OneEstablishmentUsuarioActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(OneEstablishmentUsuarioActivity.this, ReservaUsuarioActivity.class);
                 intent.putExtra("user",user);
+                intent.putExtra("establecimiento",establishment);
                 startActivity(intent);
             }
         });

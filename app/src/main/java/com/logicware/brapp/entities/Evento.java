@@ -98,9 +98,9 @@ public class Evento implements Serializable {
     /**
      * @return the establecimiento
      */
-	public Establecimiento getEstablecimiento() {
+	/*public Establecimiento getEstablecimiento() {
 		return establecimiento;
-	}
+	}*/
 
     /**
      * @param establecimiento the establecimiento to set
