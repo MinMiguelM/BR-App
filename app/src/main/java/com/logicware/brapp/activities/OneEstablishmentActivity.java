@@ -9,14 +9,24 @@ import android.widget.Button;
 
 import com.example.asus.br.R;
 import com.logicware.brapp.entities.Establecimiento;
-
+/*
+* esta clase permite al usuario acceder a una lista de
+* opciones que se pueden realizar sobre un establecimiento en especifico
+* */
 public class OneEstablishmentActivity extends AppCompatActivity {
     private Establecimiento establishment;
     private Button modificar;
     private Button comentario;
     private Button reserva;
     private Button promocion;
-
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_establishment);

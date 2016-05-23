@@ -11,15 +11,29 @@ import com.example.asus.br.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by Camilo Andres on 16/05/2016.
- */
+/*
+*esta clase es un adaptador de lista para los comentarios presentados al cliente
+*aceca de su establecimiento
+*/
 public class ComentAdapter extends ArrayAdapter<ComentForList> {
-
+    /**
+     * Nombre: ComentAdapter
+     * Entradas: clase sobre la que se trabaja la vista , lista con los datos que se manejaran en el adaptador
+     * Salidas:
+     * Descripcion: constructor
+     */
     public ComentAdapter(Context context,ArrayList<ComentForList> listaDatos){
        super(context,0,listaDatos);
 
     }
+    /**
+     * Nombre: getView
+     * Entradas: posicion, vista a convertir, grupo de vistas
+     * Salidas: Vista
+     * Descripcion: obtiene la vista sobre la que se va a trabajar y a partir de ella
+     *              modifica el formato de la lista para que esta tenga
+     *              sub items
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
         ComentForList list = getItem(position);

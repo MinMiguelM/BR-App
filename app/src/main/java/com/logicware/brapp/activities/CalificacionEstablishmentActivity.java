@@ -17,10 +17,22 @@ import com.logicware.brapp.persistence.AdapterWebService;
 
 import java.util.ArrayList;
 
+/**
+ * Esta clase se encarga de mostrarle al cliente
+ * la pantalla de los comentarios recibidos para un
+ * establecimiento
+ */
 public class CalificacionEstablishmentActivity extends AppCompatActivity {
     private ArrayList<ComentForList> calificaciones = new ArrayList<ComentForList>();
     private Establecimiento establishment;
-
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +55,14 @@ public class CalificacionEstablishmentActivity extends AppCompatActivity {
         actualizarEstablecimiento();
 
     }
-
+    /**
+     * Nombre: llenarListaComentarios
+     * Entradas: -
+     * Salidas: -
+     * Descripcion: este metodo se encarga de llenar la lista
+     *              de comentarios para el establecimiento, con datos
+     *              provinientes del servidor
+     */
     private void llenarListaComentarios() {
 
         int hasta = 0;
@@ -58,7 +77,13 @@ public class CalificacionEstablishmentActivity extends AppCompatActivity {
 
 
     }
-
+    /**
+     * Nombre: calificacionPromedio
+     * Entradas: -
+     * Salidas: un entero con la calificacion promedio
+     * Descripcion: este metodo halla la calificacion promedio
+     *              para el establecimiento
+     */
     private int calificacionPromedio() {
         int hasta = 0;
         int contador = 0;
@@ -70,7 +95,13 @@ public class CalificacionEstablishmentActivity extends AppCompatActivity {
         return contador / hasta;
 
     }
-
+    /**
+     * Nombre: actualizarEstablecimiento
+     * Entradas: -
+     * Salidas: -
+     * Descripcion: este metodo atualiza el establecimiento
+     *              en el servidor
+     */
     private void actualizarEstablecimiento() {
         try {
            establishment = (Establecimiento) new AdapterWebService().execute(Constantes.UPDATE_ESTABLISHMENT, establishment).get();

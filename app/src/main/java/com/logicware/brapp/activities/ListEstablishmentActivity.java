@@ -19,13 +19,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.R.layout.simple_expandable_list_item_1;
-
+/*Esta clase muestra al cliente todos sus establecimientos asociados
+* en forma de una lista
+*   */
 public class ListEstablishmentActivity extends AppCompatActivity {
 
     private ListView lista;
     private Usuario user;
     private ArrayList<Establecimiento> establecimientosUser = new ArrayList<>();
-
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_establishment);
@@ -49,7 +58,13 @@ public class ListEstablishmentActivity extends AppCompatActivity {
 
         lista= (ListView) findViewById(R.id.listViewCliente);
         lista.setAdapter(array);
-
+        /**
+         * Nombre: setOnItemClickListener
+         * Entradas: la vista actual del componente
+         * Salidas: -
+         * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
+         *              sobre el algun elemento de la lista
+         */
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

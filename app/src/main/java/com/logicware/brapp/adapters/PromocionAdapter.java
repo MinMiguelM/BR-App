@@ -11,15 +11,30 @@ import com.example.asus.br.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by Camilo Andres on 22/05/2016.
- */
+/*
+*esta clase es un adaptador de lista para las promciones realizadas por el cliente
+*sobre sus establecimientos
+*/
 public class PromocionAdapter extends ArrayAdapter<PromocionForList> {
-
+    /**
+     * Nombre: PromocionAdapter
+     * Entradas: clase sobre la que se trabaja la vista, lista de datos con los que trabaja el adaptador
+     * Salidas:
+     * Descripcion: constructor
+     */
     public PromocionAdapter(Context context,ArrayList<PromocionForList> listaDatos){
         super(context,0,listaDatos);
 
     }
+
+    /**
+     * Nombre: getView
+     * Entradas: posicion, vista a convertir, grupo de vistas
+     * Salidas: Vista
+     * Descripcion: obtiene la vista sobre la que se va a trabajar y a partir de ella
+     *              modifica el formato de la lista para que esta tenga
+     *              sub items
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
         PromocionForList list = getItem(position);

@@ -17,12 +17,21 @@ import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Reserva;
 
 import java.util.ArrayList;
-
+/*esta clase permite al cliente mirar las
+*reservas por establecimiento
+* */
 public class EstablishmentReservesActivity extends AppCompatActivity {
 
     private ArrayList<ReservesForList> reservas = new ArrayList<ReservesForList>();
     private Establecimiento establishment;
-
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +64,12 @@ public class EstablishmentReservesActivity extends AppCompatActivity {
                 });
                 dialogo1.show();
             }
-
+            /**
+             * Nombre: aceptar
+             * Entradas: posicion del item seleccionado en la lista
+             * Salidas: -
+             * Descripcion: modifica el estado de la reserva de pendiente a Aceptada
+             */
             private void aceptar(int position) {
                 ArrayList<Reserva> resevas=((ArrayList<Reserva>) establishment.getReservas());
                 reservas.get(position).setEstado("Aceptado");
@@ -65,7 +79,12 @@ public class EstablishmentReservesActivity extends AppCompatActivity {
 
 
             }
-
+            /**
+             * Nombre: cancelar
+             * Entradas: posicion del item selecionado en la lista
+             * Salidas: -
+             * Descripcion: modifica el estado de la reserva de pendiente a Rechazada
+             */
             private void cancelar(int position) {
 
             }
@@ -73,7 +92,13 @@ public class EstablishmentReservesActivity extends AppCompatActivity {
 
 
     }
-
+    /**
+     * Nombre: llenarListaReservas
+     * Entradas: -
+     * Salidas: -
+     * Descripcion: este metodo llena la lista de reservas que se muestran en la
+     *              pantalla, con datos provenientes del servidor
+     */
     private void llenarListaReservas() {
         int hasta = 0;
         hasta = establishment.getReservas().size();

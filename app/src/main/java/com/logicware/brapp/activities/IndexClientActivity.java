@@ -190,9 +190,11 @@ public class IndexClientActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_establecimiento) {
             Intent intent = new Intent(IndexClientActivity.this, ListEstablishmentActivity.class);
+            intent.putExtra("user", user);
             startActivity(intent);
         } else if (id == R.id.nav_promocion) {
             Intent intent = new Intent(IndexClientActivity.this, PromoteEstablishmentActivity.class);
+            intent.putExtra("user", user);
             startActivity(intent);
 
         }
