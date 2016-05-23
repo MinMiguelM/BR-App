@@ -12,6 +12,8 @@ import com.logicware.brapp.adapters.ComentAdapter;
 import com.logicware.brapp.adapters.ComentForList;
 import com.logicware.brapp.entities.ComentarioYCalificacion;
 import com.logicware.brapp.entities.Establecimiento;
+import com.logicware.brapp.handlerWS.Constantes;
+import com.logicware.brapp.persistence.AdapterWebService;
 
 import java.util.ArrayList;
 
@@ -31,12 +33,14 @@ public class CalificacionEstablishmentActivity extends AppCompatActivity {
         ComentAdapter adapter = new ComentAdapter(this, calificaciones);
         ListView listView = (ListView) findViewById(R.id.calificacionlistView);
         listView.setAdapter(adapter);
-        float calificacion=calificacionPromedio();
-        TextView caliProm=(TextView) findViewById(R.id.calificacionPromedio);
-        caliProm.setText("La calificacion promedio su establecimiento es: "+calificacion);
+        float calificacion = calificacionPromedio();
+        TextView caliProm = (TextView) findViewById(R.id.calificacionPromedio);
+        caliProm.setText("La calificacion promedio su establecimiento es: " + calificacion);
 
-        RatingBar estrellas= (RatingBar)findViewById(R.id.ratingBarComentarios);
-        estrellas.setNumStars((int)calificacion);
+        RatingBar estrellas = (RatingBar) findViewById(R.id.ratingBarComentarios);
+        estrellas.setNumStars((int) calificacion);
+
+        actualizarEstablecimiento();
 
     }
 
@@ -55,15 +59,25 @@ public class CalificacionEstablishmentActivity extends AppCompatActivity {
 
     }
 
-    private int calificacionPromedio(){
+    private int calificacionPromedio() {
         int hasta = 0;
-        int contador=0;
+        int contador = 0;
         hasta = establishment.getComentariosYCalificaciones().size();
         for (int i = 0; i < hasta; i++) {
-            contador=contador+((ArrayList<ComentarioYCalificacion>) establishment.getComentariosYCalificaciones()).get(i).getCalificacion();
+            contador = contador + ((ArrayList<ComentarioYCalificacion>) establishment.getComentariosYCalificaciones()).get(i).getCalificacion();
 
         }
-        return contador/hasta;
+        return contador / hasta;
+
+    }
+
+    private void actualizarEstablecimiento() {
+        try {
+           establishment = (Establecimiento) new AdapterWebService().execute(Constantes.UPDATE_ESTABLISHMENT, establishment).get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 

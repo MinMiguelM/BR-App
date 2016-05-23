@@ -62,19 +62,41 @@ public class PromoteEstablishmentActivity extends AppCompatActivity {
                 TextView fechaFin = (TextView) findViewById(R.id.fechaFin);
                 TextView descripcion = (TextView) findViewById(R.id.Descripcion);
 
-                String esta=estabecimientos.getTag().toString();
+                String esta=estabecimientos.getSelectedItem().toString();
                 String tit = titulo.getText().toString();
                 String fechI = fechaInicio.getText().toString();
                 String fechF = fechaFin.getText().toString();
                 String desc = descripcion.getText().toString();
+
+                Establecimiento estable=obtenerEstablecimiento(esta);
                 if (camposVacios(tit, fechI, fechF, desc)) {
                     mostrarError("Campos vacios", "Complete los campos vacios");
                 } else {
-                    crearPromocion(tit,fechI,fechF,desc,esta);
+                    crearPromocion(tit,fechI,fechF,desc,estable);
                     Intent intent = new Intent(PromoteEstablishmentActivity.this, IndexClientActivity.class);
                     intent.putExtra("user", user);
                     startActivity(intent);
                 }
+            }
+
+            private void modificarEstablecimiento(Establecimiento esta){
+                int hasta=establecimientosUser.size();
+                for(int i=0;i<hasta;i++){
+                    if(esta.equals(establecimientosUser.get(i).getNombre())){
+                            establecimientosUser.set(i,esta);
+                    }
+                }
+            }
+            private Establecimiento obtenerEstablecimiento(String esta){
+
+                int hasta=establecimientosUser.size();
+                for(int i=0;i<hasta;i++){
+                    if(esta.equals(establecimientosUser.get(i).getNombre())){
+                        return establecimientosUser.get(i);
+
+                    }
+                }
+                return null;
             }
             /**
              * Nombre de Método: Campos Vacios
@@ -105,13 +127,13 @@ public class PromoteEstablishmentActivity extends AppCompatActivity {
                 alerta.show();
             }
 
-            private void crearPromocion(String titulo, String fechaIni, String fechaFin, String Descripcion ,String establecimiento){
+            private void crearPromocion(String titulo, String fechaIni, String fechaFin, String Descripcion , Establecimiento estable){
                 Evento evento= new Evento();
-
-
                 try {
-                    Establecimiento establishment=(Establecimiento) new AdapterWebService().execute(Constantes.GET_ESTABLISHMENT_BY_NOMBRE,establecimiento).get();
-                    Evento eve=(Evento) new AdapterWebService().execute(Constantes.ADD_EVENT, establishment,titulo,fechaIni,fechaFin,Descripcion).get();
+                    Evento eve=(Evento) new AdapterWebService().execute(Constantes.ADD_EVENT, estable,titulo,fechaIni,fechaFin,Descripcion).get();
+                    estable.getEventos().add(eve);
+                    modificarEstablecimiento(estable);
+                    user.setEstablecimientos(establecimientosUser);
 
                 } catch (Exception e) {
                     e.printStackTrace();

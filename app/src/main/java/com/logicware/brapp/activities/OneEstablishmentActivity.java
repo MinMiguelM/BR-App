@@ -15,15 +15,17 @@ public class OneEstablishmentActivity extends AppCompatActivity {
     private Button modificar;
     private Button comentario;
     private Button reserva;
+    private Button promocion;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_establishment);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        establishment = (Establecimiento)getIntent().getExtras().getSerializable("establecimiento");
+        establishment = (Establecimiento) getIntent().getExtras().getSerializable("establecimiento");
 
-        modificar = (Button)findViewById(R.id.buttonModificar);
+        modificar = (Button) findViewById(R.id.buttonModificar);
         modificar.setOnClickListener(new View.OnClickListener() {
             /**
              * Nombre: onClick
@@ -40,7 +42,7 @@ public class OneEstablishmentActivity extends AppCompatActivity {
             }
         });
 
-        comentario = (Button)findViewById(R.id.buttonComentario);
+        comentario = (Button) findViewById(R.id.buttonComentario);
         comentario.setOnClickListener(new View.OnClickListener() {
             /**
              * Nombre: onClick
@@ -57,7 +59,7 @@ public class OneEstablishmentActivity extends AppCompatActivity {
             }
         });
 
-        reserva = (Button)findViewById(R.id.buttonReserva);
+        reserva = (Button) findViewById(R.id.buttonReserva);
         reserva.setOnClickListener(new View.OnClickListener() {
             /**
              * Nombre: onClick
@@ -69,16 +71,30 @@ public class OneEstablishmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OneEstablishmentActivity.this, EstablishmentReservesActivity.class);
+                intent.putExtra("establecimiento", establishment);
+
+
+                startActivity(intent);
+            }
+        });
+
+        promocion = (Button) findViewById(R.id.buttonEventos);
+        promocion.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Nombre: onClick
+             * Entradas: la vista actual del componente
+             * Salidas: -
+             * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
+             *              sobre el boton.
+             */
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OneEstablishmentActivity.this, ConsultPromotionActivity.class);
+                intent.putExtra("establecimiento", establishment);
                 startActivity(intent);
             }
         });
     }
-
-
-
-
-
-
 
 
 }
