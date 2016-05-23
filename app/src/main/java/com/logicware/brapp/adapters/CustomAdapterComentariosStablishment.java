@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.asus.br.R;
+import com.logicware.brapp.entities.ComentarioYCalificacion;
 import com.logicware.brapp.entities.Evento;
 
 import java.util.ArrayList;
@@ -15,13 +16,13 @@ import java.util.ArrayList;
 /**
  * Created by Pipe on 22/05/2016.
  */
-public class CustomAdapterEventosStablishment extends BaseAdapter {
+public class CustomAdapterComentariosStablishment extends BaseAdapter {
 
 
-    private ArrayList<Evento> listaDatos;
+    private ArrayList<ComentarioYCalificacion> listaDatos;
     private LayoutInflater layoutInflater;
 
-    public CustomAdapterEventosStablishment(Context aContext, ArrayList<Evento> listData) {
+    public CustomAdapterComentariosStablishment(Context aContext, ArrayList<ComentarioYCalificacion> listData) {
         this.listaDatos = listData;
         layoutInflater = LayoutInflater.from(aContext);
     }
@@ -45,28 +46,26 @@ public class CustomAdapterEventosStablishment extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if(convertView==null){
-            convertView = layoutInflater.inflate(R.layout.list_row_eventos_stablishment, null);
+            convertView = layoutInflater.inflate(R.layout.list_row_comentarios_stablishment, null);
             holder = new ViewHolder();
-            holder.tituloViewSta = (TextView) convertView.findViewById(R.id.TituloSta);
-            holder.fechaViewSta = (TextView) convertView.findViewById(R.id.FechaSta);
-            holder.descripcionViewSta = (TextView) convertView.findViewById(R.id.DescripcionSta);
+            holder.DesViewSta = (TextView) convertView.findViewById(R.id.DesSta);
+            holder.PromedioViewSta = (TextView) convertView.findViewById(R.id.PromedioSta);
+            holder.NomViewSta = (TextView) convertView.findViewById(R.id.NomComen);
             convertView.setTag(holder);
 
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.tituloViewSta.setText("        NOMBRE DEL EVENTO:  " + listaDatos.get(position).getTitulo());
-        holder.fechaViewSta.setText("        FECHA:  " + listaDatos.get(position).getFecha_inicio()+" - "+listaDatos.get(position).getFecha_fin());
-        holder.descripcionViewSta.setText("        DESCRIPCIÓN:  " + listaDatos.get(position).getDescripcion());
-        //System.out.println("        DESCRIPCIÓN:  " + listaDatos.get(position).getDescripcion());
+        holder.DesViewSta.setText("        COMENTARIO:  " + listaDatos.get(position).getDescripcion());
+        holder.PromedioViewSta.setText("        CALIFICACIÓN:  " + listaDatos.get(position).getCalificacion());
+        holder.NomViewSta.setText("        USUARIO:  " + listaDatos.get(position).getUsuario().getNombre());
+        //System.out.println("        calificacion  " +listaDatos.get(position).getCalificacion());
         return convertView;
-
-
     }
 
     static class ViewHolder {
-        TextView tituloViewSta;
-        TextView fechaViewSta;
-        TextView descripcionViewSta;
+        TextView DesViewSta;
+        TextView PromedioViewSta;
+        TextView NomViewSta;
     }
 }

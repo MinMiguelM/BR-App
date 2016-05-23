@@ -4,8 +4,9 @@
     android:layout_height="match_parent">
 
 
+
     <TextView
-        android:id="@+id/TituloSta"
+        android:id="@+id/DesSta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
@@ -20,22 +21,29 @@
         android:autoText="false" />
 
     <TextView
-        android:id="@+id/FechaSta"
+        android:id="@+id/PromedioSta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#343434"
         android:textSize="12sp"
         style="@style/AppTheme"
-        android:layout_below="@+id/TituloSta" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/DesSta"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/DescripcionSta"
+        android:id="@+id/NomComen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#343434"
         android:textSize="12sp"
         style="@style/AppTheme"
-        android:layout_toEndOf="@+id/FechaSta"
-        android:layout_below="@+id/FechaSta" />
+        android:layout_toEndOf="@+id/PromedioSta"
+        android:layout_below="@+id/PromedioSta"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 
 </RelativeLayout>

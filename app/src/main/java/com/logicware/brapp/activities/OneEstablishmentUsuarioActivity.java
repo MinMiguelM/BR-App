@@ -26,6 +26,7 @@ public class OneEstablishmentUsuarioActivity extends AppCompatActivity {
     private Button evento;
     private Button conEventos;
     private Evento ev = new Evento();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,19 +37,19 @@ public class OneEstablishmentUsuarioActivity extends AppCompatActivity {
         establishment = (Establecimiento)getIntent().getExtras().getSerializable("establecimiento");
 
         TextView mostrarNombre = (TextView)findViewById(R.id.textViewNomEsta) ;
-        mostrarNombre.setText(establishment.getNombre());
+        mostrarNombre.setText("Nombre: "+establishment.getNombre());
 
         TextView mostrarDireccion = (TextView)findViewById(R.id.textViewDirec) ;
-        mostrarDireccion.setText(establishment.getDireccion());
+        mostrarDireccion.setText("Dirección: "+establishment.getDireccion());
 
         TextView mostrarHorario = (TextView)findViewById(R.id.textViewHorario) ;
-        mostrarHorario.setText(establishment.getHorario());
+        mostrarHorario.setText("Horario: "+establishment.getHorario());
 
         TextView mostrarTelefono = (TextView)findViewById(R.id.textViewTelefono) ;
-        mostrarTelefono.setText(establishment.getTelefono());
+        mostrarTelefono.setText("Teléfono: "+establishment.getTelefono());
 
         TextView mostrarTematica = (TextView)findViewById(R.id.textViewTematica) ;
-        mostrarTematica.setText(establishment.getTematica());
+        mostrarTematica.setText("Temática: "+establishment.getTematica());
 
         reserva = (Button)findViewById(R.id.buttonReservas);
         reserva.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +97,8 @@ public class OneEstablishmentUsuarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OneEstablishmentUsuarioActivity.this,   CalificacionEstablishmentUsuarioActivity.class);
-                //intent.putExtra("user",user);
+                intent.putExtra("user",user);
+                intent.putExtra("establecimiento",establishment);
                 startActivity(intent);
             }
         });

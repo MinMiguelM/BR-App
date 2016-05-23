@@ -69,6 +69,8 @@ public class ReservaUsuarioActivity extends AppCompatActivity {
                     res.setFecha_reserva(fecha);
                     res.setCantidad_personas(Long.parseLong(per));
                     res.setEstado(estado);
+                    System.out.println(establishment.getNombre());
+                    System.out.println(user.getNombre());
                     res = (Reserva) new AdapterWebService().execute(Constantes.ADD_BOOKING, establishment, user, fecha, estado, per).get();
                     if (res != null) {
                         mostrarConfirmacion();

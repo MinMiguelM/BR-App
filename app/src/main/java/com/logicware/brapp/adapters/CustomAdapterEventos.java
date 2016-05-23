@@ -46,7 +46,6 @@ public class CustomAdapterEventos extends BaseAdapter {
         if(convertView==null){
             convertView = layoutInflater.inflate(R.layout.list_row_eventos, null);
             holder = new ViewHolder();
-            holder.establecimientoView = (TextView) convertView.findViewById(R.id.Establecimiento);
             holder.fechaView = (TextView) convertView.findViewById(R.id.FechaFecha);
             holder.nombreView = (TextView) convertView.findViewById(R.id.Titulo);
             holder.descripcionView = (TextView) convertView.findViewById(R.id.Descripcion);
@@ -55,7 +54,6 @@ public class CustomAdapterEventos extends BaseAdapter {
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-      //  holder.establecimientoView.setText("ESTABLECIMIENTO:  "+listaDatos.get(position).getEstablecimiento().getNombre());
         holder.nombreView.setText("NOMBRE DEL EVENTO:  " + listaDatos.get(position).getTitulo());
         holder.fechaView.setText("FECHA:  " + listaDatos.get(position).getFecha_inicio()+" - "+listaDatos.get(position).getFecha_fin());
         holder.descripcionView.setText("DESCRIPCIÓN:  " + listaDatos.get(position).getDescripcion());
@@ -65,7 +63,6 @@ public class CustomAdapterEventos extends BaseAdapter {
     }
 
     static class ViewHolder {
-        TextView establecimientoView;
         TextView fechaView;
         TextView nombreView;
         TextView descripcionView;
