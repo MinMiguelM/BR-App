@@ -12,10 +12,21 @@ import com.example.asus.br.R;
 import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.persistence.AdapterWebService;
-
+/*esta clase permite al cliente modificar los datos de alguno de sus establecimientos
+*
+* */
 public class ModifyEstablishmentActivity extends AppCompatActivity {
+
     private Establecimiento establishment;
     private Button modificar;
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +66,13 @@ public class ModifyEstablishmentActivity extends AppCompatActivity {
                 intent.putExtra("establecimiento", establishment);
                 startActivity(intent);
             }
-
+            /**
+             * Nombre: modificarEstablecimiento
+             * Entradas: nombre , telefono, direcion y tema dele stablecimiento
+             * Salidas: -
+             * Descripcion: este metodo se encarga de actualiza en el servidor los datos
+             *              modificados del establecimiento
+             */
 
             private void modificarEstablecimiento(String nom,String tele, String dir,String tema){
                 try {
@@ -63,16 +80,10 @@ public class ModifyEstablishmentActivity extends AppCompatActivity {
                     establishment.setTelefono(tele);
                     establishment.setTematica(tema);
                     establishment.setDireccion(dir);
-                    establishment= (Establecimiento)new AdapterWebService().execute(Constantes.UPDATE_ESTABLISHMENT, establishment).get();
-
+                    establishment = (Establecimiento)new AdapterWebService().execute(Constantes.UPDATE_ESTABLISHMENT, establishment).get();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
-
-
-
             }
         });
 

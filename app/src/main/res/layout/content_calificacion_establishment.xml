@@ -20,27 +20,28 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:weightSum="1">
 
             <ListView
                 android:layout_width="wrap_content"
-                android:layout_height="382dp"
+                android:layout_height="303dp"
                 android:id="@+id/calificacionlistView"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Calificacion promedio de su establecimiento"
-                android:id="@+id/textView19" />
+                android:id="@+id/calificacionPromedio"
+                android:editable="true"
+                android:text="La calificación promedio de su establecimiento es de: " />
 
             <RatingBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ratingBar"
+                android:id="@+id/ratingBarComentarios"
                 android:layout_below="@+id/scrollView3"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />

@@ -7,8 +7,8 @@ import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Evento;
 import com.logicware.brapp.entities.Producto;
 import com.logicware.brapp.entities.Reserva;
-import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.entities.Usuario;
+import com.logicware.brapp.handlerWS.Constantes;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -17,8 +17,8 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Collection;
-
 
 /**
  * Created by ASUS on 4/16/2016.
@@ -26,7 +26,6 @@ import java.util.Collection;
  * y el servidor de LogicWare.
  */
 public class AdapterWebService extends AsyncTask<Object, Void, Object> {
-
     /**
      * Nombre: doInBackGround
      * Entradas: una lista de parametros, segun sea se hace una
@@ -39,21 +38,23 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
     protected Object doInBackground(Object... params){
         try {
             if(params[0].equals(Constantes.GET_USER_BY_CORREO))
-                return getUserByCorreo((String)params[1]);
+                return getUserByCorreo((String) params[1]);
             if(params[0].equals(Constantes.GET_USER_BY_TOKEN))
-                return getUserByToken((String)params[1]); // get by token method params[1]
+                return getUserByToken((String) params[1]); // get by token method params[1]
             if(params[0].equals(Constantes.ADD_USER))
-                return addUser((String)params[1],(String)params[2],(String)params[3],(String)params[4],
-                        (String)params[5],(String)params[6],(String)params[7]);
+                return addUser((String) params[1], (String) params[2], (String) params[3], (String) params[4],
+                        (String) params[5], (String) params[6], (String) params[7]);
             if(params[0].equals(Constantes.UPDATE_USER))
-                return updateUser((Usuario)params[1]);
+                return updateUser((Usuario) params[1]);
             if(params[0].equals(Constantes.ADD_ESTABLISHMENT))
-                return addEstablishment((Usuario) params[1],(String)params[2],(String)params[3],(String)params[4],
-                        (String)params[5],(String)params[6],(String)params[7]);
+                return addEstablishment((Usuario) params[1], (String) params[2], (String) params[3], (String) params[4],
+                        (String) params[5], (String) params[6], (String) params[7]);
             if(params[0].equals(Constantes.GET_ESTABLISHMENT_BY_NOMBRE))
                 return getEstablishmentByNombre((String)params[1]);
+            if(params[0].equals(Constantes.GET_ESTABLISHMENT_BY_USUARIO))
+                return getEstablishmentByUser((Long)(params[1]));
             if(params[0].equals(Constantes.UPDATE_ESTABLISHMENT))
-                updateEstablishment((Establecimiento)params[1]);
+                return updateEstablishment((Establecimiento)params[1]);
             if(params[0].equals(Constantes.GET_ESTABLISHMENT_BY_TIPO))
                 return getEstablishmentsByTipo((String)params[1]);
             if(params[0].equals(Constantes.ADD_EVENT) && params[1] instanceof Establecimiento)
@@ -63,26 +64,25 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
                 return addEventByUser((Usuario) params[1],(String)params[2],(String)params[3],
                         (String)params[4],(String)params[5]);
             if(params[0].equals(Constantes.UPDATE_EVENT))
-                updateEvent((Evento)params[1]);
+                return updateEvent((Evento)params[1]);
             if(params[0].equals(Constantes.ADD_COMMENTS))
                 return addComments((Establecimiento) params[1],(Usuario)params[2],(String)params[3],(String)params[4]);
             if(params[0].equals(Constantes.UPDATE_COMMENTS))
-                updateComments((ComentarioYCalificacion)params[1]);
+                return updateComments((ComentarioYCalificacion)params[1]);
             if(params[0].equals(Constantes.ADD_ITEM))
                 return addItem((Establecimiento)params[1],(String)params[2],(String)params[3],(String)params[4]);
             if(params[0].equals(Constantes.UPDATE_ITEM))
-                updateItem((Producto)params[1]);
+                return updateItem((Producto)params[1]);
             if(params[0].equals(Constantes.ADD_BOOKING))
                 return addBooking((Establecimiento)params[1],(Usuario)params[2],(String)params[3],(String)params[4],
                         (String)params[5]);
             if(params[0].equals(Constantes.UPDATE_BOOKING))
-                updateBooking((Reserva)params[1]);
+                return updateBooking((Reserva)params[1]);
         }catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-
     /**
      * Nombre: getUserByToken
      * Entradas: token por el cual se traera el usuario
@@ -99,7 +99,6 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
-
     /**
      * Trae el correo y la contrasena de un usuario según el email.
      * @param correo Parametro que trae la consulta
@@ -114,7 +113,6 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
-
     /**
      * Nombre: addUser
      * Entradas: Params0 -> Nombre
@@ -136,7 +134,6 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         newUser.setLink_facebook(Boolean.parseBoolean(params[4]));
         newUser.setToken(params[5]);
         newUser.setTipo(params[6]);
-
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
@@ -151,7 +148,6 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
-
     /**
      * Nombre: updateTokenUser
      * Entradas: El correo del usuario a quien se le actualizara el token y ademas
@@ -169,7 +165,6 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
-
     /**
      * Entradas: user -> El usuario que está agregando el establecimiento
      *           params0 -> Nombre
@@ -189,8 +184,6 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         establecimiento.setTelefono(params[5]);
         establecimiento.setCalificacion_promedio(0.0);
         establecimiento.setUsuario(user);
-        //user.getEstablecimientos().add(establecimiento);
-
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
@@ -205,39 +198,68 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
-
     public Collection<Establecimiento> getEstablishmentByNombre(String nombre){
         try{
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            return (Collection<Establecimiento>) restTemplate.getForObject(Constantes.GET_ESTABLISHMENT_BY_NOMBRE + nombre , Establecimiento.class, "Android");
+            restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+            restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
+            Collection<Establecimiento> retorno = new ArrayList<>();
+            Establecimiento[] response = restTemplate.getForObject(Constantes.GET_ESTABLISHMENT_BY_NOMBRE + nombre , Establecimiento[].class, "Android");
+            for ( int i = 0; i<response.length;i++)
+                retorno.add(response[i]);
+            return retorno;
         }catch(Exception e){
             e.printStackTrace();
         }
         return null;
     }
-
-    public void updateEstablishment(Establecimiento establecimiento){
-        try {
+    public Collection<Establecimiento> getEstablishmentByUser(Long idUsuario){
+        try{
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            restTemplate.put(Constantes.UPDATE_ESTABLISHMENT,establecimiento,Establecimiento.class);
+            restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+            restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
+            Collection<Establecimiento> retorno = new ArrayList<>();
+            Establecimiento[] response = restTemplate.getForObject(Constantes.GET_ESTABLISHMENT_BY_USUARIO + idUsuario , Establecimiento[].class, "Android");
+            for ( int i = 0; i<response.length;i++)
+                retorno.add(response[i]);
+            return retorno;
         }catch(Exception e){
             e.printStackTrace();
         }
+        return null;
     }
-
+    public Establecimiento updateEstablishment(Establecimiento establecimiento){
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+            restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
+            Establecimiento e = restTemplate.postForObject(Constantes.UPDATE_ESTABLISHMENT, establecimiento, Establecimiento.class);
+            System.out.println(e.getNombre()+ "  " + e.getDireccion());
+            return e;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
     public Collection<Establecimiento> getEstablishmentsByTipo(String tipo){
         try{
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            return (Collection<Establecimiento>) restTemplate.getForObject(Constantes.GET_ESTABLISHMENT_BY_TIPO + tipo , Establecimiento.class, "Android");
+            restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+            restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
+            Collection<Establecimiento> retorno = new ArrayList<>();
+            Establecimiento[] response = restTemplate.getForObject(Constantes.GET_ESTABLISHMENT_BY_TIPO + tipo , Establecimiento[].class, "Android");
+            for ( int i = 0; i<response.length;i++)
+                retorno.add(response[i]);
+            return retorno;
         }catch(Exception e){
             e.printStackTrace();
         }
         return null;
     }
-
     /**
      * Entradas: user -> El usuario que está agregando el evento
      *           params0 -> fecha_inicio
@@ -252,7 +274,6 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         newEvento.setDescripcion(params[2]);
         newEvento.setTitulo(params[3]);
         newEvento.setUsuario(user);
-
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
@@ -267,7 +288,6 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
-
     /**
      * Entradas: establecimiento -> El establecimiento que está agregando el evento
      *           params0 -> fecha_inicio
@@ -282,7 +302,6 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         newEvento.setDescripcion(params[2]);
         newEvento.setTitulo(params[3]);
         newEvento.setEstablecimiento(establecimiento);
-
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
@@ -297,17 +316,16 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
-
-    public void updateEvent(Evento evento){
+    public Evento updateEvent(Evento evento){
         try {
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            restTemplate.put(Constantes.UPDATE_EVENT,evento,Evento.class);
+            return restTemplate.postForObject(Constantes.UPDATE_EVENT, evento, Evento.class);
         }catch(Exception e){
             e.printStackTrace();
         }
+        return null;
     }
-
     /**
      * Entradas: establecimiento -> El establecimiento el cual esta siendo calificado y comentado
      *           usuario -> El usuario que esta haciendo el comentario y la calificacion
@@ -320,7 +338,6 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         comentario.setCalificacion(Integer.parseInt(params[1]));
         comentario.setUsuario(usuario);
         comentario.setEstablecimiento(establecimiento);
-
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
@@ -335,17 +352,16 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
-
-    public void updateComments(ComentarioYCalificacion comentarioYCalificacion){
+    public ComentarioYCalificacion updateComments(ComentarioYCalificacion comentarioYCalificacion){
         try {
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            restTemplate.put(Constantes.UPDATE_COMMENTS,comentarioYCalificacion,ComentarioYCalificacion.class);
+            return restTemplate.postForObject(Constantes.UPDATE_COMMENTS, comentarioYCalificacion, ComentarioYCalificacion.class);
         }catch(Exception e){
             e.printStackTrace();
         }
+        return null;
     }
-
     /**
      * Entradas: establecimiento -> El establecimiento el cual esta agregando el producto
      *           params0 -> Nombre
@@ -358,7 +374,6 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         producto.setPrecio(Double.parseDouble(params[1]));
         producto.setDescripcion(params[2]);
         producto.setEstablecimiento(establecimiento);
-
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
@@ -373,17 +388,16 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
-
-    public void updateItem(Producto producto){
+    public Producto updateItem(Producto producto){
         try {
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            restTemplate.put(Constantes.UPDATE_ITEM,producto,Producto.class);
+            return restTemplate.postForObject(Constantes.UPDATE_ITEM, producto, Producto.class);
         }catch(Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
-
     /**
      * Entradas: establecimiento -> El establecimiento al cual se le hace la reserva
      *           usuario -> El usuario que hace la reserva
@@ -398,7 +412,6 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         reserva.setCantidad_personas(Long.parseLong(params[2]));
         reserva.setUsuario(usuario);
         reserva.setEstablecimiento(establecimiento);
-
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
@@ -413,14 +426,14 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
-
-    public void updateBooking(Reserva reserva){
+    public Reserva updateBooking(Reserva reserva){
         try {
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            restTemplate.put(Constantes.UPDATE_BOOKING,reserva,Reserva.class);
+            return restTemplate.postForObject(Constantes.UPDATE_BOOKING,reserva,Reserva.class);
         }catch(Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 }

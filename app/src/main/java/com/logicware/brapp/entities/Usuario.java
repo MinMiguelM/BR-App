@@ -156,9 +156,9 @@ public class Usuario implements Serializable {
     /**
      * @return
      */
-    public Collection<Establecimiento> getEstablecimientos(){
+    /*public Collection<Establecimiento> getEstablecimientos(){
         return this.establecimientos;
-    }
+    }*/
 
     /**
      * @param establecimientos the establecimientos to set

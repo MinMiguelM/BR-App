@@ -12,20 +12,21 @@ import com.example.asus.br.R;
 import java.util.ArrayList;
 
 /*
-*esta clase es un adaptador de lista para los comentarios presentados al cliente
-*aceca de su establecimiento
+*esta clase es un adaptador de lista para las promciones realizadas por el cliente
+*sobre sus establecimientos
 */
-public class ComentAdapter extends ArrayAdapter<ComentForList> {
+public class PromocionAdapter extends ArrayAdapter<PromocionForList> {
     /**
-     * Nombre: ComentAdapter
-     * Entradas: clase sobre la que se trabaja la vista , lista con los datos que se manejaran en el adaptador
+     * Nombre: PromocionAdapter
+     * Entradas: clase sobre la que se trabaja la vista, lista de datos con los que trabaja el adaptador
      * Salidas:
      * Descripcion: constructor
      */
-    public ComentAdapter(Context context,ArrayList<ComentForList> listaDatos){
-       super(context,0,listaDatos);
+    public PromocionAdapter(Context context,ArrayList<PromocionForList> listaDatos){
+        super(context,0,listaDatos);
 
     }
+
     /**
      * Nombre: getView
      * Entradas: posicion, vista a convertir, grupo de vistas
@@ -36,22 +37,23 @@ public class ComentAdapter extends ArrayAdapter<ComentForList> {
      */
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        ComentForList list = getItem(position);
+        PromocionForList list = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_content, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_promocion, parent, false);
         }
         // Lookup view for data population
-        TextView nombre = (TextView) convertView.findViewById(R.id.nombre);
-        TextView calificacion = (TextView) convertView.findViewById(R.id.calificacion);
-        TextView comentarios = (TextView) convertView.findViewById(R.id.comentario);
+        TextView titulo = (TextView) convertView.findViewById(R.id.tituloPromo);
+        TextView fechaIni = (TextView) convertView.findViewById(R.id.fechI);
+        TextView fechaFin = (TextView) convertView.findViewById(R.id.fechF);
+        TextView descripcion=(TextView)convertView.findViewById(R.id.descripcionPromo);
 
         // Populate the data into the template view using the data object
-        nombre.setText(list.getNombre());
-        calificacion.setText(list.getCalificacion());
-        comentarios.setText(list.getComentarios());
+        titulo.setText(list.getTitulo());
+        fechaIni.setText(list.getFechaInicio());
+        fechaFin.setText(list.getFechaFin());
+        descripcion.setText(list.getDescripcion());
         // Return the completed view to render on screen
         return convertView;
     }
-
 }

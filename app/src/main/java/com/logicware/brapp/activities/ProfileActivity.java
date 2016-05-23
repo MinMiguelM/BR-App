@@ -12,13 +12,24 @@ import com.example.asus.br.R;
 import com.logicware.brapp.entities.Usuario;
 import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.persistence.AdapterWebService;
-
+/*
+* esta clase permite al usuario y cliente ver y modificar los
+* datos personales del perfil
+*
+* */
 public class ProfileActivity extends AppCompatActivity {
 
     private Button modificarPass;
     private Button modificarPerfil;
     private Usuario user;
-
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +77,6 @@ public class ProfileActivity extends AppCompatActivity {
                     user.setNombre(nomb);
                     user.setTelefono(tele);
                     user=(Usuario)new AdapterWebService().execute(Constantes.UPDATE_USER, user).get();
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -19,8 +19,6 @@ import com.example.asus.br.R;
 import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Usuario;
 
-import java.util.ArrayList;
-
 /**
  * Es la interfaz del menu principal despues de que el cliente
  * se logguea correctamente
@@ -50,13 +48,6 @@ public class IndexClientActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         user = (Usuario)getIntent().getExtras().getSerializable("user");
-        //---------------imprimir prueba
-
-        if(user.getEstablecimientos().isEmpty())
-            System.out.println("vacioais");
-        else
-            System.out.println(((ArrayList<Establecimiento>)user.getEstablecimientos()).get(0).getNombre());
-
 
         establecimiento = (Button)findViewById(R.id.buttonEstablecimiento);
        establecimiento.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +79,7 @@ public class IndexClientActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(IndexClientActivity.this, PromoteEstablishmentActivity.class);
+                intent.putExtra("user",user);
                 startActivity(intent);
             }
         });
@@ -198,9 +190,11 @@ public class IndexClientActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_establecimiento) {
             Intent intent = new Intent(IndexClientActivity.this, ListEstablishmentActivity.class);
+            intent.putExtra("user", user);
             startActivity(intent);
         } else if (id == R.id.nav_promocion) {
             Intent intent = new Intent(IndexClientActivity.this, PromoteEstablishmentActivity.class);
+            intent.putExtra("user", user);
             startActivity(intent);
 
         }

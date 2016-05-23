@@ -14,11 +14,21 @@ import com.example.asus.br.R;
 import com.logicware.brapp.entities.Usuario;
 import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.persistence.AdapterWebService;
-
+/*
+* esta clase permite al cliente y usuario cambiar la contraseña de su perfil
+*
+* */
 public class ChangePasswordActivity extends AppCompatActivity {
     private Usuario user;
     private Button aceptar;
-
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,12 +115,17 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 });
                 alerta.show();
             }
-
+            /**
+             * Nombre: actualizarUsuario
+             * Entradas: contraseña nueva
+             * Salidas: -
+             * Descripcion: este metodo se encarga de actualizar la contraseña del usuario
+             *              en el servidor
+             */
             private void actualizarUsuario(String pas1) {
                 try {
                     user.setContrasena(pas1);
                     user = (Usuario) new AdapterWebService().execute(Constantes.UPDATE_USER, user).get();
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

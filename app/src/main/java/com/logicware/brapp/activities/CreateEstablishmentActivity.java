@@ -18,11 +18,24 @@ import com.logicware.brapp.entities.Usuario;
 import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.persistence.AdapterWebService;
 
+import java.util.ArrayList;
+
+/*esta clase permite al cliente
+* crear un nuevo establecimiento
+*
+* */
 public class CreateEstablishmentActivity extends AppCompatActivity {
     private Establecimiento establishment;
     private Usuario user;
     private Button aceptar;
-
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,11 +109,23 @@ public class CreateEstablishmentActivity extends AppCompatActivity {
                 });
                 alerta.show();
             }
-
+            /**
+             * Nombre: insertarEstablecimiento
+             * Entradas: nombre, telefono, direccion, horario, tematica y tipo de establecimiento
+             * Salidas: -
+             * Descripcion: este metodo permite al usuario insertar un nuevo establecimiento en el servidor
+             *
+             */
             public void insertarEstablecimiento(String nom, String tel, String dir, String hor, String tem, String tipo) {
                 try {
                     establishment = (Establecimiento) new AdapterWebService().execute(Constantes.ADD_ESTABLISHMENT, user, nom, dir, hor, tem, tipo, tel).get();
                     user = (Usuario) new AdapterWebService().execute(Constantes.GET_USER_BY_CORREO,user.getCorreo()).get();
+                    try{
+                        ArrayList<Establecimiento> establecimientos = (ArrayList<Establecimiento>) new AdapterWebService().execute(Constantes.GET_ESTABLISHMENT_BY_USUARIO,user.getIdUsuario()).get();
+                        user.setEstablecimientos(establecimientos);
+                    } catch(Exception ex){
+                        ex.printStackTrace();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

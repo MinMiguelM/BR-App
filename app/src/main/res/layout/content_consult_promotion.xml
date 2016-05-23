@@ -9,11 +9,19 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.logicware.brapp.activities.EstablishmentReservesActivity"
-    tools:showIn="@layout/activity_establishment_reserves">
+    tools:context="com.logicware.brapp.activities.ConsultPromotionActivity"
+    tools:showIn="@layout/activity_consult_promotion">
 
-    <ListView
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listViewReservasCliente" />
+        android:id="@+id/scrollView6"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true">
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewConsultPromo" />
+    </ScrollView>
 </RelativeLayout>
