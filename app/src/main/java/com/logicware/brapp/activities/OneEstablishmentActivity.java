@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.asus.br.R;
+import com.logicware.brapp.R;
 import com.logicware.brapp.entities.Establecimiento;
 /*
 * esta clase permite al usuario acceder a una lista de

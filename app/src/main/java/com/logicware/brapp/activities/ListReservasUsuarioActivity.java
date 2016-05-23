@@ -3,12 +3,8 @@ package com.logicware.brapp.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.ListView;
 
-import com.example.asus.br.R;
-import com.logicware.brapp.adapters.CustomAdapterEventos;
-
-import java.util.ArrayList;
+import com.logicware.brapp.R;
 
 /**
  * Created by Pipe on 15/05/2016.

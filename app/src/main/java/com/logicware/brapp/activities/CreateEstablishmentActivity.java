@@ -12,7 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.asus.br.R;
+import com.logicware.brapp.R;
 import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Usuario;
 import com.logicware.brapp.handlerWS.Constantes;

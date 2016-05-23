@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.asus.br">
+    package="com.logicware.brapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -104,7 +104,6 @@
         <activity
             android:name="com.logicware.brapp.activities.OneEstablishmentUsuarioActivity"
             android:label="@string/title_activity_one_establishment_usuario"
-<<<<<<< HEAD
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.logicware.brapp.activities.ReservaUsuarioActivity"
@@ -135,13 +134,10 @@
             android:label="@string/title_activity_list_bares"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-=======
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <activity
             android:name="com.logicware.brapp.activities.ConsultPromotionActivity"
             android:label="@string/title_activity_consult_promotion"
             android:theme="@style/AppTheme.NoActionBar"></activity>
->>>>>>> master
     </application>
-
 </manifest>

@@ -50,34 +50,42 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
                 return addEstablishment((Usuario) params[1], (String) params[2], (String) params[3], (String) params[4],
                         (String) params[5], (String) params[6], (String) params[7]);
             if(params[0].equals(Constantes.GET_ESTABLISHMENT_BY_NOMBRE))
-                return getEstablishmentByNombre((String)params[1]);
+                return getEstablishmentByNombre((String) params[1]);
             if(params[0].equals(Constantes.GET_ESTABLISHMENT_BY_USUARIO))
-                return getEstablishmentByUser((Long)(params[1]));
+                return getEstablishmentByUser((Long) (params[1]));
             if(params[0].equals(Constantes.UPDATE_ESTABLISHMENT))
-                return updateEstablishment((Establecimiento)params[1]);
+                return updateEstablishment((Establecimiento) params[1]);
             if(params[0].equals(Constantes.GET_ESTABLISHMENT_BY_TIPO))
-                return getEstablishmentsByTipo((String)params[1]);
+                return getEstablishmentsByTipo((String) params[1]);
             if(params[0].equals(Constantes.ADD_EVENT) && params[1] instanceof Establecimiento)
-                return addEventByEstablishment((Establecimiento)params[1],(String)params[2],(String)params[3],
-                        (String)params[4],(String)params[5]);
+                return addEventByEstablishment((Establecimiento) params[1], (String) params[2], (String) params[3],
+                        (String) params[4], (String) params[5]);
             if(params[0].equals(Constantes.ADD_EVENT) && params[1] instanceof Usuario)
-                return addEventByUser((Usuario) params[1],(String)params[2],(String)params[3],
-                        (String)params[4],(String)params[5]);
+                return addEventByUser((Usuario) params[1], (String) params[2], (String) params[3],
+                        (String) params[4], (String) params[5]);
             if(params[0].equals(Constantes.UPDATE_EVENT))
-                return updateEvent((Evento)params[1]);
+                return updateEvent((Evento) params[1]);
+            if(params[0].equals(Constantes.GET_EVENT_BY_IDESTABLECIMIENTO))
+                return getEventByIdEstablecimiento((Long) params[1]);
+            if(params[0].equals(Constantes.GET_EVENT_BY_IDUSUARIO))
+                return getEventByIdUsuario((Long) params[1]);
             if(params[0].equals(Constantes.ADD_COMMENTS))
-                return addComments((Establecimiento) params[1],(Usuario)params[2],(String)params[3],(String)params[4]);
+                return addComments((Establecimiento) params[1], (Usuario) params[2], (String) params[3], (String) params[4]);
             if(params[0].equals(Constantes.UPDATE_COMMENTS))
-                return updateComments((ComentarioYCalificacion)params[1]);
+                return updateComments((ComentarioYCalificacion) params[1]);
+            if(params[0].equals(Constantes.GET_COMMENTS_BY_IDESTABLECIMIENTO))
+                return getCommentsByIdEstablecimiento((Long)params[1]);
             if(params[0].equals(Constantes.ADD_ITEM))
-                return addItem((Establecimiento)params[1],(String)params[2],(String)params[3],(String)params[4]);
+                return addItem((Establecimiento) params[1], (String) params[2], (String) params[3], (String) params[4]);
             if(params[0].equals(Constantes.UPDATE_ITEM))
-                return updateItem((Producto)params[1]);
+                return updateItem((Producto) params[1]);
             if(params[0].equals(Constantes.ADD_BOOKING))
-                return addBooking((Establecimiento)params[1],(Usuario)params[2],(String)params[3],(String)params[4],
-                        (String)params[5]);
+                return addBooking((Establecimiento) params[1], (Usuario) params[2], (String) params[3], (String) params[4],
+                        (String) params[5]);
             if(params[0].equals(Constantes.UPDATE_BOOKING))
-                return updateBooking((Reserva)params[1]);
+                return updateBooking((Reserva) params[1]);
+            if(params[0].equals(Constantes.GET_BOOKING_BY_IDESTABLECIMIENTO))
+                return getBookingByIdEstablecimiento((Long)params[1]);
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -326,6 +334,41 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
+
+    public Collection<Evento> getEventByIdEstablecimiento(Long id){
+        try{
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+            restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
+            Collection<Evento> retorno = new ArrayList<>();
+            Evento[] response = restTemplate.getForObject(Constantes.GET_EVENT_BY_IDESTABLECIMIENTO + id , Evento[].class, "Android");
+            for ( int i = 0; i<response.length;i++)
+                retorno.add(response[i]);
+            return retorno;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Collection<Evento> getEventByIdUsuario(Long id){
+        try{
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+            restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
+            Collection<Evento> retorno = new ArrayList<>();
+            Evento[] response = restTemplate.getForObject(Constantes.GET_EVENT_BY_IDUSUARIO + id , Evento[].class, "Android");
+            for ( int i = 0; i<response.length;i++)
+                retorno.add(response[i]);
+            return retorno;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * Entradas: establecimiento -> El establecimiento el cual esta siendo calificado y comentado
      *           usuario -> El usuario que esta haciendo el comentario y la calificacion
@@ -362,6 +405,24 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
+
+    public Collection<ComentarioYCalificacion> getCommentsByIdEstablecimiento(Long id){
+        try{
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+            restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
+            Collection<ComentarioYCalificacion> retorno = new ArrayList<>();
+            ComentarioYCalificacion[] response = restTemplate.getForObject(Constantes.GET_COMMENTS_BY_IDESTABLECIMIENTO + id , ComentarioYCalificacion[].class, "Android");
+            for ( int i = 0; i<response.length;i++)
+                retorno.add(response[i]);
+            return retorno;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * Entradas: establecimiento -> El establecimiento el cual esta agregando el producto
      *           params0 -> Nombre
@@ -432,6 +493,23 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
             return restTemplate.postForObject(Constantes.UPDATE_BOOKING,reserva,Reserva.class);
         }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Collection<Reserva> getBookingByIdEstablecimiento(Long id){
+        try{
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+            restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
+            Collection<Reserva> retorno = new ArrayList<>();
+            Reserva[] response = restTemplate.getForObject(Constantes.GET_BOOKING_BY_IDESTABLECIMIENTO + id , Reserva[].class, "Android");
+            for ( int i = 0; i<response.length;i++)
+                retorno.add(response[i]);
+            return retorno;
+        }catch(Exception e){
             e.printStackTrace();
         }
         return null;

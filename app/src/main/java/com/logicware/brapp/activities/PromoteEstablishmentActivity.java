@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.asus.br.R;
+import com.logicware.brapp.R;
 import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Evento;
 import com.logicware.brapp.entities.Usuario;
@@ -83,10 +83,11 @@ public class PromoteEstablishmentActivity extends AppCompatActivity {
                 int hasta=establecimientosUser.size();
                 for(int i=0;i<hasta;i++){
                     if(esta.equals(establecimientosUser.get(i).getNombre())){
-                            establecimientosUser.set(i,esta);
+                        establecimientosUser.set(i,esta);
                     }
                 }
             }
+
             private Establecimiento obtenerEstablecimiento(String esta){
 
                 int hasta=establecimientosUser.size();
@@ -108,6 +109,7 @@ public class PromoteEstablishmentActivity extends AppCompatActivity {
             private boolean camposVacios(String titulo, String fechaIni, String fechaFin, String Descripcion) {
                 return titulo.isEmpty() || fechaIni.isEmpty() || fechaFin.isEmpty() || Descripcion.isEmpty() ;
             }
+
             /**
              * Nombre de Método: mostrar Error
              * Entradas: nombre del error y su descripcion
@@ -131,10 +133,9 @@ public class PromoteEstablishmentActivity extends AppCompatActivity {
                 Evento evento= new Evento();
                 try {
                     Evento eve=(Evento) new AdapterWebService().execute(Constantes.ADD_EVENT, estable,titulo,fechaIni,fechaFin,Descripcion).get();
-                    estable.getEventos().add(eve);
+                    //estable.getEventos().add(eve);
                     modificarEstablecimiento(estable);
                     user.setEstablecimientos(establecimientosUser);
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

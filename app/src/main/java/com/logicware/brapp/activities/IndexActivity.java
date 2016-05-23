@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.asus.br.R;
+import com.logicware.brapp.R;
 import com.logicware.brapp.entities.Usuario;
 
 /**

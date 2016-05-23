@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.asus.br.R;
+import com.logicware.brapp.R;
 
 import java.util.ArrayList;
 

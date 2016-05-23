@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 
-import com.example.asus.br.R;
+import com.logicware.brapp.R;
 import com.logicware.brapp.adapters.CustomAdapterEventosStablishment;
 import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Evento;
+import com.logicware.brapp.handlerWS.Constantes;
+import com.logicware.brapp.persistence.AdapterWebService;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,9 +32,13 @@ public class ListEventosEstablishmentActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         establishment = (Establecimiento) getIntent().getExtras().getSerializable("establecimiento");
-        eventos = establishment.getEventos();
+        try {
+            eventos = (ArrayList<Evento>) (new AdapterWebService().execute(Constantes.GET_EVENT_BY_IDESTABLECIMIENTO, establishment.getIdEstablecimiento()).get());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-        if(eventos.isEmpty())
+        if(eventos == null || eventos.isEmpty())
         {
             Mensaje();
         }else

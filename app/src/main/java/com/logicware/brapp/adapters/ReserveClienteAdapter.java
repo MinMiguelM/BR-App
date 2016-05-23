@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.asus.br.R;
+import com.logicware.brapp.R;
 
 import java.util.ArrayList;
 
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 *sobre sus establecimientos
 */
 public class ReserveClienteAdapter extends ArrayAdapter<ReservesForList> {
+
     /**
      * Nombre: ReserveClienteAdapter
      * Entradas: clase sobre la que se trabaja la vista, lista de datos con los que trabaja el adaptador

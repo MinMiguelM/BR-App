@@ -8,13 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 
-import com.example.asus.br.R;
+import com.logicware.brapp.R;
 import com.logicware.brapp.adapters.PromocionAdapter;
 import com.logicware.brapp.adapters.PromocionForList;
 import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Evento;
+import com.logicware.brapp.handlerWS.Constantes;
+import com.logicware.brapp.persistence.AdapterWebService;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class ConsultPromotionActivity extends AppCompatActivity {
     private ArrayList<PromocionForList> promociones = new ArrayList<PromocionForList>();
@@ -50,12 +53,18 @@ public class ConsultPromotionActivity extends AppCompatActivity {
      */
     private void llenarPromociones() {
         int hasta = 0;
-        hasta = establishment.getEventos().size();
+        Collection<Evento> events = new ArrayList<>();
+        try {
+            events = (ArrayList<Evento>) (new AdapterWebService().execute(Constantes.GET_EVENT_BY_IDESTABLECIMIENTO, establishment.getIdEstablecimiento()).get());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        hasta = events.size();
         for (int i = 0; i < hasta; i++) {
-            String titulo = ((ArrayList<Evento>) establishment.getEventos()).get(i).getTitulo();
-            String fechaI = ((ArrayList<Evento>) establishment.getEventos()).get(i).getFecha_inicio();
-            String fechaF = ((ArrayList<Evento>) establishment.getEventos()).get(i).getFecha_fin();
-            String descripcion = ((ArrayList<Evento>) establishment.getEventos()).get(i).getDescripcion();
+            String titulo = ((ArrayList<Evento>) events).get(i).getTitulo();
+            String fechaI = ((ArrayList<Evento>) events).get(i).getFecha_inicio();
+            String fechaF = ((ArrayList<Evento>) events).get(i).getFecha_fin();
+            String descripcion = ((ArrayList<Evento>) events).get(i).getDescripcion();
             PromocionForList comen = new PromocionForList(titulo, "Fecha de inicio: " + fechaI, "Fecha de Fin: " + fechaF, "Descripcion: " + descripcion);
             promociones.add(comen);
         }

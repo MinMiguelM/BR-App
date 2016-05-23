@@ -1,7 +1,6 @@
 package com.logicware.brapp.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by ASUS on 5/14/2016.
@@ -76,9 +75,9 @@ public class Reserva implements Serializable {
     /**
      * @return the usuario
      */
-	/*public Usuario getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
-	}*/
+	}
 
     /**
      * @param usuario the usuario to set
@@ -90,9 +89,9 @@ public class Reserva implements Serializable {
     /**
      * @return the establecimiento
      */
-	/*public Establecimiento getEstablecimiento() {
+	public Establecimiento getEstablecimiento() {
 		return establecimiento;
-	}*/
+	}
 
     /**
      * @param establecimiento the establecimiento to set

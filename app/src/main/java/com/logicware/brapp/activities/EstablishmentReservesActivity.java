@@ -2,7 +2,6 @@ package com.logicware.brapp.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,11 +9,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.asus.br.R;
+import com.logicware.brapp.R;
 import com.logicware.brapp.adapters.ReserveClienteAdapter;
 import com.logicware.brapp.adapters.ReservesForList;
 import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Reserva;
+import com.logicware.brapp.handlerWS.Constantes;
+import com.logicware.brapp.persistence.AdapterWebService;
 
 import java.util.ArrayList;
 /*esta clase permite al cliente mirar las
@@ -24,6 +25,8 @@ public class EstablishmentReservesActivity extends AppCompatActivity {
 
     private ArrayList<ReservesForList> reservas = new ArrayList<ReservesForList>();
     private Establecimiento establishment;
+    ArrayList<Reserva> resevas = new ArrayList<>();
+
     /**
      * Nombre: onCreate
      * Entradas: Instancia del estado salvada
@@ -32,7 +35,6 @@ public class EstablishmentReservesActivity extends AppCompatActivity {
      *              que la aplicacion pueda mostrar sus componentes graficos
      *              y funcionales
      */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,14 +73,15 @@ public class EstablishmentReservesActivity extends AppCompatActivity {
              * Descripcion: modifica el estado de la reserva de pendiente a Aceptada
              */
             private void aceptar(int position) {
-                ArrayList<Reserva> resevas=((ArrayList<Reserva>) establishment.getReservas());
-                reservas.get(position).setEstado("Aceptado");
-                establishment.setReservas(resevas);
-                Intent intent = new Intent(EstablishmentReservesActivity.this, EstablishmentReservesActivity.class);
-                intent.putExtra("establecimiento", establishment);
-
-
+                resevas.get(position).setEstado("Aceptado");
+                try{
+                    new AdapterWebService().execute(Constantes.UPDATE_BOOKING,resevas.get(position)).get();
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                llenarListaReservas();
             }
+
             /**
              * Nombre: cancelar
              * Entradas: posicion del item selecionado en la lista
@@ -86,12 +89,17 @@ public class EstablishmentReservesActivity extends AppCompatActivity {
              * Descripcion: modifica el estado de la reserva de pendiente a Rechazada
              */
             private void cancelar(int position) {
-
+                resevas.get(position).setEstado("Rechazado");
+                try{
+                    new AdapterWebService().execute(Constantes.UPDATE_BOOKING,resevas.get(position)).get();
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                llenarListaReservas();
             }
         });
-
-
     }
+
     /**
      * Nombre: llenarListaReservas
      * Entradas: -
@@ -101,11 +109,17 @@ public class EstablishmentReservesActivity extends AppCompatActivity {
      */
     private void llenarListaReservas() {
         int hasta = 0;
-        hasta = establishment.getReservas().size();
+        try{
+            resevas =(ArrayList<Reserva>) new AdapterWebService().execute(Constantes.GET_BOOKING_BY_IDESTABLECIMIENTO,establishment.getIdEstablecimiento()).get();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        reservas.clear();
+        hasta = resevas.size();
         for (int i = 0; i < hasta; i++) {
-            String fecha = ((ArrayList<Reserva>) establishment.getReservas()).get(i).getFecha_reserva();
-            String estado = ((ArrayList<Reserva>) establishment.getReservas()).get(i).getEstado();
-            Long cantidadPersonas = ((ArrayList<Reserva>) establishment.getReservas()).get(i).getCantidad_personas();
+            String fecha = resevas.get(i).getFecha_reserva();
+            String estado = resevas.get(i).getEstado();
+            Long cantidadPersonas = resevas.get(i).getCantidad_personas();
             ReservesForList comen = new ReservesForList("Fecha: " + fecha, "Estado: " + estado, "Cantidad de personas: " + cantidadPersonas.toString());
             reservas.add(comen);
         }

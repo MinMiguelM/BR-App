@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.asus.br.R;
+import com.logicware.brapp.R;
 import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Usuario;
 import com.logicware.brapp.handlerWS.Constantes;

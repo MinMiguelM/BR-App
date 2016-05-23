@@ -1,21 +1,22 @@
 package com.logicware.brapp.activities;
 
 import android.content.DialogInterface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 
-import com.example.asus.br.R;
+import com.logicware.brapp.R;
 import com.logicware.brapp.entities.ComentarioYCalificacion;
 import com.logicware.brapp.entities.Establecimiento;
-import com.logicware.brapp.entities.Reserva;
 import com.logicware.brapp.entities.Usuario;
 import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.persistence.AdapterWebService;
+
+import java.util.ArrayList;
 
 public class ComentarioUsuarioActivity extends AppCompatActivity {
 
@@ -25,6 +26,9 @@ public class ComentarioUsuarioActivity extends AppCompatActivity {
     private ComentarioYCalificacion com = new ComentarioYCalificacion();
     private boolean repetido = false;
     private RatingBar ratingBar = null;
+    private ArrayList<ComentarioYCalificacion> comments = new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +37,12 @@ public class ComentarioUsuarioActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         user = (Usuario) getIntent().getExtras().getSerializable("user");
         establishment = (Establecimiento) getIntent().getExtras().getSerializable("establecimiento");
+
+        try{
+            comments = (ArrayList<ComentarioYCalificacion>) new AdapterWebService().execute(Constantes.GET_COMMENTS_BY_IDESTABLECIMIENTO,establishment.getIdEstablecimiento()).get();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
         final EditText RecibirDes= (EditText) findViewById(R.id.editTextDes);
         final EditText RecibirCla= (EditText) findViewById(R.id.editTextCali);
@@ -58,7 +68,7 @@ public class ComentarioUsuarioActivity extends AppCompatActivity {
                     mostrarError("Número inválido", "Por favor ingrese un número ");
                 }
                 else {
-                    for(ComentarioYCalificacion cc :establishment.getComentariosYCalificaciones())
+                    for(ComentarioYCalificacion cc :comments)
                     {
                         //System.out.println("ID DE USUARIO EN COMENTARIOS "+ cc.getUsuario().getIdUsuario());
                         //System.out.println("ID ACTUAL "+ user.getIdUsuario());
