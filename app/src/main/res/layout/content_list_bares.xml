@@ -9,16 +9,14 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.logicware.brapp.activities.ListaEventoActivity"
-    tools:showIn="@layout/activity_list_evento"
-    android:background="@drawable/ciudad">
+    tools:context="com.logicware.brapp.activities.ListBaresActivity"
+    tools:showIn="@layout/activity_list_bares">
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listViewUsuario"
+        android:id="@+id/listViewUsuarioBar"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:choiceMode="none" />
-
 </RelativeLayout>

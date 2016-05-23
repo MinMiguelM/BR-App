@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Nombre del establecimiento"
-        android:id="@+id/textView16"
+        android:id="@+id/textViewDescripcion"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -26,7 +26,7 @@
         android:layout_width="381dp"
         android:layout_height="wrap_content"
         android:id="@+id/modifiNombre"
-        android:layout_below="@+id/textView16"
+        android:layout_below="@+id/textViewDescripcion"
         android:layout_alignParentLeft="true" />
 
     <TextView
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Dirección"
-        android:id="@+id/textView15"
+        android:id="@+id/textViewCalificacion"
         android:layout_below="@+id/modifiNombre"
         android:layout_alignParentLeft="true" />
 
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/modifiUbica"
-        android:layout_below="@+id/textView15"
+        android:layout_below="@+id/textViewCalificacion"
         android:layout_alignParentLeft="true" />
 
     <TextView

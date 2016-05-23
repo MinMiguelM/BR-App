@@ -68,16 +68,12 @@
             android:label="@string/title_activity_one_establishment"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.logicware.brapp.activities.ListaEventoActivity"
-            android:label="@string/title_activity_list_evento"
+            android:name="com.logicware.brapp.activities.ListEventosUsuarioActivity"
+            android:label="@string/title_activity_list_eventos_usuario"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.logicware.brapp.activities.OneEventActivity"
-            android:label="@string/title_activity_one_establishment"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.logicware.brapp.activities.OneResEventActivity"
-            android:label="@string/title_activity_one_res_event"
+            android:name="com.logicware.brapp.activities.ListReservasUsuarioActivity"
+            android:label="@string/title_activity_list_reservas_usuario"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.logicware.brapp.activities.CreateEstablishmentActivity"
@@ -108,11 +104,44 @@
         <activity
             android:name="com.logicware.brapp.activities.OneEstablishmentUsuarioActivity"
             android:label="@string/title_activity_one_establishment_usuario"
+<<<<<<< HEAD
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.ReservaUsuarioActivity"
+            android:label="@string/title_activity_reserva_usuario"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.ListEventosEstablishmentActivity"
+            android:label="@string/title_activity_list_eventos_establishment"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name="com.logicware.brapp.activities.CalificacionEstablishmentUsuarioActivity"
+            android:label="@string/title_activity_list_eventos_establishment_usuario"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.ComentarioUsuarioActivity"
+            android:label="@string/title_activity_comentario_usuario"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.logicware.brapp.activities.EventoUsuarioActivity"
+            android:label="@string/title_activity_evento_usuario"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="com.logicware.brapp.activities.ListBaresActivity"
+            android:label="@string/title_activity_list_bares"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+=======
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name="com.logicware.brapp.activities.ConsultPromotionActivity"
             android:label="@string/title_activity_consult_promotion"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+>>>>>>> master
     </application>
 
 </manifest>

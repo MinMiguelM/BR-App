@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/TituloSta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:typeface="sans"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="52dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        style="@style/AppTheme"
+        android:autoText="false" />
+
+    <TextView
+        android:id="@+id/FechaSta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#343434"
+        android:textSize="12sp"
+        style="@style/AppTheme"
+        android:layout_below="@+id/TituloSta" />
+
+    <TextView
+        android:id="@+id/DescripcionSta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#343434"
+        android:textSize="12sp"
+        style="@style/AppTheme"
+        android:layout_toEndOf="@+id/FechaSta"
+        android:layout_below="@+id/FechaSta" />
+
+</RelativeLayout>
