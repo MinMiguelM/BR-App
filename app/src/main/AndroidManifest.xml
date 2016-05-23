@@ -104,6 +104,7 @@
         <activity
             android:name="com.logicware.brapp.activities.OneEstablishmentUsuarioActivity"
             android:label="@string/title_activity_one_establishment_usuario"
+<<<<<<< HEAD
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.logicware.brapp.activities.ReservaUsuarioActivity"
@@ -134,6 +135,13 @@
             android:label="@string/title_activity_list_bares"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+=======
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="com.logicware.brapp.activities.ConsultPromotionActivity"
+            android:label="@string/title_activity_consult_promotion"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+>>>>>>> master
     </application>
 
 </manifest>

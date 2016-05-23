@@ -47,7 +47,6 @@
         android:layout_height="wrap_content"
         android:text="Comentarios y Calificaciones"
         android:id="@+id/buttonComentario"
-        android:layout_marginTop="40dp"
         android:layout_below="@+id/buttonModificar"
         android:layout_centerHorizontal="true" />
 
@@ -57,9 +56,20 @@
         android:text="Reservas"
         android:id="@+id/buttonReserva"
         android:layout_below="@+id/buttonComentario"
-        android:layout_marginTop="42dp"
         android:layout_alignRight="@+id/buttonComentario"
         android:layout_alignEnd="@+id/buttonComentario"
         android:layout_alignLeft="@+id/buttonComentario"
         android:layout_alignStart="@+id/buttonComentario" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eventos"
+        android:id="@+id/buttonEventos"
+        android:layout_below="@+id/buttonReserva"
+        android:layout_alignLeft="@+id/buttonReserva"
+        android:layout_alignStart="@+id/buttonReserva"
+        android:layout_alignRight="@+id/buttonReserva"
+        android:layout_alignEnd="@+id/buttonReserva" />
+
 </RelativeLayout>

@@ -12,18 +12,18 @@ import com.example.asus.br.R;
 import java.util.ArrayList;
 
 /*
-*esta clase es un adaptador de lista para los comentarios presentados al cliente
-*aceca de su establecimiento
+*esta clase es un adaptador de lista para las reservas que son aceptadas y rechazas  por el cliente
+*sobre sus establecimientos
 */
-public class ComentAdapter extends ArrayAdapter<ComentForList> {
+public class ReserveClienteAdapter extends ArrayAdapter<ReservesForList> {
     /**
-     * Nombre: ComentAdapter
-     * Entradas: clase sobre la que se trabaja la vista , lista con los datos que se manejaran en el adaptador
+     * Nombre: ReserveClienteAdapter
+     * Entradas: clase sobre la que se trabaja la vista, lista de datos con los que trabaja el adaptador
      * Salidas:
      * Descripcion: constructor
      */
-    public ComentAdapter(Context context,ArrayList<ComentForList> listaDatos){
-       super(context,0,listaDatos);
+    public ReserveClienteAdapter(Context context,ArrayList<ReservesForList> listaDatos){
+        super(context,0,listaDatos);
 
     }
     /**
@@ -36,22 +36,23 @@ public class ComentAdapter extends ArrayAdapter<ComentForList> {
      */
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        ComentForList list = getItem(position);
+        ReservesForList list = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_content, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_reserves_cliente, parent, false);
         }
         // Lookup view for data population
-        TextView nombre = (TextView) convertView.findViewById(R.id.nombre);
-        TextView calificacion = (TextView) convertView.findViewById(R.id.calificacion);
-        TextView comentarios = (TextView) convertView.findViewById(R.id.comentario);
+        TextView fechaReserva = (TextView) convertView.findViewById(R.id.fechaReserva);
+        TextView estado = (TextView) convertView.findViewById(R.id.estado);
+        TextView personas = (TextView) convertView.findViewById(R.id.personas);
 
         // Populate the data into the template view using the data object
-        nombre.setText(list.getNombre());
-        calificacion.setText(list.getCalificacion());
-        comentarios.setText(list.getComentarios());
+        fechaReserva.setText(list.getFecha_reserva());
+        estado.setText(list.getEstado());
+        personas.setText(list.getCantidad_personas());
         // Return the completed view to render on screen
         return convertView;
     }
+
 
 }
