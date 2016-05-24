@@ -1,5 +1,7 @@
 package com.logicware.brapp.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -61,25 +63,46 @@ public class ProfileActivity extends AppCompatActivity {
                 String nomb=nombre.getText().toString();
                 String ema=email.getText().toString();
                 String tel=telefono.getText().toString();
-                modificarUsuario(nomb, ema, tel);
+                if(modificarUsuario(nomb, ema, tel)){
+                    AlertDialog alerta = new AlertDialog.Builder(ProfileActivity.this).create();
+                    alerta.setMessage("La modificación del perfil ha sido exitosa");
+                    alerta.setButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+
+                    });
+                    alerta.show();
+                }else{
+                    AlertDialog alerta = new AlertDialog.Builder(ProfileActivity.this).create();
+                    alerta.setMessage("La modificación del perfil no ha sido exitosa");
+                    alerta.setButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+
+                    });
+                }
             }
 
 
             /**
              * Nombre: modificarUsuario
              * Entradas: nombre, email y telefono del usuario
-             * Salidas: -
+             * Salidas: booleano
              * Descripcion: modifica el usuario en la base de datos
              */
-            private void modificarUsuario(String nomb, String ema, String tele) {
+            private boolean modificarUsuario(String nomb, String ema, String tele) {
                 try {
                     user.setCorreo(ema);
                     user.setNombre(nomb);
                     user.setTelefono(tele);
                     user=(Usuario)new AdapterWebService().execute(Constantes.UPDATE_USER, user).get();
+                    return true;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                return false;
 
 
             }

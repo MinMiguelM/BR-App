@@ -69,13 +69,13 @@ public class CreateEstablishmentActivity extends AppCompatActivity {
                 } else {
                     insertarEstablecimiento(nom, tel, dir, hor, tem, tipo);
                 }
-                System.out.println("asldhasldjasldjasljdlsajdl");
                 if (establishment == null) {
                     mostrarError("Establecimiento no creado", "No se ha podido crear el establecimiento.");
                 } else {
+                    mostrarError("","El establecimiento ha sido creado con exito");
+
                     Intent intent = new Intent(CreateEstablishmentActivity.this, IndexClientActivity.class);
                     intent.putExtra("user",user);
-//                    intent.putExtra("establecimiento",establishment);
                     startActivity(intent);
                 }
             }
