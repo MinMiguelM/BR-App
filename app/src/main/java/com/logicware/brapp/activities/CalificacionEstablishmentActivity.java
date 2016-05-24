@@ -1,5 +1,7 @@
 package com.logicware.brapp.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +30,7 @@ public class CalificacionEstablishmentActivity extends AppCompatActivity {
     private Establecimiento establishment;
     private ArrayList<ComentarioYCalificacion> comments = new ArrayList<>();
 
+
     /**
      * Nombre: onCreate
      * Entradas: Instancia del estado salvada
@@ -49,20 +52,25 @@ public class CalificacionEstablishmentActivity extends AppCompatActivity {
         }catch(Exception e){
             e.printStackTrace();
         }
+        if(comments.isEmpty()){
+            mostrarError("No hay comentarios","Hasta el momento usted no tiene comentarios");
+        }else {
+            llenarListaComentarios();
 
-        llenarListaComentarios();
-        ComentAdapter adapter = new ComentAdapter(this, calificaciones);
-        ListView listView = (ListView) findViewById(R.id.calificacionlistView);
-        listView.setAdapter(adapter);
-        float calificacion = calificacionPromedio();
-        TextView caliProm = (TextView) findViewById(R.id.calificacionPromedio);
-        caliProm.setText("La calificacion promedio su establecimiento es: " + calificacion);
-        establishment.setCalificacion_promedio(calificacion);
+            ComentAdapter adapter = new ComentAdapter(this, calificaciones);
+            ListView listView = (ListView) findViewById(R.id.calificacionlistView);
+            listView.setAdapter(adapter);
+        }
+            float calificacion = calificacionPromedio();
+            TextView caliProm = (TextView) findViewById(R.id.calificacionPromedio);
+            caliProm.setText("La calificacion promedio su establecimiento es: " + calificacion);
+            establishment.setCalificacion_promedio(calificacion);
 
-        RatingBar estrellas = (RatingBar) findViewById(R.id.ratingBarComentarios);
-        estrellas.setNumStars((int) calificacion);
+            RatingBar estrellas = (RatingBar) findViewById(R.id.ratingBarComentarios);
+            estrellas.setNumStars((int) calificacion);
 
-        actualizarEstablecimiento();
+            actualizarEstablecimiento();
+
 
     }
     /**
@@ -98,12 +106,14 @@ public class CalificacionEstablishmentActivity extends AppCompatActivity {
         int hasta = 0;
         int contador = 0;
         hasta = comments.size();
-        for (int i = 0; i < hasta; i++) {
-            contador = contador + comments.get(i).getCalificacion();
+        if(hasta!=0) {
+            for (int i = 0; i < hasta; i++) {
+                contador = contador + comments.get(i).getCalificacion();
 
+            }
+            return contador / hasta;
         }
-        return contador / hasta;
-
+        return 0;
     }
     /**
      * Nombre: actualizarEstablecimiento
@@ -118,6 +128,24 @@ public class CalificacionEstablishmentActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    /**
+     * Nombre de Método: mostrar Error
+     * Entradas: nombre del error y su descripcion
+     * Salidas: void
+     * Descripcion:  imprime una alerta para el usuario que verifica si hay errores
+     */
+    private void mostrarError(String nombreError, String descripcion) {
+        AlertDialog alerta = new AlertDialog.Builder(CalificacionEstablishmentActivity.this).create();
+        alerta.setTitle(nombreError);
+        alerta.setMessage(descripcion);
+        alerta.setButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+
+        });
+        alerta.show();
     }
 
 }
