@@ -71,7 +71,7 @@ public class ConsultPromotionActivity extends AppCompatActivity {
             String fechaI = ((ArrayList<Evento>) events).get(i).getFecha_inicio();
             String fechaF = ((ArrayList<Evento>) events).get(i).getFecha_fin();
             String descripcion = ((ArrayList<Evento>) events).get(i).getDescripcion();
-            PromocionForList comen = new PromocionForList(titulo, "Fecha de inicio: " + fechaI, "Fecha de Fin: " + fechaF, "Descripcion: " + descripcion);
+            PromocionForList comen = new PromocionForList(titulo,  fechaI,  fechaF, descripcion);
             promociones.add(comen);
         }
     }
