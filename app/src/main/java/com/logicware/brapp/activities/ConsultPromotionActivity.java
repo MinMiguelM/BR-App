@@ -3,6 +3,8 @@ package com.logicware.brapp.activities;
 * permite al cliente consultar las promociones que han sido creadas
 *
 * */
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -37,12 +39,16 @@ public class ConsultPromotionActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         establishment = (Establecimiento) getIntent().getExtras().getSerializable("establecimiento");
+
         llenarPromociones();
-        PromocionAdapter adapter = new PromocionAdapter(this, promociones);
-        ListView listView = (ListView) findViewById(R.id.listViewConsultPromo);
-        listView.setAdapter(adapter);
+        if(promociones.isEmpty()){
+            mostrarError("Sin promociones","Usted no ha creado promociones.");
+        }else {
+            PromocionAdapter adapter = new PromocionAdapter(this, promociones);
+            ListView listView = (ListView) findViewById(R.id.listViewConsultPromo);
+            listView.setAdapter(adapter);
 
-
+        }
     }
     /**
      * Nombre: llenarPromociones
@@ -65,8 +71,26 @@ public class ConsultPromotionActivity extends AppCompatActivity {
             String fechaI = ((ArrayList<Evento>) events).get(i).getFecha_inicio();
             String fechaF = ((ArrayList<Evento>) events).get(i).getFecha_fin();
             String descripcion = ((ArrayList<Evento>) events).get(i).getDescripcion();
-            PromocionForList comen = new PromocionForList(titulo, "Fecha de inicio: " + fechaI, "Fecha de Fin: " + fechaF, "Descripcion: " + descripcion);
+            PromocionForList comen = new PromocionForList(titulo,  fechaI,  fechaF, descripcion);
             promociones.add(comen);
         }
+    }
+    /**
+     * Nombre de Método: mostrar Error
+     * Entradas: nombre del error y su descripcion
+     * Salidas: void
+     * Descripcion:  imprime una alerta para el usuario que verifica si hay errores
+     */
+    private void mostrarError(String nombreError, String descripcion) {
+        AlertDialog alerta = new AlertDialog.Builder(ConsultPromotionActivity.this).create();
+        alerta.setTitle(nombreError);
+        alerta.setMessage(descripcion);
+        alerta.setButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+
+        });
+        alerta.show();
     }
 }

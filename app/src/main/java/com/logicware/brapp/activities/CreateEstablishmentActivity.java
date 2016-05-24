@@ -63,19 +63,21 @@ public class CreateEstablishmentActivity extends AppCompatActivity {
                 String tem = tematica.getText().toString();
                 String tipo = ((RadioButton) findViewById(botones.getCheckedRadioButtonId())).getText().toString();
                 String tel = telefono.getText().toString();
-
+                boolean paso=false;
                 if (camposVacios(nom, tel, dir, hor, tem)) {
                     mostrarError("Campos vacios", "Complete los campos vacios");
                 } else {
                     insertarEstablecimiento(nom, tel, dir, hor, tem, tipo);
                 }
-                System.out.println("asldhasldjasldjasljdlsajdl");
                 if (establishment == null) {
                     mostrarError("Establecimiento no creado", "No se ha podido crear el establecimiento.");
                 } else {
+                    mostrarError("","El establecimiento ha sido creado con exito");
+                    paso=true;
+                }
+                if(paso){
                     Intent intent = new Intent(CreateEstablishmentActivity.this, IndexClientActivity.class);
                     intent.putExtra("user",user);
-//                    intent.putExtra("establecimiento",establishment);
                     startActivity(intent);
                 }
             }
