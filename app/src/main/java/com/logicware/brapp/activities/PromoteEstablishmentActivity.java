@@ -132,7 +132,7 @@ public class PromoteEstablishmentActivity extends AppCompatActivity {
             private void crearPromocion(String titulo, String fechaIni, String fechaFin, String Descripcion , Establecimiento estable){
                 Evento evento= new Evento();
                 try {
-                    Evento eve=(Evento) new AdapterWebService().execute(Constantes.ADD_EVENT, estable,titulo,fechaIni,fechaFin,Descripcion).get();
+                    Evento eve=(Evento) new AdapterWebService().execute(Constantes.ADD_EVENT, estable,fechaIni,fechaFin,Descripcion,titulo).get();
                     //estable.getEventos().add(eve);
                     modificarEstablecimiento(estable);
                     user.setEstablecimientos(establecimientosUser);
