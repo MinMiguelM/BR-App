@@ -39,24 +39,6 @@
         android:text="Large Text"
         android:id="@+id/textViewNomEsta"
         android:layout_below="@+id/scrollView2"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/textViewDirec"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/textViewHorario"
-        android:layout_below="@+id/textViewDirec"
         android:layout_alignLeft="@+id/textViewDirec"
         android:layout_alignStart="@+id/textViewDirec" />
 
@@ -65,10 +47,30 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
+        android:id="@+id/textViewDirec"
+        android:layout_below="@+id/textViewNomEsta"
+        android:layout_alignLeft="@+id/textViewHorario"
+        android:layout_alignStart="@+id/textViewHorario" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textViewHorario"
+        android:layout_below="@+id/textViewDirec"
+        android:layout_alignLeft="@+id/textViewTelefono"
+        android:layout_alignStart="@+id/textViewTelefono" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
         android:id="@+id/textViewTelefono"
         android:layout_below="@+id/textViewHorario"
-        android:layout_alignRight="@+id/textViewHorario"
-        android:layout_alignEnd="@+id/textViewHorario" />
+        android:layout_alignLeft="@+id/textViewTematica"
+        android:layout_alignStart="@+id/textViewTematica" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -77,17 +79,17 @@
         android:text="Large Text"
         android:id="@+id/textViewTematica"
         android:layout_below="@+id/textViewTelefono"
-        android:layout_alignRight="@+id/textViewTelefono"
-        android:layout_alignEnd="@+id/textViewTelefono" />
+        android:layout_alignLeft="@+id/buttonReservas"
+        android:layout_alignStart="@+id/buttonReservas" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Reservas"
         android:id="@+id/buttonReservas"
-        android:layout_below="@+id/textViewTematica"
-        android:layout_toLeftOf="@+id/buttonComentarios"
-        android:layout_toStartOf="@+id/buttonComentarios" />
+        android:layout_alignTop="@+id/buttonComentarios"
+        android:layout_alignRight="@+id/buttonConsultarEvento"
+        android:layout_alignEnd="@+id/buttonConsultarEvento" />
 
     <Button
         android:layout_width="wrap_content"
@@ -95,8 +97,8 @@
         android:text="Comentarios"
         android:id="@+id/buttonComentarios"
         android:layout_below="@+id/textViewTematica"
-        android:layout_toRightOf="@+id/buttonConsultarEvento"
-        android:layout_toEndOf="@+id/buttonConsultarEvento" />
+        android:layout_toRightOf="@+id/buttonReservas"
+        android:layout_toEndOf="@+id/buttonReservas" />
 
     <Button
         android:layout_width="wrap_content"
@@ -112,8 +114,8 @@
         android:layout_height="wrap_content"
         android:text="Realizar Evento"
         android:id="@+id/buttonRealizarEvento"
-        android:layout_alignTop="@+id/buttonConsultarEvento"
-        android:layout_alignRight="@+id/scrollView2"
-        android:layout_alignEnd="@+id/scrollView2" />
+        android:layout_below="@+id/buttonComentarios"
+        android:layout_alignLeft="@+id/buttonComentarios"
+        android:layout_alignStart="@+id/buttonComentarios" />
 
 </RelativeLayout>

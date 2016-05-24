@@ -1,6 +1,7 @@
 package com.logicware.brapp.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,13 +15,23 @@ import com.logicware.brapp.entities.Usuario;
 import com.logicware.brapp.entities.Reserva;
 import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.persistence.AdapterWebService;
-
+/**
+* Esta clase permite al usuario realizar una reservación
+* */
 public class ReservaUsuarioActivity extends AppCompatActivity {
 
     private Usuario user = null;
     private Button reserva;
     private Establecimiento establishment;
     private Reserva res = new Reserva();
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,21 +70,22 @@ public class ReservaUsuarioActivity extends AppCompatActivity {
             }
 
             /**
-             * Nombre: modificarUsuario
-             * Entradas: nombre, email y telefono del usuario
+             * Nombre: reservar
+             * Entradas: fecha, cantidad de personas, estado de reservación
              * Salidas: -
-             * Descripcion: modifica el usuario en la base de datos
+             * Descripcion: hace la reservación y se conecta con la base de datos
              */
             private void Reservar(String fecha, String per, String estado) {
                 try {
                     res.setFecha_reserva(fecha);
                     res.setCantidad_personas(Long.parseLong(per));
                     res.setEstado(estado);
-                    System.out.println(establishment.getNombre());
-                    System.out.println(user.getNombre());
+                    //System.out.println(establishment.getNombre());
+                    //System.out.println(user.getNombre());
                     res = (Reserva) new AdapterWebService().execute(Constantes.ADD_BOOKING, establishment, user, fecha, estado, per).get();
                     if (res != null) {
                         mostrarConfirmacion();
+
                     } else
                         mostrarError("Error solicitud", "No se ha enviado la solicitud");
                 } catch (Exception e) {
@@ -84,7 +96,7 @@ public class ReservaUsuarioActivity extends AppCompatActivity {
             }
         });
     }
-    /*
+
 
     /**
      * Nombre de Método: mostrar Error
@@ -93,18 +105,23 @@ public class ReservaUsuarioActivity extends AppCompatActivity {
      * Descripcion:  imprime una alerta para el usuario que verifica si hay errores
      */
     private void mostrarError(String nombreError, String descripcion) {
-        android.app.AlertDialog alerta = new android.app.AlertDialog.Builder(ReservaUsuarioActivity.this).create();
-        alerta.setTitle(nombreError);
-        alerta.setMessage(descripcion);
-        alerta.setButton("OK", new DialogInterface.OnClickListener() {
+        android.app.AlertDialog alerta2 = new android.app.AlertDialog.Builder(ReservaUsuarioActivity.this).create();
+        alerta2.setTitle(nombreError);
+        alerta2.setMessage(descripcion);
+        alerta2.setButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
 
         });
-        alerta.show();
+        alerta2.show();
     }
-
+    /**
+     * Nombre de Método: mostrar Confirmación
+     * Entradas: -
+     * Salidas: void
+     * Descripcion:  imprime confirmación
+     */
     private void mostrarConfirmacion() {
         android.app.AlertDialog alerta = new android.app.AlertDialog.Builder(ReservaUsuarioActivity.this).create();
         alerta.setTitle("Confirmación");
@@ -112,6 +129,11 @@ public class ReservaUsuarioActivity extends AppCompatActivity {
         alerta.setButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                Intent intent = new Intent(ReservaUsuarioActivity .this,  OneEstablishmentUsuarioActivity.class);
+                intent.putExtra("user",user);
+                intent.putExtra("establecimiento",establishment);
+                startActivity(intent);
             }
 
         });

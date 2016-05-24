@@ -17,19 +17,25 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Created by Pipe on 15/05/2016.
- */
+ * Esta clase permite al usuario consultar sus eventos
+ * */
 public class ListEventosUsuarioActivity extends AppCompatActivity {
 
     private Usuario user = null;
     private Collection<Evento> eventos = null;
-
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_eventos_usuario);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         user = (Usuario)getIntent().getExtras().getSerializable("user");
         try {
             eventos = (ArrayList<Evento>) (new AdapterWebService().execute(Constantes.GET_EVENT_BY_IDUSUARIO, user.getIdUsuario()).get());

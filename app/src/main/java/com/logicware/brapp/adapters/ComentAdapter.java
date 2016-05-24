@@ -11,7 +11,7 @@ import com.logicware.brapp.R;
 
 import java.util.ArrayList;
 
-/*
+/**
 *esta clase es un adaptador de lista para los comentarios presentados al cliente
 *aceca de su establecimiento
 */

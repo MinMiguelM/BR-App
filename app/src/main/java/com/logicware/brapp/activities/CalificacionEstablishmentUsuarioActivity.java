@@ -21,7 +21,10 @@ import com.logicware.brapp.persistence.AdapterWebService;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
+/**
+ * Esta clase permite al usuario ver
+ * los comentarios y la calificación de un establecimiento
+ * */
 public class CalificacionEstablishmentUsuarioActivity extends AppCompatActivity {
 
     private  ListView lv1;
@@ -29,9 +32,16 @@ public class CalificacionEstablishmentUsuarioActivity extends AppCompatActivity 
     private Establecimiento establishment = null;
     private Usuario user = null;
     private Collection<ComentarioYCalificacion> comentarios = null;
-    private double promedio = 0;
+    private float promedio = 0;
     private RatingBar ratingBar = null;
-
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +56,7 @@ public class CalificacionEstablishmentUsuarioActivity extends AppCompatActivity 
         }catch(Exception e){
             e.printStackTrace();
         }
-        promedio = establishment.getCalificacion_promedio();
+        promedio = (float) establishment.getCalificacion_promedio();
 
         if(comentarios.isEmpty())
         {
@@ -57,7 +67,8 @@ public class CalificacionEstablishmentUsuarioActivity extends AppCompatActivity 
             lv1 = (ListView) findViewById(R.id.calificacionlistUsuarioView);
             lv1.setAdapter(new CustomAdapterComentariosStablishment(this, image_details));
             ratingBar = (RatingBar)findViewById(R.id.ratingBarOne);
-            ratingBar.setRating((float)promedio);
+            //ratingBar.setNumStars((int)promedio);
+            ratingBar.setRating(promedio);
             ratingBar.setIsIndicator(true);
             TextView ra = (TextView)findViewById(R.id.textView19) ;
             ra.setText(ra.getText()+String.valueOf(promedio));
@@ -82,6 +93,12 @@ public class CalificacionEstablishmentUsuarioActivity extends AppCompatActivity 
             }
         });
     }
+    /**
+     * Nombre de Método: Mensaje
+     * Entradas: -
+     * Salidas: void
+     * Descripcion:  imprime si no tiene eventos asociados
+     */
     private void Mensaje() {
         android.app.AlertDialog alerta = new android.app.AlertDialog.Builder(CalificacionEstablishmentUsuarioActivity.this).create();
         alerta.setTitle("No comentario");
@@ -93,5 +110,20 @@ public class CalificacionEstablishmentUsuarioActivity extends AppCompatActivity 
 
         });
         alerta.show();
+    }
+    /**
+     * Nombre: onBackPressed
+     * Entradas: -
+     * Salidas: -
+     * Descripcion: Si el usuario de la aplicacion le da al boton
+     *              de retroceso volvera al menu principal
+     */
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(CalificacionEstablishmentUsuarioActivity.this, OneEstablishmentUsuarioActivity.class);
+        intent.putExtra("user",user);
+        intent.putExtra("establecimiento",establishment);
+        startActivity(intent);
     }
 }

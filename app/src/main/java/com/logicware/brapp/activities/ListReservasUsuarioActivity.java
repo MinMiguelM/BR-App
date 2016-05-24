@@ -1,43 +1,65 @@
 package com.logicware.brapp.activities;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.ListView;
 
 import com.logicware.brapp.R;
+import com.logicware.brapp.adapters.CustomAdapterEventos;
+import com.logicware.brapp.adapters.CustomAdapterReservas;
+import com.logicware.brapp.entities.Evento;
+import com.logicware.brapp.entities.Reserva;
+import com.logicware.brapp.entities.Usuario;
+import com.logicware.brapp.handlerWS.Constantes;
+import com.logicware.brapp.persistence.AdapterWebService;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
- * Created by Pipe on 15/05/2016.
- */
+ * Esta clase permite al usuario consultar sus reservas
+ * */
 public class ListReservasUsuarioActivity extends AppCompatActivity {
 
+    private Usuario user = null;
+    private Collection<Reserva> reservas = null;
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_reservas_usuario);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        user = (Usuario)getIntent().getExtras().getSerializable("user");
 
-      /*  ArrayList image_details = getListData();
-        final ListView lv1 = (ListView) findViewById(R.id.listViewEventos);
-        lv1.setAdapter(new CustomAdapterEventos(this, image_details));*/
+        try {
+            reservas = (ArrayList<Reserva>) (new AdapterWebService().execute(Constantes.GET_BOOKING_BY_IDUSUARIO, user.getIdUsuario()).get());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        if(reservas == null || reservas.isEmpty())
+        {
+            AlertDialog ms = new AlertDialog.Builder(this).create();
+            ms.setTitle("No tiene reservas asociadas");
+            ms.show();
+        }else
+        {
+            ArrayList image_details = (ArrayList) reservas;
+            final ListView lv1 = (ListView) findViewById(R.id.listViewReservas);
+            lv1.setAdapter(new CustomAdapterReservas(this, image_details));
+        }
+
     }
 
-  /*  private ArrayList getListData() {
-        ArrayList<ItemListEventos> results = new ArrayList<ItemListEventos>();
-        ItemListEventos newsData = new ItemListEventos();
-        newsData.setDia("MARTES 17 DE MAYO");
-        newsData.setHora("3 PM");
-        newsData.setEstablecimiento("LA CERCA");
 
-        ItemListEventos newsData2 = new ItemListEventos();
-        newsData2.setDia("LUNES 16 DE MAYO");
-        newsData2.setHora("9 PM");
-        newsData2.setEstablecimiento("RESTAURANTE DOÑA JUANA");
-
-
-        results.add(newsData);
-        results.add(newsData2);
-        return results;
-    }*/
 
 }

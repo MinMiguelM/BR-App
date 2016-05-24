@@ -22,12 +22,23 @@ import java.util.concurrent.ExecutionException;
 
 import static android.R.layout.simple_expandable_list_item_1;
 
+/**
+ * Es la interfaz que muestra la lista de restaurantes
+ * para psoterior mente seleccionar uno
+ */
 public class ListRestaurantesActivity extends AppCompatActivity {
 
     private ListView lista;
     private Usuario user;
     private Collection<Establecimiento> esta = null;
-
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +64,13 @@ public class ListRestaurantesActivity extends AppCompatActivity {
 
         lista= (ListView) findViewById(R.id.listViewUsuarioRes);
         lista.setAdapter(array);
-
+        /**
+         * Nombre: setOnItemClickListener
+         * Entradas: la vista actual del componente
+         * Salidas: -
+         * Descripcion: es la encargada de darle funcionalidad al evento de dar clic
+         *              sobre el algun elemento de la lista
+         */
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
