@@ -2,6 +2,7 @@ package com.logicware.brapp.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -42,62 +43,79 @@ public class EstablishmentReservesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         establishment = (Establecimiento) getIntent().getExtras().getSerializable("establecimiento");
-        llenarListaReservas();
-        ReserveClienteAdapter adapter = new ReserveClienteAdapter(this, reservas);
-        ListView listView = (ListView) findViewById(R.id.listViewReservasCliente);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                ListView lista = (ListView) findViewById(R.id.listViewReservasCliente);
-                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(EstablishmentReservesActivity.this);
-                dialogo1.setTitle("Reserva");
-                dialogo1.setMessage("Seleccione si desea rechazar o aceptar la reserva");
-                dialogo1.setCancelable(false);
-                dialogo1.setPositiveButton("Aceptar ", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialogo1, int id) {
-                        aceptar(position);
-                    }
-                });
-                dialogo1.setNegativeButton("Rechazar ", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialogo1, int id) {
-                        cancelar(position);
-                    }
-                });
-                dialogo1.show();
-            }
-            /**
-             * Nombre: aceptar
-             * Entradas: posicion del item seleccionado en la lista
-             * Salidas: -
-             * Descripcion: modifica el estado de la reserva de pendiente a Aceptada
-             */
-            private void aceptar(int position) {
-                resevas.get(position).setEstado("Aceptado");
-                try{
-                    new AdapterWebService().execute(Constantes.UPDATE_BOOKING,resevas.get(position)).get();
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-                llenarListaReservas();
-            }
 
+        llenarListaReservas();
+
+        if(resevas.isEmpty()){
+            mostrarError("Sin reservas","Hasta el momento usted no cuenta con ninguna reserva.");
+        }else {
+            ReserveClienteAdapter adapter = new ReserveClienteAdapter(this, reservas);
+            ListView listView = (ListView) findViewById(R.id.listViewReservasCliente);
+            listView.setAdapter(adapter);
             /**
-             * Nombre: cancelar
-             * Entradas: posicion del item selecionado en la lista
+             * Nombre: setOnItemClickListener
+             * Entradas: adaptador de la posicion seleccionada
              * Salidas: -
-             * Descripcion: modifica el estado de la reserva de pendiente a Rechazada
+             * Descripcion: realiza acciones segun el elemento escogido de la lista
              */
-            private void cancelar(int position) {
-                resevas.get(position).setEstado("Rechazado");
-                try{
-                    new AdapterWebService().execute(Constantes.UPDATE_BOOKING,resevas.get(position)).get();
-                }catch(Exception e){
-                    e.printStackTrace();
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                    ListView lista = (ListView) findViewById(R.id.listViewReservasCliente);
+                    AlertDialog.Builder dialogo1 = new AlertDialog.Builder(EstablishmentReservesActivity.this);
+                    dialogo1.setTitle("Reserva");
+                    dialogo1.setMessage("Seleccione si desea rechazar o aceptar la reserva");
+                    dialogo1.setCancelable(false);
+                    dialogo1.setPositiveButton("Aceptar ", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialogo1, int id) {
+                            aceptar(position);
+                        }
+                    });
+                    dialogo1.setNegativeButton("Rechazar ", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialogo1, int id) {
+                            cancelar(position);
+                        }
+                    });
+                    dialogo1.show();
                 }
-                llenarListaReservas();
-            }
-        });
+
+                /**
+                 * Nombre: aceptar
+                 * Entradas: posicion del item seleccionado en la lista
+                 * Salidas: -
+                 * Descripcion: modifica el estado de la reserva de pendiente a Aceptada
+                 */
+                private void aceptar(int position) {
+                    resevas.get(position).setEstado("Aceptado");
+                    try {
+                        new AdapterWebService().execute(Constantes.UPDATE_BOOKING, resevas.get(position)).get();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Intent intent = new Intent(EstablishmentReservesActivity.this, OneEstablishmentActivity.class);
+                    intent.putExtra("establecimiento", establishment);
+                    llenarListaReservas();
+                }
+
+                /**
+                 * Nombre: cancelar
+                 * Entradas: posicion del item selecionado en la lista
+                 * Salidas: -
+                 * Descripcion: modifica el estado de la reserva de pendiente a Rechazada
+                 */
+                private void cancelar(int position) {
+                    resevas.get(position).setEstado("Rechazado");
+                    try {
+                        new AdapterWebService().execute(Constantes.UPDATE_BOOKING, resevas.get(position)).get();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Intent intent = new Intent(EstablishmentReservesActivity.this, OneEstablishmentActivity.class);
+                    intent.putExtra("establecimiento", establishment);
+                    llenarListaReservas();
+                }
+            });
+        }
     }
 
     /**
@@ -123,6 +141,25 @@ public class EstablishmentReservesActivity extends AppCompatActivity {
             ReservesForList comen = new ReservesForList("Fecha: " + fecha, "Estado: " + estado, "Cantidad de personas: " + cantidadPersonas.toString());
             reservas.add(comen);
         }
+    }
+
+    /**
+     * Nombre de Método: mostrar Error
+     * Entradas: nombre del error y su descripcion
+     * Salidas: void
+     * Descripcion:  imprime una alerta para el usuario que verifica si hay errores
+     */
+    private void mostrarError(String nombreError, String descripcion) {
+        AlertDialog alerta = new AlertDialog.Builder(EstablishmentReservesActivity.this).create();
+        alerta.setTitle(nombreError);
+        alerta.setMessage(descripcion);
+        alerta.setButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+
+        });
+        alerta.show();
     }
 
 }
