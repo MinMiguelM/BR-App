@@ -21,23 +21,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="144dp"
-                android:id="@+id/imageView3"
-                android:foreground="@drawable/mesa"
-                android:background="@drawable/mesa" />
-
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="402dp"
-                android:id="@+id/listViewReservas"
-                android:layout_below="@+id/scrollView2"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
         </LinearLayout>
 
     </ScrollView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:id="@+id/imageView3"
+        android:foreground="@drawable/mesa"
+        android:background="@drawable/mesa" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="402dp"
+        android:id="@+id/listViewReservas"
+        android:layout_below="@+id/imageView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

@@ -109,6 +109,7 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
+
     /**
      * Trae el correo y la contrasena de un usuario según el email.
      * @param correo Parametro que trae la consulta

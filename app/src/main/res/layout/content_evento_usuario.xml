@@ -12,18 +12,7 @@
     tools:context="com.logicware.brapp.activities.EventoUsuarioActivity"
     android:background="@drawable/ciudad">
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView2" >
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </LinearLayout>
-    </ScrollView>
 
     <RelativeLayout tools:context="com.logicware.brapp.activities.ModifyEstablishmentActivity"
         tools:showIn="@layout/activity_modify_establishment"

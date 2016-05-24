@@ -12,16 +12,6 @@
     tools:context="com.logicware.brapp.activities.ReservaUsuarioActivity"
     android:background="@drawable/ciudad">
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-    </ScrollView>
-
     <TextView
         android:layout_width="240dp"
         android:layout_height="wrap_content"

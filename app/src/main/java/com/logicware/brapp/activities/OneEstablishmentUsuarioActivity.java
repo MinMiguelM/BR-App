@@ -89,6 +89,7 @@ public class OneEstablishmentUsuarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OneEstablishmentUsuarioActivity.this,  ListEventosEstablishmentActivity.class);
+                intent.putExtra("user",user);
                 intent.putExtra("establecimiento",establishment);
                 startActivity(intent);
             }

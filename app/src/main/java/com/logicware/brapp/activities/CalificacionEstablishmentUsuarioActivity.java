@@ -111,4 +111,19 @@ public class CalificacionEstablishmentUsuarioActivity extends AppCompatActivity 
         });
         alerta.show();
     }
+    /**
+     * Nombre: onBackPressed
+     * Entradas: -
+     * Salidas: -
+     * Descripcion: Si el usuario de la aplicacion le da al boton
+     *              de retroceso volvera al menu principal
+     */
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(CalificacionEstablishmentUsuarioActivity.this, OneEstablishmentUsuarioActivity.class);
+        intent.putExtra("user",user);
+        intent.putExtra("establecimiento",establishment);
+        startActivity(intent);
+    }
 }

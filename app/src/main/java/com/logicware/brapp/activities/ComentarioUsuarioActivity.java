@@ -56,7 +56,7 @@ public class ComentarioUsuarioActivity extends AppCompatActivity {
         }
 
         final EditText RecibirDes= (EditText) findViewById(R.id.editTextDes);
-        final EditText RecibirCla= (EditText) findViewById(R.id.editTextCali);
+        ratingBar = (RatingBar)findViewById(R.id.ratingBar2);
 
         comentario = (Button)findViewById(R.id.buttonModifiEstable);
         comentario.setOnClickListener(new View.OnClickListener() {
@@ -71,12 +71,10 @@ public class ComentarioUsuarioActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String des = RecibirDes.getText().toString();
-                String cali = RecibirCla.getText().toString();
-
+                float cali = ratingBar.getRating();
+                //System.out.println("Calificacion recibida es "+cali);
                 if (des.equalsIgnoreCase("")) {
                     mostrarError("Campos vacíos", "Para comentar debe llenar los datos requeridos");
-                }if (!cali.matches("[0-5]")) {
-                    mostrarError("Número inválido", "Por favor ingrese un número del 1 al 5 ");
                 }
                 else {
                     for(ComentarioYCalificacion cc :comments)
@@ -102,13 +100,14 @@ public class ComentarioUsuarioActivity extends AppCompatActivity {
              * Salidas: -
              * Descripcion: hace el comentario y se conecta con la base de datos
              */
-            private void Comentar(String des, String cali) {
+            private void Comentar(String des, float cali) {
                 try {
                     com.setDescripcion(des);
-                    com.setCalificacion(Integer.parseInt(cali));
+                    com.setCalificacion((int)(cali));
                     com.setUsuario(user);
                     com.setEstablecimiento(establishment);
-                    com = (ComentarioYCalificacion) new AdapterWebService().execute(Constantes.ADD_COMMENTS, establishment, user, des, cali).get();
+                    //System.out.println("Enviando datos a server");
+                    com = (ComentarioYCalificacion) new AdapterWebService().execute(Constantes.ADD_COMMENTS, establishment, user, des, ((int)cali)+"").get();
                     if (com != null) {
                         mostrarConfirmacion();
 
@@ -151,10 +150,15 @@ public class ComentarioUsuarioActivity extends AppCompatActivity {
     private void mostrarConfirmacion() {
         android.app.AlertDialog alerta = new android.app.AlertDialog.Builder(ComentarioUsuarioActivity.this).create();
         alerta.setTitle("Confirmación");
-        alerta.setMessage("Se a hecho el comentario");
+        alerta.setMessage("Se ha enviado el comentario");
         alerta.setButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                Intent intent = new Intent(ComentarioUsuarioActivity.this, CalificacionEstablishmentUsuarioActivity.class);
+                intent.putExtra("user",user);
+                intent.putExtra("establecimiento",establishment);
+                startActivity(intent);
             }
 
         });

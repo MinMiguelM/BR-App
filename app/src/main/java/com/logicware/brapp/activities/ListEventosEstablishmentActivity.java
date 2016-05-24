@@ -1,6 +1,7 @@
 package com.logicware.brapp.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import com.logicware.brapp.R;
 import com.logicware.brapp.adapters.CustomAdapterEventosStablishment;
 import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Evento;
+import com.logicware.brapp.entities.Usuario;
 import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.persistence.AdapterWebService;
 
@@ -22,6 +24,7 @@ public class ListEventosEstablishmentActivity extends AppCompatActivity {
 
     private Establecimiento establishment;
     private Collection<Evento> eventos = null;
+    private Usuario user = null;
     /**
      * Nombre: onCreate
      * Entradas: Instancia del estado salvada
@@ -37,6 +40,7 @@ public class ListEventosEstablishmentActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         establishment = (Establecimiento) getIntent().getExtras().getSerializable("establecimiento");
+        user = (Usuario)getIntent().getExtras().getSerializable("user");
         try {
             eventos = (ArrayList<Evento>) (new AdapterWebService().execute(Constantes.GET_EVENT_BY_IDESTABLECIMIENTO, establishment.getIdEstablecimiento()).get());
         }catch (Exception e){
@@ -73,4 +77,5 @@ public class ListEventosEstablishmentActivity extends AppCompatActivity {
         });
         alerta.show();
     }
+
 }
