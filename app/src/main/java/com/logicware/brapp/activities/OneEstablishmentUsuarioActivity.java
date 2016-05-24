@@ -2,6 +2,8 @@ package com.logicware.brapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,7 +14,10 @@ import com.logicware.brapp.R;
 import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Evento;
 import com.logicware.brapp.entities.Usuario;
-
+/**
+* esta clase permite al usuario acceder a una lista de
+* opciones que se pueden realizar sobre un establecimiento en especifico
+* */
 public class OneEstablishmentUsuarioActivity extends AppCompatActivity {
 
     private Usuario user = null;
@@ -22,7 +27,14 @@ public class OneEstablishmentUsuarioActivity extends AppCompatActivity {
     private Button evento;
     private Button conEventos;
     private Evento ev = new Evento();
-
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,8 +124,25 @@ public class OneEstablishmentUsuarioActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(OneEstablishmentUsuarioActivity.this, EventoUsuarioActivity.class);
                 intent.putExtra("user",user);
+                intent.putExtra("establecimiento",establishment);
                 startActivity(intent);
             }
         });
     }
+    /**
+     * Nombre: onBackPressed
+     * Entradas: -
+     * Salidas: -
+     * Descripcion: Si el usuario de la aplicacion le da al boton
+     *              de retroceso volvera al menu principal
+     */
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(OneEstablishmentUsuarioActivity.this, IndexActivity.class);
+        intent.putExtra("user",user);
+        intent.putExtra("establecimiento",establishment);
+        startActivity(intent);
+    }
+
 }

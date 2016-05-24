@@ -15,62 +15,65 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView2" >
+        android:id="@+id/scrollView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
     </ScrollView>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignTop="@+id/scrollView2"
+    <TextView
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="   Fecha de la reservación"
+        android:id="@+id/textViewFechaInicio"
+        android:layout_below="@+id/scrollView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="89dp">
+        android:layout_marginTop="42dp" />
 
-        <TextView
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="   Fecha de la reservación"
-            android:id="@+id/textViewFechaInicio"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+    <EditText
+        android:layout_width="367dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextFecha"
+        android:layout_below="@+id/textViewFechaInicio"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/editTextCPer"
+        android:layout_below="@+id/textView15"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-        <EditText
-            android:layout_width="367dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/editTextFecha" />
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reservar"
+        android:id="@+id/buttonReservar"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/editTextCPer"
+        android:layout_alignRight="@+id/textView15"
+        android:layout_alignEnd="@+id/textView15" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:inputType="phone"
-            android:ems="10"
-            android:text="   Cantidad de personas"
-            android:id="@+id/textViewFechaFin"
-            android:layout_below="@+id/editTextFechaInicio"
-            android:layout_alignParentLeft="true" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:ems="10"
-            android:id="@+id/editTextCPer" />
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Reservar"
-            android:id="@+id/buttonReservar"
-            android:layout_gravity="center_horizontal"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:inputType="phone"
+        android:ems="10"
+        android:text="   Cantidad de personas"
+        android:id="@+id/textView15"
+        android:layout_below="@+id/editTextFecha"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

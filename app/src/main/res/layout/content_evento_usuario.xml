@@ -46,7 +46,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/editTextFechaInicio"
             android:layout_below="@+id/textViewFechaInicio"
-            android:layout_alignParentLeft="true" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <EditText
             android:layout_width="match_parent"
@@ -115,9 +117,9 @@
             android:layout_height="wrap_content"
             android:text="Realizar Evento"
             android:id="@+id/buttonE"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="89dp" />
+            android:layout_below="@+id/editTextDescripcion"
+            android:layout_toRightOf="@+id/textViewFechaFin"
+            android:layout_toEndOf="@+id/textViewFechaFin" />
     </RelativeLayout>
 
 </RelativeLayout>

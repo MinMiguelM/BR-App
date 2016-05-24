@@ -119,6 +119,8 @@ public class IndexActivity extends AppCompatActivity
         }
     }
 
+
+
     /**
      * Nombre: onNavigationItemSelected
      * Entradas: item que representa un boton del menu desplegable

@@ -13,7 +13,8 @@ import com.logicware.brapp.entities.Evento;
 import java.util.ArrayList;
 
 /**
- * Created by Pipe on 22/05/2016.
+ *esta clase es un adaptador de lista para los eventos
+ * dentro de un establecimiento
  */
 public class CustomAdapterEventosStablishment extends BaseAdapter {
 
@@ -25,22 +26,44 @@ public class CustomAdapterEventosStablishment extends BaseAdapter {
         this.listaDatos = listData;
         layoutInflater = LayoutInflater.from(aContext);
     }
-
+    /**
+     * Nombre: getCount
+     * Entradas: -
+     * Salidas: tamaño de la lista de datos
+     * Descripcion: get
+     */
     @Override
     public int getCount() {
         return listaDatos.size();
     }
-
+    /**
+     * Nombre: getItem
+     * Entradas: posición
+     * Salidas: el objeto en la posicion de la lista de datos
+     * Descripcion: get
+     */
     @Override
     public Object getItem(int position) {
         return listaDatos.get(position);
     }
-
+    /**
+     * Nombre: getItemId
+     * Entradas: posición
+     * Salidas: posicion de la lista dada
+     * Descripcion: get
+     */
     @Override
     public long getItemId(int position) {
         return position;
     }
-
+    /**
+     * Nombre: getView
+     * Entradas: posicion, vista a convertir, grupo de vistas
+     * Salidas: Vista
+     * Descripcion: obtiene la vista sobre la que se va a trabajar y a partir de ella
+     *              modifica el formato de la lista para que esta tenga
+     *              sub items
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;

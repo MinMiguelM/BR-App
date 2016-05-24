@@ -1,6 +1,7 @@
 package com.logicware.brapp.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,15 +10,27 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.logicware.brapp.R;
+import com.logicware.brapp.entities.Establecimiento;
 import com.logicware.brapp.entities.Evento;
 import com.logicware.brapp.entities.Usuario;
 import com.logicware.brapp.handlerWS.Constantes;
 import com.logicware.brapp.persistence.AdapterWebService;
-
+/**
+ * Esta clase permite al usuario realizar un eventos en el establecimiento
+ * */
 public class EventoUsuarioActivity extends AppCompatActivity {
     private Usuario user = null;
     private Button evento;
     private Evento ev = new Evento();
+    private Establecimiento establishment;
+    /**
+     * Nombre: onCreate
+     * Entradas: Instancia del estado salvada
+     * Salidas: -
+     * Descripcion: Este metodo se encarga de cargar todo lo necesario para
+     *              que la aplicacion pueda mostrar sus componentes graficos
+     *              y funcionales
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +38,7 @@ public class EventoUsuarioActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         user = (Usuario)getIntent().getExtras().getSerializable("user");
-
+        establishment = (Establecimiento) getIntent().getExtras().getSerializable("establecimiento");
         final EditText RecibirFechaInicio = (EditText) findViewById(R.id.editTextFechaInicio);
         final EditText RecibirFechaFin = (EditText) findViewById(R.id.editTextFechaFin);
         final EditText RecibirTitulo = (EditText) findViewById(R.id.editTextTitulo);
@@ -62,10 +75,10 @@ public class EventoUsuarioActivity extends AppCompatActivity {
             }
 
             /**
-             * Nombre: modificarUsuario
-             * Entradas: nombre, email y telefono del usuario
+             * Nombre: RealizarEvento
+             * Entradas: fecha de inicio, fecha de fin, titulo del evento, descripción del evento
              * Salidas: -
-             * Descripcion: modifica el usuario en la base de datos
+             * Descripcion: crea un evento y se conecta con la base de datos
              */
             private void RealizarEvento(String fechaIni, String fechaFin, String Titulo,String des) {
                 try {
@@ -76,6 +89,7 @@ public class EventoUsuarioActivity extends AppCompatActivity {
                     ev = (Evento) new AdapterWebService().execute(Constantes.ADD_EVENT, user, fechaIni, fechaFin,des,Titulo).get();
                     if (ev != null) {
                         mostrarConfirmacion();
+
                     } else
                         mostrarError("Error solicitud", "No se ha enviado la solicitud");
                 } catch (Exception e) {
@@ -95,18 +109,23 @@ public class EventoUsuarioActivity extends AppCompatActivity {
      * Descripcion:  imprime una alerta para el usuario que verifica si hay errores
      */
     private void mostrarError(String nombreError, String descripcion) {
-        android.app.AlertDialog alerta = new android.app.AlertDialog.Builder(EventoUsuarioActivity.this).create();
-        alerta.setTitle(nombreError);
-        alerta.setMessage(descripcion);
-        alerta.setButton("OK", new DialogInterface.OnClickListener() {
+        android.app.AlertDialog alerta2 = new android.app.AlertDialog.Builder(EventoUsuarioActivity.this).create();
+        alerta2.setTitle(nombreError);
+        alerta2.setMessage(descripcion);
+        alerta2.setButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
 
         });
-        alerta.show();
+        alerta2.show();
     }
-
+    /**
+     * Nombre de Método: mostrar Confirmación
+     * Entradas: -
+     * Salidas: void
+     * Descripcion:  imprime confirmación
+     */
     private void mostrarConfirmacion() {
         android.app.AlertDialog alerta = new android.app.AlertDialog.Builder(EventoUsuarioActivity.this).create();
         alerta.setTitle("Confirmación");
@@ -114,6 +133,11 @@ public class EventoUsuarioActivity extends AppCompatActivity {
         alerta.setButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                Intent intent = new Intent(EventoUsuarioActivity.this, OneEstablishmentUsuarioActivity.class);
+                intent.putExtra("user",user);
+                intent.putExtra("establecimiento",establishment);
+                startActivity(intent);
             }
 
         });

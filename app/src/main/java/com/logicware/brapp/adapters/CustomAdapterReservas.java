@@ -9,19 +9,20 @@ import android.widget.TextView;
 
 import com.logicware.brapp.R;
 import com.logicware.brapp.entities.Evento;
+import com.logicware.brapp.entities.Reserva;
 
 import java.util.ArrayList;
 
 /**
- *esta clase es un adaptador de lista para los eventos
+ *esta clase es un adaptador de lista para las reservas
  * de un usuario
  */
-public class CustomAdapterEventos extends BaseAdapter {
+public class CustomAdapterReservas extends BaseAdapter {
 
 
-    private ArrayList<Evento> listaDatos;
+    private ArrayList<Reserva> listaDatos;
     private LayoutInflater layoutInflater;
-    public CustomAdapterEventos(Context aContext, ArrayList<Evento> listData) {
+    public CustomAdapterReservas(Context aContext, ArrayList<Reserva> listData) {
         this.listaDatos = listData;
         layoutInflater = LayoutInflater.from(aContext);
     }
@@ -77,9 +78,9 @@ public class CustomAdapterEventos extends BaseAdapter {
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.nombreView.setText("NOMBRE DEL EVENTO:  " + listaDatos.get(position).getTitulo());
-        holder.fechaView.setText("FECHA:  " + listaDatos.get(position).getFecha_inicio()+" - "+listaDatos.get(position).getFecha_fin());
-        holder.descripcionView.setText("DESCRIPCIÓN:  " + listaDatos.get(position).getDescripcion());
+        holder.nombreView.setText("FECHA DE LA RESERVA:  " + listaDatos.get(position).getFecha_reserva());
+        holder.fechaView.setText("ESTADO DE LA RESERVA:  " + listaDatos.get(position).getEstado());
+        holder.descripcionView.setText("CANTIDAD DE PERSONAS:  " + listaDatos.get(position).getCantidad_personas());
         return convertView;
 
 

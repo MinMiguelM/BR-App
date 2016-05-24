@@ -86,6 +86,8 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
                 return updateBooking((Reserva) params[1]);
             if(params[0].equals(Constantes.GET_BOOKING_BY_IDESTABLECIMIENTO))
                 return getBookingByIdEstablecimiento((Long)params[1]);
+            if(params[0].equals(Constantes.GET_BOOKING_BY_IDUSUARIO))
+                return getBookingByIdUsuario((Long)params[1]);
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -506,6 +508,23 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
             restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
             Collection<Reserva> retorno = new ArrayList<>();
             Reserva[] response = restTemplate.getForObject(Constantes.GET_BOOKING_BY_IDESTABLECIMIENTO + id , Reserva[].class, "Android");
+            for ( int i = 0; i<response.length;i++)
+                retorno.add(response[i]);
+            return retorno;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Collection<Reserva> getBookingByIdUsuario(Long id){
+        try{
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+            restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
+            Collection<Reserva> retorno = new ArrayList<>();
+            Reserva[] response = restTemplate.getForObject(Constantes.GET_BOOKING_BY_IDUSUARIO + id , Reserva[].class, "Android");
             for ( int i = 0; i<response.length;i++)
                 retorno.add(response[i]);
             return retorno;

@@ -55,4 +55,5 @@ public class Constantes {
     public static final String ADD_BOOKING = "http://" + IP + ":" +PORT + "/booking/add";
     public static final String UPDATE_BOOKING = "http://" + IP + ":" +PORT + "/booking/update";
     public static final String GET_BOOKING_BY_IDESTABLECIMIENTO = "http://" + IP + ":" +PORT + "/booking/getByIdEstablecimiento/";
+    public static final String GET_BOOKING_BY_IDUSUARIO = "http://" + IP + ":" +PORT + "/booking/getByIdUsuario/";
 }
