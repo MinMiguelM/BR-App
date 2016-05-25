@@ -111,8 +111,10 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
     }
 
     /**
-     * Trae el correo y la contrasena de un usuario según el email.
-     * @param correo Parametro que trae la consulta
+     * Nombre: getUserByCorreo
+     * Entradas: correo por el cual se traera el usuario
+     * Salidas: Usuario si existe, si no null
+     * Descripcion: trae un usuario de la base de datos segun el correo.
      */
     public Usuario getUserByCorreo(String correo){
         try{
@@ -160,11 +162,10 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         return null;
     }
     /**
-     * Nombre: updateTokenUser
-     * Entradas: El correo del usuario a quien se le actualizara el token y ademas
-     *           el new token generado para dicho usuario
+     * Nombre: updateUser
+     * Entradas: usuario con datos nuevos
      * Salidas: El usuario con sus datos acualizados.
-     * Descripcion: Actualiza el token debido a que este ya expiró.
+     * Descripcion: Actualiza el usuario.
      */
     public Usuario updateUser(Usuario user){
         try {
@@ -177,6 +178,7 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         return null;
     }
     /**
+     * Nombre: addEstablishment
      * Entradas: user -> El usuario que está agregando el establecimiento
      *           params0 -> Nombre
      *           params1 -> Direccion
@@ -184,6 +186,8 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
      *           params3 -> Tematica
      *           params4 -> Tipo
      *           params5 -> Telefono
+     * Salida: Un establecimiento nuevo
+     * Descripcion: Agrega un nuevo establecimiento a la base de datos
      */
     public Establecimiento addEstablishment(Usuario user, String... params){
         Establecimiento establecimiento = new Establecimiento();
@@ -209,6 +213,13 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
+
+    /**
+     * Nombre: getEstablishmentByNombre
+     * Entradas: nombre del establecimiento a buscar
+     * Salidas: lista de establecimientos
+     * Descripcion: trae una lista de establecimientos segun el nombre del establecimiento
+     */
     public Collection<Establecimiento> getEstablishmentByNombre(String nombre){
         try{
             RestTemplate restTemplate = new RestTemplate();
@@ -225,6 +236,13 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
+
+    /**
+     * Nombre: getEstablishmentByUser
+     * Entradas: id del usuario a consultar sus establecimientos
+     * Salidas: lista de establecimientos
+     * Descripcion: trae una lista de establecimientos segun el id de usuario
+     */
     public Collection<Establecimiento> getEstablishmentByUser(Long idUsuario){
         try{
             RestTemplate restTemplate = new RestTemplate();
@@ -241,6 +259,13 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
+
+    /**
+     * Nombre: updateEstablishment
+     * Entradas: establecimiento
+     * Salidas: El establecimiento con sus datos acualizados.
+     * Descripcion: Actualiza el establecimiento a peticion de su dueño.
+     */
     public Establecimiento updateEstablishment(Establecimiento establecimiento){
         try {
             RestTemplate restTemplate = new RestTemplate();
@@ -255,6 +280,13 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
+
+    /**
+     * Nombre: getEstablishmentByTipo
+     * Entradas: Tipo de establecimiento a buscar
+     * Salidas: lista de establecimientos
+     * Descripcion: trae una lista de establecimientos segun el tipo dado
+     */
     public Collection<Establecimiento> getEstablishmentsByTipo(String tipo){
         try{
             RestTemplate restTemplate = new RestTemplate();
@@ -272,11 +304,14 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         return null;
     }
     /**
+     * Nombre: addEventByUser
      * Entradas: user -> El usuario que está agregando el evento
      *           params0 -> fecha_inicio
      *           params1 -> fecha_fin
      *           params2 -> Descripcion
      *           params3 -> Titulo
+     * Salida: Un evento nuevo
+     * Descripcion: Agrega un nuevo evento a la base de datos hecho por un usuario
      */
     public Evento addEventByUser(Usuario user,String... params){
         Evento newEvento = new Evento();
@@ -300,11 +335,14 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         return null;
     }
     /**
+     * Nombre: addEventByEstablishment
      * Entradas: establecimiento -> El establecimiento que está agregando el evento
      *           params0 -> fecha_inicio
      *           params1 -> fecha_fin
      *           params2 -> Descripcion
      *           params3 -> Titulo
+     * Salida: Un evento nuevo
+     * Descripcion: Agrega un evento nuevo a la base de datos hecho por un establecimiento
      */
     public Evento addEventByEstablishment(Establecimiento establecimiento,String... params){
         Evento newEvento = new Evento();
@@ -327,6 +365,13 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
+
+    /**
+     * Nombre: updateEvent
+     * Entradas: evento con sus datos modificados
+     * Salidas: El evento con sus datos acualizados.
+     * Descripcion: Actualiza el evento a peticion de un usuario o establecimiento
+     */
     public Evento updateEvent(Evento evento){
         try {
             RestTemplate restTemplate = new RestTemplate();
@@ -338,6 +383,12 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         return null;
     }
 
+    /**
+     * Nombre: getEventByIdEstablecimiento
+     * Entradas: id del establecimiento
+     * Salidas: lista de eventos
+     * Descripcion: trae una lista de eventos del establecimiento según id
+     */
     public Collection<Evento> getEventByIdEstablecimiento(Long id){
         try{
             RestTemplate restTemplate = new RestTemplate();
@@ -355,6 +406,12 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         return null;
     }
 
+    /**
+     * Nombre: getEventByIdUsuario
+     * Entradas: id del usuario
+     * Salidas: lista de eventos
+     * Descripcion: trae una lista de eventos que ha hecho el usuario con id id
+     */
     public Collection<Evento> getEventByIdUsuario(Long id){
         try{
             RestTemplate restTemplate = new RestTemplate();
@@ -373,10 +430,13 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
     }
 
     /**
+     * Nombre: addComments
      * Entradas: establecimiento -> El establecimiento el cual esta siendo calificado y comentado
      *           usuario -> El usuario que esta haciendo el comentario y la calificacion
      *           params0 -> Descripcion
      *           params1 -> Calificacion
+     * Salida: Un comentario y calificacion nuevo
+     * Descripcion: Agrega a la base de datos un comentario y calificacion
      */
     public ComentarioYCalificacion addComments(Establecimiento establecimiento, Usuario usuario, String... params){
         ComentarioYCalificacion comentario = new ComentarioYCalificacion();
@@ -398,6 +458,13 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
+
+    /**
+     * Nombre: updateComments
+     * Entradas: comentario y calificacion con sus datos nuevos
+     * Salidas: El comentario y calificacion con sus datos acualizados.
+     * Descripcion: Actualiza el comentario y calificacion a peticion de un usuario.
+     */
     public ComentarioYCalificacion updateComments(ComentarioYCalificacion comentarioYCalificacion){
         try {
             RestTemplate restTemplate = new RestTemplate();
@@ -409,6 +476,12 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         return null;
     }
 
+    /**
+     * Nombre: getCommentsByIdEstablecimiento
+     * Entradas: id del establecimiento
+     * Salidas: lista de comentarios y calificaciones
+     * Descripcion: trae una lista de comentarios y calificaciones que le han hecho al establecimiento
+     */
     public Collection<ComentarioYCalificacion> getCommentsByIdEstablecimiento(Long id){
         try{
             RestTemplate restTemplate = new RestTemplate();
@@ -427,10 +500,13 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
     }
 
     /**
+     * Nombre: addItem
      * Entradas: establecimiento -> El establecimiento el cual esta agregando el producto
      *           params0 -> Nombre
      *           params1 -> Precio en String
      *           params2 -> Descripcion
+     * Salida: Un producto nuevo
+     * Descripcion: Agrega a la base de datos un nuevo producto
      */
     public Producto addItem(Establecimiento establecimiento, String... params){
         Producto producto = new Producto();
@@ -452,6 +528,13 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
+
+    /**
+     * Nombre: updateItem
+     * Entradas: producto con sus nuevos datos
+     * Salidas: El producto con sus datos acualizados.
+     * Descripcion: Actualiza el producto a peticion de un estalecimiento
+     */
     public Producto updateItem(Producto producto){
         try {
             RestTemplate restTemplate = new RestTemplate();
@@ -463,11 +546,15 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         return null;
     }
     /**
+     * Nombre : addBooking
      * Entradas: establecimiento -> El establecimiento al cual se le hace la reserva
      *           usuario -> El usuario que hace la reserva
      *           params0 -> Fecha_reserva
      *           params1 -> Estado
      *           params2 -> cantidad personas
+     * Salida: Una nueva reserva
+     * Descripcion: Agrega a la base de datos una nueva reserva
+     *
      */
     public Reserva addBooking(Establecimiento establecimiento,Usuario usuario,String... params){
         Reserva reserva = new Reserva();
@@ -490,6 +577,14 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         }
         return null;
     }
+
+    /**
+     * Nombre: updateBooking
+     * Entradas: reserva con sus nuevos datos
+     * Salidas: La reserva con sus datos acualizados.
+     * Descripcion: Actualiza la reserva a peticion de un usuario o un establecimiento segun
+     * corresponda
+     */
     public Reserva updateBooking(Reserva reserva){
         try {
             RestTemplate restTemplate = new RestTemplate();
@@ -501,6 +596,12 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         return null;
     }
 
+    /**
+     * Nombre: getBookingByIdEstablecimiento
+     * Entradas: id del establecimiento
+     * Salidas: lista de reservas
+     * Descripcion: trae una lista de reservas que tiene un establecimiento
+     */
     public Collection<Reserva> getBookingByIdEstablecimiento(Long id){
         try{
             RestTemplate restTemplate = new RestTemplate();
@@ -518,6 +619,12 @@ public class AdapterWebService extends AsyncTask<Object, Void, Object> {
         return null;
     }
 
+    /**
+     * Nombre: getBookingByIdUsuario
+     * Entradas: id del usuario
+     * Salidas: lista de reservas
+     * Descripcion: trae una lista de reservas que ha hecho el usuario
+     */
     public Collection<Reserva> getBookingByIdUsuario(Long id){
         try{
             RestTemplate restTemplate = new RestTemplate();
